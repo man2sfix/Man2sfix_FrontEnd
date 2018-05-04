@@ -1,18 +1,16 @@
 <template>
   <app-layout>
-    <visual-carousel></visual-carousel>
+    contact
   </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/components/layout/AppLayout'
-import VisualCarousel from '@/components/home/VisualCarousel'
 
 export default {
-  name: 'Home',
+  name: 'Contact',
   components: {
-    AppLayout,
-    VisualCarousel
+    AppLayout
   }
 }
 </script>

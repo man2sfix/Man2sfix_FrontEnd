@@ -1,18 +1,20 @@
 <template>
   <app-layout>
-    <visual-carousel></visual-carousel>
+    Instructors
   </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/components/layout/AppLayout'
-import VisualCarousel from '@/components/home/VisualCarousel'
 
 export default {
-  name: 'Home',
+  name: 'Instructors',
   components: {
-    AppLayout,
-    VisualCarousel
+    AppLayout
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
