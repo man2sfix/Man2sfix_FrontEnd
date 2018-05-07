@@ -2,7 +2,7 @@
   <header class="app-header">
     <div class="inner">
       <h1 class="title">
-        <a href="#">{{ title }}</a>
+        <a href="/">{{ title }}</a>
       </h1>
       <app-nav></app-nav>
     </div>
