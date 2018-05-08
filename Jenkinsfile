@@ -26,7 +26,7 @@ pipeline {
             sh 'ls -al'
 
             // copy config file
-            sh 'cp -rf /enviroments /*'
+            sh 'cp -rf /enviroments /'
 
             // npm install
             echo 'npm install'
