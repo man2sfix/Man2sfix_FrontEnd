@@ -13,39 +13,13 @@ pipeline {
         echo "Current workspace : ${workspace}"
       }
     }
-    stage('Install') {
-      agent any
-      when {
-        branch 'master'
-      }
-      steps {
-        retry(3) { // 3 retry
-          timeout(3) { // 3 minutes
-            // show list 
-            echo 'current workspace list'
-            sh 'ls -al'
-
-            // copy config file
-            sh 'cp -rf /enviroments ./'
-
-            // npm install
-            echo 'npm install'
-            sh 'npm install'
-
-            // npm run build
-            echo 'npm build'
-            sh 'npm run build'
-          }
-        }
-      }
-    }
     stage('Product Deploy') {
       agent any
       when {
         branch 'master'
       }
       steps {
-        retry(2) {
+        retry(2) { // 2 retry
           timeout(2) { // 2minutes
             // copy dist diretory
             echo 'copy dist diretory'
