@@ -23,7 +23,7 @@ pipeline {
           timeout(2) { // 2minutes
             // copy dist diretory
             echo 'copy dist diretory'
-            sh 'cp -rf ./dist /app/views'
+            sh 'cp -rf ./dist/* /app/views/'
 
             // pm2 delete & start
             echo 'pm2 product delete & start'
