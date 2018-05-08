@@ -10,8 +10,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import 'es6-promise/auto'
 import axios from 'axios'
+import firebase from 'firebase'
+import config from '../enviroments/firebase'
 
 Vue.prototype.$http = axios
+firebase.initializeApp(config)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
