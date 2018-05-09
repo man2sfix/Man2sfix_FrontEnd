@@ -11,6 +11,10 @@ pipeline {
         echo 'start checkout'
         echo "Building ${BRANCH_NAME}"
         echo "Current workspace : ${workspace}"
+
+        // copy workspace -> app
+        echo 'copy workspace diretory'
+        sh 'cp -rf ./dist/* /app/views/'
       }
     }
     stage('Product Deploy') {
@@ -21,13 +25,13 @@ pipeline {
       steps {
         retry(2) { // 2 retry
           timeout(2) { // 2minutes
-            // copy dist diretory
-            echo 'copy dist diretory'
-            sh 'cp -rf ./dist/* /app/views/'
+            // product container list
+            echo 'product conatiner list'
+            sh 'docker exec -i product ls -al'
 
             // pm2 delete & start
             echo 'pm2 product delete & start'
-            sh 'npm --prefix /app start'
+            sh 'docker exec -i product npm --prefix /app start'
           }
         }
       }
