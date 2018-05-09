@@ -12,6 +12,10 @@ pipeline {
         echo "Building ${BRANCH_NAME}"
         echo "Current workspace : ${workspace}"
 
+        // remove app views
+        echo 'copy workspace diretory'
+        sh 'rm -rf /app/views/*'
+
         // copy workspace -> app
         echo 'copy workspace diretory'
         sh 'cp -rf ./dist/* /app/views/'
