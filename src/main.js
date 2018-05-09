@@ -3,18 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store/index'
 
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ko'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import 'es6-promise/auto'
-import axios from 'axios'
-import firebase from 'firebase'
-import config from '../enviroments/firebase'
-
-Vue.prototype.$http = axios
-Vue.prototype.$firebase = firebase.initializeApp(config)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
@@ -23,6 +18,7 @@ Vue.use(ElementUI, { locale })
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
   render (h) {

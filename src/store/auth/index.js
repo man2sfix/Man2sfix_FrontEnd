@@ -1,3 +1,5 @@
+import firebase from '@/providers/firebase'
+
 // initial state
 const state = {
   auth: {}
@@ -10,8 +12,8 @@ const getters = {
 
 // actions
 const actions = {
-  signUp () {
-    console.log(this.$firebase.auth())
+  signUp (context, payload) {
+    firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
   }
 }
 

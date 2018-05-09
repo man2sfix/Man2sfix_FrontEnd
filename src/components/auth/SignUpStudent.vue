@@ -14,7 +14,7 @@
         <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button round @click="onSubmit">회원가입</el-button>
+        <el-button round @click="onSubmit('form')">회원가입</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -76,8 +76,20 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
-      console.log('submit!')
+    onSubmit (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          const signUpData = {
+            name: this.form.name,
+            email: this.form.email,
+            password: this.form.password
+          }
+
+          this.$store.dispatch('signUp', signUpData)
+        } else {
+          return false
+        }
+      })
     }
   }
 }
