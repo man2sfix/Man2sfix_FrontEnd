@@ -7,6 +7,8 @@ import HowToUse from '@/pages/HowToUse'
 import Faq from '@/pages/Faq'
 import Contact from '@/pages/Contact'
 import Training from '@/pages/Training'
+import SignIn from '@/pages/auth/SignIn'
+import SignUp from '@/pages/auth/SignUp'
 
 Vue.use(Router)
 
@@ -42,6 +44,16 @@ export default new Router({
       path: '/training',
       name: 'training',
       component: Training
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignIn
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
     }
   ]
 })

@@ -1,9 +1,11 @@
 <template>
-  <ul class="nav">
-    <li v-for="(item, index) in nav" :key="index">
-      <router-link :to="item.href">{{ item.name }}</router-link>
-    </li>
-  </ul>
+  <nav class="app-nav">
+    <ul class="inner">
+      <li v-for="(item, index) in nav" :key="index">
+        <router-link :to="item.href">{{ item.name }}</router-link>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -25,12 +27,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .nav {
-    flex: auto;
-    font-size: 0;
-    text-align: right;
+  .app-nav {
+    height: $font-size-base * 3;
 
-    &,
+    .inner {
+      max-width: 1200px;
+      display: flex;
+      margin: 0 auto;
+    }
+
+    .inner,
     li,
     a {
       height: 100%;
@@ -39,7 +45,7 @@ export default {
     li {
       display: inline-block;
       font-size: $font-size-base;
-      margin: 0 map-get($spacers, 2);
+      margin: 0 map-get($spacers, 3);
     }
 
     a {

@@ -14,7 +14,7 @@ import firebase from 'firebase'
 import config from '../enviroments/firebase'
 
 Vue.prototype.$http = axios
-firebase.initializeApp(config)
+Vue.prototype.$firebase = firebase.initializeApp(config)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })

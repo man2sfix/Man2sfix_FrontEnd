@@ -4,8 +4,8 @@
       <h1 class="title">
         <a href="/">{{ title }}</a>
       </h1>
-      <app-nav></app-nav>
     </div>
+    <app-nav></app-nav>
   </header>
 </template>
 
@@ -27,22 +27,21 @@ export default {
 
 <style lang="scss" scoped>
   .app-header {
-    height: $font-size-base * 5;
+    padding-top: map-get($spacers, 3);
     border-bottom: 1px solid gray('300');
-
-    .inner,
-    .title,
-    a {
-      height: 100%;
-    }
 
     .inner {
       max-width: 1200px;
-      height: 100%;
+      height: $font-size-base * 2;
       display: flex;
       align-items: center;
       margin: 0 auto;
       padding: 0 map-get($spacers, 3);
+    }
+
+    .title,
+    a {
+      height: 100%;
     }
 
     .title {
