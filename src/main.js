@@ -9,8 +9,6 @@ import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ko'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import 'es6-promise/auto'
-
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 

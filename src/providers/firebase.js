@@ -1,6 +1,6 @@
-import firebaseApp from 'firebase'
+import Firebase from 'firebase'
 import config from '../../enviroments/firebase'
 
-const firebase = firebaseApp.initializeApp(config)
+const firebase = Firebase.initializeApp(config)
 
 export default firebase

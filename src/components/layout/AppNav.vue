@@ -18,8 +18,7 @@ export default {
         { name: '강사진 소개', href: 'instructors' },
         { name: '이용방법', href: 'howtouse' },
         { name: '자주 묻는 질문', href: 'faq' },
-        { name: '제휴 및 문의', href: 'contact' },
-        { name: '모의훈련', href: 'training' }
+        { name: '제휴 및 문의', href: 'contact' }
       ]
     }
   }

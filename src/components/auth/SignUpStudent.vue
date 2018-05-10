@@ -1,20 +1,20 @@
 <template>
-  <div class="signup-form">
+  <div class="signup-form" v-loading="loading">
     <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium">
       <el-form-item label="이름" prop="name">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
       </el-form-item>
       <el-form-item label="이메일" prop="email">
-        <el-input v-model="form.email"></el-input>
+        <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
       </el-form-item>
       <el-form-item label="비밀번호" prop="password">
         <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="비밀번호" prop="passwordConfirm">
+      <el-form-item label="비밀번호 확인" prop="passwordConfirm">
         <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button round @click="onSubmit('form')">회원가입</el-button>
+        <el-button type="sumbit" round @click="onSubmit('form')">회원가입</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -48,6 +48,7 @@ export default {
     }
 
     return {
+      loading: false,
       form: {
         name: '',
         email: '',
@@ -77,15 +78,19 @@ export default {
   },
   methods: {
     onSubmit (formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
           const signUpData = {
+            type: 'student',
             name: this.form.name,
             email: this.form.email,
-            password: this.form.password
+            password: this.form.password,
+            createdAt: new Date().getTime(),
+            lastLoginedAt: new Date().getTime()
           }
 
-          this.$store.dispatch('signUp', signUpData)
+          const bool = await this.$store.dispatch('signUp', signUpData)
+          console.log(bool)
         } else {
           return false
         }

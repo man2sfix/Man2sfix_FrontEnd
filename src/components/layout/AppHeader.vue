@@ -2,8 +2,17 @@
   <header class="app-header">
     <div class="inner">
       <h1 class="title">
-        <a href="/">{{ title }}</a>
+        <router-link :to="'/'">{{ title }}</router-link>
       </h1>
+      <ul class="btn-list">
+        <!-- not login -->
+        <li><router-link :to="'signin'">로그인</router-link></li>
+        <li><router-link :to="'signup'">회원가입</router-link></li>
+        <!-- logined -->
+        <li><router-link :to="'#'">로그아웃</router-link></li>
+        <li><router-link :to="'#'">마이페이지</router-link></li>
+        <li><router-link :to="'#'">강사페이지</router-link></li>
+      </ul>
     </div>
     <app-nav></app-nav>
   </header>
@@ -40,6 +49,7 @@ export default {
     }
 
     .title,
+    .btn-list,
     a {
       height: 100%;
     }
@@ -50,6 +60,37 @@ export default {
       a {
         display: flex;
         align-items: center;
+      }
+    }
+
+    .btn-list {
+      flex: auto;
+      text-align: right;
+      font-size: 0;
+
+      * {
+        height: 100%;
+      }
+
+      li {
+        display: inline-block;
+        margin: 0 map-get($spacers, 1);
+      }
+
+      a {
+        font-size: $font-size-base * 0.8;
+        display: flex;
+        align-items: center;
+        color: gray('700');
+        border: 1px solid gray('300');
+        padding: 0 map-get($spacers, 2);
+
+        &:hover,
+        &:focus,
+        &.router-link-exact-active {
+          color: theme-color('primary');
+          border-color: theme-color('primary');
+        }
       }
     }
   }
