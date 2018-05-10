@@ -8,7 +8,7 @@
         <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="sumbit" round @click="onSubmit('form')">로그인</el-button>
+        <el-button native-type="button" round @click="onSubmit('form')">로그인</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -39,14 +39,33 @@ export default {
     onSubmit (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
+          // 로딩 시작
+          this.loading = true
+          // 폼 데이터 셋
           const signInData = {
             email: this.form.email,
             password: this.form.password,
             lastLoginedAt: new Date().getTime()
           }
-
+          // 리턴 boolean
           const bool = await this.$store.dispatch('signIn', signInData)
-          console.log(bool)
+          // 리턴값에 따른 분기
+          if (bool) {
+            // 알람
+            this.$notify({
+              message: '로그인에 성공하였습니다.',
+              type: 'success'
+            })
+            this.$router.replace(this.$route.query.redirect || '/')
+          } else {
+            // 알람
+            this.$notify({
+              message: '이메일 혹은 비밀번호를 확인해주세요.',
+              type: 'warning'
+            })
+            // 로딩 끝
+            this.loading = false
+          }
         } else {
           return false
         }
@@ -63,6 +82,7 @@ export default {
     padding: map-get($spacers, 4);
     border: 1px solid gray('300');
     border-radius: $font-size-sm;
+    overflow: hidden;
 
     .el-form-item__label {
       padding-bottom: 0;

@@ -5,13 +5,13 @@
         <router-link :to="'/'">{{ title }}</router-link>
       </h1>
       <ul class="btn-list">
-        <!-- not login -->
-        <li><router-link :to="'signin'">로그인</router-link></li>
-        <li><router-link :to="'signup'">회원가입</router-link></li>
+        <!-- not logined -->
+        <li v-if="!auth.logined"><router-link :to="'signin'">로그인</router-link></li>
+        <li v-if="!auth.logined"><router-link :to="'signup'">회원가입</router-link></li>
         <!-- logined -->
-        <li><router-link :to="'#'">로그아웃</router-link></li>
-        <li><router-link :to="'#'">마이페이지</router-link></li>
-        <li><router-link :to="'#'">강사페이지</router-link></li>
+        <li v-if="auth.logined"><router-link :to="'signout'">로그아웃</router-link></li>
+        <li v-if="auth.logined"><router-link :to="'mypage'">마이페이지</router-link></li>
+        <li v-if="auth.logined && auth.type === 'instructor'"><router-link :to="'#'">강사페이지</router-link></li>
       </ul>
     </div>
     <app-nav></app-nav>
@@ -28,7 +28,20 @@ export default {
   },
   data () {
     return {
-      title: 'MAN2SFIX'
+      title: 'MAN2SFIX',
+      auth: {}
+    }
+  },
+  created () {
+    this.getAuth()
+  },
+  watch: {
+    '$route': 'getAuth'
+  },
+  methods: {
+    getAuth () {
+      this.$store.commit('setState')
+      this.auth = this.$store.getters.getState
     }
   }
 }

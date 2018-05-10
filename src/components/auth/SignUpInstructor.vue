@@ -38,7 +38,7 @@
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button type="sumbit" round @click="onSubmit('form')">회원가입</el-button>
+        <el-button native-type="button" round @click="onSubmit('form')">회원가입</el-button>
       </el-form-item>
     </el-form>
   </div>

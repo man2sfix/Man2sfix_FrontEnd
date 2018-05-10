@@ -14,7 +14,7 @@
         <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="sumbit" round @click="onSubmit('form')">회원가입</el-button>
+        <el-button native-type="button" round @click="onSubmit('form')">회원가입</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -80,6 +80,9 @@ export default {
     onSubmit (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
+          // 로딩 시작
+          this.loading = true
+          // 폼 데이터 셋
           const signUpData = {
             type: 'student',
             name: this.form.name,
@@ -88,9 +91,25 @@ export default {
             createdAt: new Date().getTime(),
             lastLoginedAt: new Date().getTime()
           }
-
+          // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', signUpData)
-          console.log(bool)
+          // 리턴값에 따른 분기
+          if (bool) {
+            // 알람
+            this.$notify({
+              message: '회원가입에 성공하였습니다. 로그인 후 이용하여주세요.',
+              type: 'success'
+            })
+            this.$router.replace('/signin')
+          } else {
+            // 알람
+            this.$notify({
+              message: '회원가입에 실패하였습니다. 이메일과 이름을 확인해주세요.',
+              type: 'warning'
+            })
+            // 로딩 끝
+            this.loading = false
+          }
         } else {
           return false
         }
@@ -107,6 +126,7 @@ export default {
     padding: map-get($spacers, 4);
     border: 1px solid gray('300');
     border-radius: $font-size-sm;
+    overflow: hidden;
 
     .el-form-item__label {
       padding-bottom: 0;

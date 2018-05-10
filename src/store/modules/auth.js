@@ -2,22 +2,25 @@ import firebase from '@/providers/firebase'
 
 // initial state
 const state = {
-  auth: {}
+  auth: {
+    logined: false
+  }
 }
 
 // getters
 const getters = {
-  getAuth: state => state.auth
+  getState: state => state.auth
 }
 
 // mutations
 const mutations = {
   signIn (state, payload) {
-    state.auth = Object.assign({
-      logined: true
-    }, payload)
+    state.auth = Object.assign({ logined: true }, payload)
     // set state auth
-    sessionStorage.setItem(`auth:${state.auth.key}`, JSON.stringify(state.auth))
+    sessionStorage.setItem('_auth', JSON.stringify(state.auth))
+  },
+  setState (state) {
+    state.auth = JSON.parse(sessionStorage.getItem('_auth')) || { logined: false }
   },
   deleteLocalStorage (state, payload) {
     localStorage.removeItem(`firebase:authUser:${payload.m}:[DEFAULT]`)
@@ -35,8 +38,8 @@ const actions = {
       // auth data
       const key = payload.email.split('@').join('').split('.').join('')
       const authData = await firebase.database().ref(`members/${key}`).once('value')
-      await firebase.database().ref(`members/${key}`).update({lastLoginedAt: new Date().getTime()})
-      context.commit('signIn', Object.assign({key: authData.key}, authData.val()))
+      await firebase.database().ref(`members/${key}`).update({ lastLoginedAt: new Date().getTime() })
+      context.commit('signIn', Object.assign({ key: authData.key }, authData.val()))
       // reutrn
       return true
     } catch (err) {
