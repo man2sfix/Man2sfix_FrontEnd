@@ -40,6 +40,8 @@ export default {
 
 <style lang="scss" scoped>
   .collapse-container {
+    padding-bottom: map-get($spacers, 5);
+
     @include clearfix();
   }
 </style>

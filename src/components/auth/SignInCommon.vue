@@ -1,6 +1,6 @@
 <template>
   <div class="login-form" v-loading="loading">
-    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium">
+    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
       <el-form-item label="이메일" prop="email">
         <el-input v-model="form.email"></el-input>
       </el-form-item>
@@ -8,7 +8,7 @@
         <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button native-type="button" round @click="onSubmit('form')">로그인</el-button>
+        <el-button native-type="submit" round>로그인</el-button>
       </el-form-item>
     </el-form>
   </div>

@@ -64,6 +64,23 @@ const actions = {
     } catch (err) {
       console.log(err)
     }
+  },
+  async signUpUpload (context, payload) {
+    try {
+      const metadata = { contentType: payload.file.type }
+      const response = await firebase.storage().ref(`instructors/${payload.key}/${payload.file.name}`).put(payload.file, metadata)
+      return response
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  async signUpDelete (context, payload) {
+    try {
+      await firebase.storage().ref(payload.path).delete()
+      return true
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 

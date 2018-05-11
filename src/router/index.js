@@ -1,26 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/pages/Home'
-import Instructors from '@/pages/Instructors'
-import HowToUse from '@/pages/HowToUse'
-import Faq from '@/pages/Faq'
-import Contact from '@/pages/Contact'
-import Training from '@/pages/Training'
+// common
+import Home from '@/pages/common/Home'
+import Instructors from '@/pages/common/Instructors'
+import HowToUse from '@/pages/common/HowToUse'
+import Faq from '@/pages/common/Faq'
+import Contact from '@/pages/common/Contact'
+import Magazine from '@/pages/common/Magazine'
+import Community from '@/pages/common/Community'
+
+// student
+import Training from '@/pages/student/Training'
+
+// auth
 import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
+
+// user
 import MyPage from '@/pages/user/MyPage'
 
-Vue.use(Router)
+// shaerd
+import NotFound from '@/pages/shared/NotFound'
 
-const notRequireAuth = (to, from, next) => {
-  const auth = JSON.parse(sessionStorage.getItem('_auth')) || { logined: false }
-  if (auth.logined) {
-    next('/')
-  } else {
-    next()
-  }
-}
+Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
@@ -34,6 +37,16 @@ const router = new Router({
       path: '/instructors',
       name: 'instructors',
       component: Instructors
+    },
+    {
+      path: '/magazine',
+      name: 'magazine',
+      component: Magazine
+    },
+    {
+      path: '/community',
+      name: 'community',
+      component: Community
     },
     {
       path: '/howtouse',
@@ -59,12 +72,13 @@ const router = new Router({
       path: '/signin',
       name: 'signin',
       component: SignIn,
-      beforeEnter: notRequireAuth
+      meta: { NotRequiresAuth: true }
     },
     {
       path: '/signup',
       name: 'signup',
-      component: SignUp
+      component: SignUp,
+      meta: { NotRequiresAuth: true }
     },
     {
       path: '/signout',
@@ -79,6 +93,11 @@ const router = new Router({
       name: 'mypage',
       component: MyPage,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      component: NotFound
     }
   ]
 })
@@ -91,6 +110,22 @@ router.beforeEach((to, from, next) => {
       next({
         path: '/signin',
         query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.NotRequiresAuth)) {
+    // 로그인 있을 시 홈으로 리다이렉트
+    const auth = JSON.parse(sessionStorage.getItem('_auth')) || { logined: false }
+    if (auth.logined) {
+      next({
+        path: '/'
       })
     } else {
       next()

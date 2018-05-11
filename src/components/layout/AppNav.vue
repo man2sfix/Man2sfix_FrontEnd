@@ -14,11 +14,12 @@ export default {
   data () {
     return {
       nav: [
-        { name: '맨투스픽 소개', href: '/' },
-        { name: '강사진 소개', href: 'instructors' },
-        { name: '이용방법', href: 'howtouse' },
-        { name: '자주 묻는 질문', href: 'faq' },
-        { name: '제휴 및 문의', href: 'contact' }
+        { name: '맨투스픽', href: '/' },
+        { name: '강사진 소개', href: '/instructors' },
+        { name: '매거진', href: '/magazine' },
+        { name: '커뮤니티', href: '/community' },
+        { name: '자주 묻는 질문', href: '/faq' },
+        { name: '제휴 및 문의', href: '/contact' }
       ]
     }
   }

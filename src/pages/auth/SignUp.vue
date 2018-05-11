@@ -29,6 +29,14 @@ export default {
       type: 'student'
     }
   },
+  watch: {
+    '$route': 'setType'
+  },
+  methods: {
+    setType () {
+      this.type = 'student'
+    }
+  },
   components: {
     AppLayout,
     SignUpStudent,

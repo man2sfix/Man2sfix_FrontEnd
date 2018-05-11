@@ -1,6 +1,6 @@
 <template>
   <div class="signup-form" v-loading="loading">
-    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium">
+    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
       <el-form-item label="이름" prop="name">
         <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
       </el-form-item>
@@ -13,9 +13,11 @@
       <el-form-item label="비밀번호 확인" prop="passwordConfirm">
         <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button native-type="button" round @click="onSubmit('form')">회원가입</el-button>
-      </el-form-item>
+      <div class="form-btn">
+        <el-form-item>
+          <el-button native-type="submit" round>회원가입</el-button>
+        </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
@@ -82,7 +84,7 @@ export default {
         if (valid) {
           // 로딩 시작
           this.loading = true
-          // 폼 데이터 셋
+          // 폼 데이터 set
           const signUpData = {
             type: 'student',
             name: this.form.name,
@@ -132,10 +134,11 @@ export default {
       padding-bottom: 0;
     }
 
-    .el-form-item {
-      &:last-child {
+    .form-btn {
+      text-align: center;
+
+      .el-form-item {
         margin-bottom: 0;
-        text-align: center;
       }
     }
   }
