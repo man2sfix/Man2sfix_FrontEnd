@@ -1,16 +1,18 @@
 <template>
   <div class="login-form" v-loading="loading">
-    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
-      <el-form-item label="이메일" prop="email">
-        <el-input v-model="form.email"></el-input>
-      </el-form-item>
-      <el-form-item label="비밀번호" prop="password">
-        <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button native-type="submit" round>로그인</el-button>
-      </el-form-item>
-    </el-form>
+    <el-card shadow="never" class="login-form-card">
+      <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+        <el-form-item label="이메일" prop="email">
+          <el-input v-model="form.email"></el-input>
+        </el-form-item>
+        <el-form-item label="비밀번호" prop="password">
+          <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button native-type="submit" class="btn-submit">로그인</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
   </div>
 </template>
 
@@ -77,22 +79,30 @@ export default {
 
 <style lang="scss">
   .login-form {
-    max-width: 500px;
-    margin: map-get($spacers, 5) auto;
-    padding: map-get($spacers, 4);
-    border: 1px solid gray('300');
-    border-radius: $font-size-sm;
-    overflow: hidden;
+    padding: map-get($spacers, 5) map-get($spacers, 3);
+
+    .login-form-card {
+      max-width: 500px;
+      margin: 0 auto;
+    }
 
     .el-form-item__label {
       padding-bottom: 0;
     }
 
     .el-form-item {
+      margin-bottom: map-get($spacers, 2);
+
       &:last-child {
         margin-bottom: 0;
         text-align: center;
       }
+    }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      margin-top: map-get($spacers, 3);
     }
   }
 </style>

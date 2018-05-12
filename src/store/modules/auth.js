@@ -15,7 +15,15 @@ const getters = {
 // mutations
 const mutations = {
   signIn (state, payload) {
-    state.auth = Object.assign({ logined: true }, payload)
+    state.auth = {
+      logined: true,
+      key: payload.key,
+      name: payload.name,
+      type: payload.type,
+      email: payload.email,
+      createdAt: payload.createdAt,
+      lastLoginedAt: payload.lastLoginedAt
+    }
     // set state auth
     sessionStorage.setItem('_auth', JSON.stringify(state.auth))
   },
@@ -81,6 +89,10 @@ const actions = {
     } catch (err) {
       console.log(err)
     }
+  },
+  async getUser (context, payload) {
+    const user = await firebase.database().ref(`members/${payload.key}`).once('value')
+    return Object.assign({ key: user.key }, user.val())
   }
 }
 
