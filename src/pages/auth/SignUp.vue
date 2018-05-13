@@ -71,6 +71,7 @@ export default {
 
       &:last-child {
         margin-top: map-get($spacers, 2);
+        margin-left: 0;
       }
     }
 

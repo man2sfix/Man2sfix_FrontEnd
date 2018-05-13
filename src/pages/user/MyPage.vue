@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <div class="inner-contents">
-      <div class="mypage-container">
+      <div class="mypage-container" v-loading="loading">
         <div class="mypage-inner">
           <my-info v-if="user" :info="user"></my-info>
         </div>
@@ -22,13 +22,15 @@ export default {
   name: 'MyPage',
   data () {
     return {
-      user: null
+      user: null,
+      loading: true
     }
   },
   methods: {
     async fetchData () {
       const auth = JSON.parse(sessionStorage.getItem('_auth'))
       this.user = await this.$store.dispatch('getUser', auth)
+      this.loading = false
       console.log(this.user)
     }
   },
@@ -52,6 +54,7 @@ export default {
     flex-wrap: wrap;
     font-size: 0;
     padding: map-get($spacers, 5) 0;
+    min-height: 300px;
 
     @include clearfix();
 
