@@ -1,114 +1,118 @@
 <template>
   <div class="signup-form" v-loading="loading">
-    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
-      <el-form-item label="이름" prop="name">
-        <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
-      </el-form-item>
-      <el-form-item label="이메일" prop="email">
-        <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
-      </el-form-item>
-      <el-form-item label="비밀번호" prop="password">
-        <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="비밀번호 확인" prop="passwordConfirm">
-        <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="생년월일" prop="birthday">
-        <el-date-picker type="date" v-model="form.birthday" placeholder="0000-00-00" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-      <!-- 경력 -->
-      <div class="item-career">
-        <el-button @click.prevent="addCareer()" class="btn-add--career" size="mini"><i class="el-icon-plus"></i></el-button>
-        <el-form-item label="경력사항">
-          <el-form-item :prop="'careers[' + index + ']'" v-for="(career, index) in form.careers" :key="career.key">
-            <div class="item-career-inner">
-              <el-input type="text" v-model="career.company" placeholder="예) Man2sfix"></el-input>
-              <el-button @click.prevent="removeCareer(career)"><i class="el-icon-close"></i></el-button>
-            </div>
-            <el-date-picker
-              v-model="career.date"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="0000-00-00"
-              end-placeholder="0000-00-00">
-            </el-date-picker>
-            <el-input type="textarea" v-model="career.description" placeholder="해당 경력을 소개해주세요."></el-input>
+    <el-card shadow="never" class="signup-form-card">
+      <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+        <el-form-item label="이름" prop="name">
+          <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
+        </el-form-item>
+        <el-form-item label="이메일" prop="email">
+          <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
+          <el-checkbox v-model="form.emailRecive">이메일 수신동의</el-checkbox>
+        </el-form-item>
+        <el-form-item label="비밀번호" prop="password">
+          <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="비밀번호 확인" prop="passwordConfirm">
+          <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="휴대폰 번호" prop="phone">
+          <div class="item-phone">
+            <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
+          </div>
+          <el-checkbox v-model="form.phoneRecive">SMS 수신동의</el-checkbox>
+        </el-form-item>
+        <!-- 강사용 정보 -->
+        <el-form-item label="성별" prop="gender">
+          <el-radio-group v-model="form.gender">
+            <el-radio label="man">남성</el-radio>
+            <el-radio label="woman">여성</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="생년월일" prop="birthday">
+          <el-date-picker v-model="form.birthday" type="date" placeholder="예) 0000-00-00"></el-date-picker>
+        </el-form-item>
+        <el-form-item label="인사말" prop="greeting">
+          <el-input type="textarea" v-model="form.greeting" :autosize="{ minRows: 5, maxRows: 20}"></el-input>
+        </el-form-item>
+        <el-form-item label="학력인증 (학력증명서, 졸업증명서, 재학증명서)" prop="academicFile" class="relative-container">
+          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile">
+            <el-button size="small" plain>업로드</el-button>
+            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="경력인증 (경력증명서, 출강증명서)" prop="careerFile" class="relative-container">
+          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile">
+            <el-button size="small" plain>업로드</el-button>
+            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="수료인증 (수료증 및 이수증)" prop="completionFile" class="relative-container">
+          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile">
+            <el-button size="small" plain>업로드</el-button>
+            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+          </el-upload>
+        </el-form-item>
+        <!-- // 강사용 정보 -->
+        <el-form-item label="프로필사진" class="relative-container">
+          <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfileFile" :on-remove="removeProfileFile">
+            <el-button size="small" plain>업로드</el-button>
+            <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="이용약관" prop="terms" class="relative-container">
+          <el-checkbox v-model="form.terms">동의하기</el-checkbox>
+          <el-button plain size="mini" @click="termsVisible = true">전문보기</el-button>
+        </el-form-item>
+        <el-form-item label="개인정보처리방침" prop="privacy" class="relative-container">
+          <el-checkbox v-model="form.privacy">동의하기</el-checkbox>
+          <el-button plain size="mini" @click="privacyVisible = true">전문보기</el-button>
+        </el-form-item>
+        <div class="form-btn">
+          <el-form-item>
+            <el-button native-type="submit" plain class="btn-submit">회원가입</el-button>
           </el-form-item>
-        </el-form-item>
-      </div>
-      <!-- // 경력 -->
-      <!-- 첨부파일 -->
-      <el-form-item label="첨부파일" prop="file" v-loading="fileLoading">
-        <el-upload
-          class="upload"
-          drag
-          action="#"
-          :limit="5"
-          :before-upload="handleUpload"
-          :http-request="handleRequest"
-          :before-remove="handleRemove"
-          :on-exceed="handleExceed"
-          :file-list="fileList"
-          multiple>
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-            <div class="el-upload__tip" slot="tip">파일당 크기는 최대 1MB로 제한됩니다.</div>
-        </el-upload>
-      </el-form-item>
-      <!-- // 첨부파일 -->
-      <div class="form-btn">
-        <el-form-item>
-          <el-button native-type="submit" round>회원가입</el-button>
-        </el-form-item>
-      </div>
-    </el-form>
+        </div>
+      </el-form>
+    </el-card>
+    <el-dialog title="이용약관" :visible.sync="termsVisible" class="signup-dialog">
+      <sign-up-terms></sign-up-terms>
+    </el-dialog>
+    <el-dialog title="개인정보처리방침" :visible.sync="privacyVisible" class="signup-dialog">
+      <sign-up-privacy></sign-up-privacy>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import SignUpTerms from '@/components/auth/SignUpTerms'
+import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
+
 export default {
-  name: 'SignUpStudent',
+  name: 'SignUpInstructor',
   data () {
-    // Validate Password
-    const validatePassword = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('비밀번호를 입력해주세요.'))
-      } else {
-        if (this.form.passwordConfirm !== '') {
-          this.$refs.form.validateField('passwordConfirm')
-        }
-        callback()
-      }
-    }
-
-    // Validate Password Confirm
-    var validatePasswordConfirm = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('비밀번호를 입력해주세요.'))
-      } else if (value !== this.form.password) {
-        callback(new Error('비밀번호가 서로 다릅니다.'))
-      } else {
-        callback()
-      }
-    }
-
     return {
       loading: false,
-      fileLoading: false,
-      key: `${Date.now()}`,
+      termsVisible: false,
+      privacyVisible: false,
       form: {
         name: '',
         email: '',
         password: '',
         passwordConfirm: '',
+        phone: '',
+        gender: null,
         birthday: '',
-        careers: [{
-          key: Date.now(),
-          company: '',
-          date: '',
-          description: ''
-        }],
-        fileList: []
+        greeting: '',
+        academicFile: '',
+        careerFile: '',
+        completionFile: '',
+        profile: '',
+        terms: false,
+        privacy: false,
+        emailRecive: true,
+        phoneRecive: true,
+        verified: false,
+        active: true
       },
       rules: {
         name: [
@@ -122,106 +126,133 @@ export default {
         password: [
           { required: true, message: '비밀번호를 입력해주세요.', trigger: 'blur' },
           { min: 6, message: '비밀번호는 6글자 이상으로 입력해주세요.', trigger: 'blur' },
-          { validator: validatePassword, trigger: 'blur' }
+          { validator: this.validatePassword, trigger: 'blur' }
         ],
         passwordConfirm: [
           { required: true, message: '비밀번호를 확인해주세요.', trigger: 'blur' },
-          { validator: validatePasswordConfirm, trigger: 'blur' }
+          { validator: this.validatePasswordConfirm, trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '휴대폰 번호를 입력해주세요.', trigger: 'blur' },
+          { validator: this.validatePhone, message: '휴대폰 번호가 올바르지 않습니다.', trigger: 'blur' }
+        ],
+        gender: [
+          { required: true, message: '성별을 선택해주세요.', trigger: 'change' }
         ],
         birthday: [
           { required: true, message: '생년월일을 입력해주세요.', trigger: 'blur' }
+        ],
+        greeting: [
+          { required: true, message: '인사말을 입력해주세요.', trigger: 'blur' },
+          { min: 100, message: '인사말은 최소 100자 이상으로 입력해주세요.', trigger: 'blur' }
+        ],
+        academicFile: [
+          { required: true, message: '학력인증 파일을 등록해주세요', trigger: 'blur' }
+        ],
+        careerFile: [
+          { required: true, message: '경력인증 파일을 등록해주세요.', trigger: 'blur' }
+        ],
+        completionFile: [
+          { required: true, message: '수료인증 파일을 등록해주세요.', trigger: 'blur' }
+        ],
+        terms: [
+          { required: true, message: '이용약관에 동의해주세요.', trigger: 'change' },
+          { validator: this.validateCheck, message: '이용약관에 동의해주세요.', trigger: 'change' }
+        ],
+        privacy: [
+          { required: true, message: '개인정보처리방침에 동의해주세요.', trigger: 'change' },
+          { validator: this.validateCheck, message: '개인정보처리방침에 동의해주세요.', trigger: 'change' }
         ]
-      },
-      fileList: []
+      }
     }
   },
   methods: {
-    addCareer () {
-      this.form.careers.push({
-        key: Date.now(),
-        company: '',
-        date: '',
-        description: ''
-      })
-      console.log(this.form.careers)
-    },
-    removeCareer (career) {
-      const index = this.form.careers.indexOf(career)
-      if (index !== -1) {
-        this.form.careers.splice(index, 1)
-        console.log(this.form.careers)
+    validatePassword (rule, value, callback) {
+      if (value === '') {
+        callback(new Error('비밀번호를 입력해주세요.'))
+      } else {
+        if (this.form.passwordConfirm !== '') {
+          this.$refs.form.validateField('passwordConfirm')
+        }
+        callback()
       }
     },
-    handleUpload (file) {
-      const maxFileSize = 1 * 1024 * 1024
+    validatePasswordConfirm (rule, value, callback) {
+      if (value === '') {
+        callback(new Error('비밀번호를 입력해주세요.'))
+      } else if (value !== this.form.password) {
+        callback(new Error('비밀번호가 서로 다릅니다.'))
+      } else {
+        callback()
+      }
+    },
+    validateCheck (rule, value, callback) {
+      if (!value) {
+        callback(new Error())
+      } else {
+        callback()
+      }
+    },
+    validatePhone (rule, value, callback) {
+      if (!/^\d{3}-\d{3,4}-\d{4}$/.test(value)) {
+        callback(new Error())
+      } else {
+        callback()
+      }
+    },
+    uploadFile (file, fileList, key) {
+      const isSize = file.size <= 2 * 1024 * 1024
+      const isType = file.raw.type === 'image/jpg' || file.raw.type === 'image/png' || file.raw.type === 'image/jpeg' || file.raw.type === 'image/gif' || file.raw.type === 'application/pdf'
 
-      if (file.size > maxFileSize) {
-        // 알람
-        this.$notify({
-          message: '파일크기가 초과하였습니다.',
+      if (isSize && isType) {
+        this.form[key] = file.raw
+      } else {
+        fileList.pop()
+        this.$message({
+          showClose: true,
+          message: '파일 크기 혹은 형식을 확인해주세요.',
           type: 'warning'
         })
-        return false
       }
     },
-    async handleRequest (file) {
-      // 파일 정보
-      const fileData = Object.assign({key: this.key}, file)
-      // 로딩 시작
-      this.fileLoading = true
-      // retrun 값
-      const res = await this.$store.dispatch('signUpUpload', fileData)
-      if (res) {
-        this.form.fileList.push({
-          name: res.metadata.name,
-          size: res.metadata.size,
-          type: res.metadata.type,
-          downloadURL: res.metadata.downloadURLs[0],
-          path: res.metadata.fullPath
-        })
-        console.log(this.form.fileList)
-      } else {
-        // 알람
-        this.$notify.error({
-          message: '파일 업로드에 실패하였습니다.'
-        })
-      }
-      // 로딩 끝
-      this.fileLoading = false
+    uploadAcademicFile (file, fileList) {
+      this.uploadFile(file, fileList, 'academicFile')
     },
-    async handleRemove (file, fileList) {
-      // 로딩 시작
-      this.fileLoading = true
-      // 파일 index
-      const index = fileList.indexOf(file)
-      console.log(index)
-      // 파일 path
-      const path = this.form.fileList.length > 0 ? this.form.fileList[index].path : null
-      // 삭제 정보
-      const fileData = {
-        path: path
-      }
-      // 파일 삭제
-      const bool = await this.$store.dispatch('signUpDelete', fileData)
-      if (bool) {
-        if (index !== -1) this.form.fileList.splice(index, 1)
-      } else {
-        // 알람
-        this.$notify.error({
-          message: '파일 삭제에 실패하였습니다.'
-        })
-        this.fileLoading = false
-        return false
-      }
+    removeAcademicFile (file, fileList) {
+      this.form.academicFile = ''
+    },
+    uploadCareerFile (file, fileList) {
+      this.uploadFile(file, fileList, 'careerFile')
+    },
+    removeCareerFile (file, fileList) {
+      this.form.careerFile = ''
+    },
+    uploadCompletionFile (file, fileList) {
+      this.uploadFile(file, fileList, 'completionFile')
+    },
+    removeCompletionFile (file, fileList) {
+      this.form.completionFile = ''
+    },
+    uploadProfileFile (file, fileList) {
+      const isSize = file.size <= 1 * 1024 * 1024
+      const isType = file.raw.type === 'image/jpg' || file.raw.type === 'image/png' || file.raw.type === 'image/jpeg' || file.raw.type === 'image/gif'
 
-      // 로딩 끝
-      this.fileLoading = false
+      if (isSize && isType) {
+        this.form.profile = file.raw
+      } else {
+        fileList.pop()
+        this.$message({
+          showClose: true,
+          message: '파일 크기 혹은 형식을 확인해주세요.',
+          type: 'warning'
+        })
+      }
     },
-    handleExceed (file, fileList) {
-
+    removeProfileFile (file, fileList) {
+      this.form.profile = ''
     },
     onSubmit (formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // 로딩 시작
           this.loading = true
@@ -231,83 +262,46 @@ export default {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
-            birthday: this.form.birthday,
-            careers: this.form.careers,
-            fileList: this.form.fileList,
+            phone: this.form.phone,
+            gender: this.form.gender,
+            birthday: this.form.birthday.getTime(),
+            greeting: this.form.greeting,
+            academicFile: this.form.academicFile,
+            careerFile: this.form.careerFile,
+            completionFile: this.form.completionFile,
+            profile: this.form.profile,
+            terms: this.form.terms,
+            privacy: this.form.privacy,
+            emailRecive: this.form.emailRecive,
+            phoneRecive: this.form.phoneRecive,
             createdAt: new Date().getTime(),
-            lastLoginedAt: new Date().getTime()
+            lastLoginedAt: new Date().getTime(),
+            passwordChangedAt: new Date().getTime(),
+            verified: this.form.verified,
+            active: this.form.active
           }
           // 리턴 boolean
-          const bool = this.$store.dispatch('signUp', signUpData)
+          const bool = await this.$store.dispatch('signUp', signUpData)
           // 리턴값에 따른 분기
           if (bool) {
-            // 알람
-            this.$notify({
-              message: '회원가입에 성공하였습니다. 로그인 후 이용하여주세요.',
+            this.$message({
+              showClose: true,
+              message: '회원가입에 성공하였습니다.',
               type: 'success'
             })
             this.$router.replace('/signin')
-          } else {
-            // 알람
-            this.$notify({
-              message: '회원가입에 실패하였습니다. 이메일과 이름을 확인해주세요.',
-              type: 'warning'
-            })
-            // 로딩 끝
-            this.loading = false
           }
+          // 로딩 끝
+          this.loading = false
         } else {
           return false
         }
       })
     }
+  },
+  components: {
+    SignUpTerms,
+    SignUpPrivacy
   }
 }
 </script>
-
-<style lang="scss">
-  .signup-form {
-    .upload,
-    .el-upload,
-    .el-upload-dragger {
-      display: block;
-      width: 100%;
-    }
-
-    .item-career {
-      position: relative;
-
-      .btn-add--career {
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-
-      .el-form-item__content {
-        > .el-form-item {
-          &:not(:last-child) {
-            margin-bottom: map-get($spacers, 2);
-          }
-        }
-      }
-
-      .item-career-inner {
-        display: flex;
-
-        .el-input {
-          flex: auto;
-          width: auto;
-        }
-
-        .el-button {
-          margin-left: map-get($spacers, 1);
-        }
-      }
-
-      .el-date-editor {
-        width: 100%;
-        margin: map-get($spacers, 1) 0;
-      }
-    }
-  }
-</style>

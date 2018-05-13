@@ -16,6 +16,8 @@ import Training from '@/pages/student/Training'
 // auth
 import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
+import SignUpStudent from '@/components/auth/SignUpStudent'
+import SignUpInstructor from '@/components/auth/SignUpInstructor'
 
 // user
 import MyPage from '@/pages/user/MyPage'
@@ -78,7 +80,19 @@ const router = new Router({
       path: '/signup',
       name: 'signup',
       component: SignUp,
-      meta: { NotRequiresAuth: true }
+      meta: { NotRequiresAuth: true },
+      children: [
+        {
+          path: 'student',
+          component: SignUpStudent,
+          meta: { NotRequiresAuth: true }
+        },
+        {
+          path: 'instructor',
+          component: SignUpInstructor,
+          meta: { NotRequiresAuth: true }
+        }
+      ]
     },
     {
       path: '/signout',

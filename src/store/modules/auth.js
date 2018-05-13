@@ -1,4 +1,5 @@
 import firebase from '@/providers/firebase'
+import { Message } from 'element-ui'
 
 // initial state
 const state = {
@@ -9,7 +10,7 @@ const state = {
 
 // getters
 const getters = {
-  getState: state => state.auth
+  getStateAuth: state => state.auth
 }
 
 // mutations
@@ -32,6 +33,43 @@ const mutations = {
   },
   deleteLocalStorage (state, payload) {
     localStorage.removeItem(`firebase:authUser:${payload.m}:[DEFAULT]`)
+  },
+  errorHandling (state, payload) {
+    let message = ''
+    let type = ''
+
+    switch (payload.code) {
+      case 'auth/user-not-found':
+        message = '회원가입된 이메일이 아닙니다.'
+        type = 'warning'
+        break
+
+      case 'auth/wrong-password':
+        message = '비밀번호가 맞지 않습니다.'
+        type = 'warning'
+        break
+
+      case 'auth/email-already-in-use':
+        message = '이미 가입된 이메일입니다.'
+        type = 'warning'
+        break
+
+      case 'auth/network-request-failed':
+        message = '네티워크가 불안정합니다.'
+        type = 'error'
+        break
+
+      default:
+        message = payload.code
+        type = 'error'
+        break
+    }
+
+    Message({
+      showClose: true,
+      message: message,
+      type: type
+    })
   }
 }
 
@@ -51,7 +89,7 @@ const actions = {
       // reutrn
       return true
     } catch (err) {
-      console.log(err)
+      context.commit('errorHandling', err)
     }
   },
   async signUp (context, payload) {
@@ -65,29 +103,55 @@ const actions = {
       delete (payload.password)
       // key
       const key = payload.email.split('@').join('').split('.').join('')
+      // if instructor
+      if (payload.type === 'instructor') {
+        // academic
+        payload.academicFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.academicFile })
+        // career
+        payload.careerFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.careerFile })
+        // completion
+        payload.completionFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.completionFile })
+      }
+      // if profile
+      if (payload.profile) {
+        payload.profile = await context.dispatch('signUpUploadFile', { key: key, file: payload.profile })
+      }
       // save storage
       await firebase.database().ref(`members/${key}`).set(payload)
       // return
       return true
     } catch (err) {
-      console.log(err)
+      context.commit('errorHandling', err)
     }
   },
-  async signUpUpload (context, payload) {
+  async passwordResetEmail (context, payload) {
+    try {
+      await firebase.auth().sendPasswordResetEmail(payload.value)
+      return true
+    } catch (err) {
+      context.commit('errorHandling', err)
+    }
+  },
+  async signUpUploadFile (context, payload) {
     try {
       const metadata = { contentType: payload.file.type }
-      const response = await firebase.storage().ref(`instructors/${payload.key}/${payload.file.name}`).put(payload.file, metadata)
-      return response
+      const response = await firebase.storage().ref(`members/${payload.key}/${payload.file.name}`).put(payload.file, metadata)
+      return {
+        name: response.metadata.name,
+        size: response.metadata.size,
+        downloadURL: response.metadata.downloadURLs[0],
+        updated: response.metadata.updated
+      }
     } catch (err) {
-      console.log(err)
+      context.commit('errorHandling', err)
     }
   },
-  async signUpDelete (context, payload) {
+  async signUpDeleteFile (context, payload) {
     try {
       await firebase.storage().ref(payload.path).delete()
       return true
     } catch (err) {
-      console.log(err)
+      context.commit('errorHandling', err)
     }
   },
   async getUser (context, payload) {

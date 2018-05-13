@@ -1,6 +1,6 @@
 <template>
-  <div class="login-form" v-loading="loading">
-    <el-card shadow="never" class="login-form-card">
+  <div class="signin-form" v-loading="loading">
+    <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이메일" prop="email">
           <el-input v-model="form.email"></el-input>
@@ -9,8 +9,12 @@
           <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button native-type="submit" class="btn-submit">로그인</el-button>
+          <el-button native-type="submit" plain class="btn-submit">로그인</el-button>
         </el-form-item>
+        <div class="btn-box">
+          <el-button type="text" size="small" @click="openFindPassword">비밀번호를 잊으셨나요?</el-button>
+          <el-button type="text" size="small"><router-link :to="'/signup'">아직 회원이 아니신가요?</router-link></el-button>
+        </div>
       </el-form>
     </el-card>
   </div>
@@ -22,6 +26,7 @@ export default {
   data () {
     return {
       loading: false,
+      passwordVisible: false,
       form: {
         email: '',
         password: ''
@@ -53,45 +58,50 @@ export default {
           const bool = await this.$store.dispatch('signIn', signInData)
           // 리턴값에 따른 분기
           if (bool) {
-            // 알람
-            this.$notify({
-              message: '로그인에 성공하였습니다.',
-              type: 'success'
-            })
             this.$router.replace(this.$route.query.redirect || '/')
-          } else {
-            // 알람
-            this.$notify({
-              message: '이메일 혹은 비밀번호를 확인해주세요.',
-              type: 'warning'
-            })
-            // 로딩 끝
-            this.loading = false
           }
+          // 로딩 끝
+          this.loading = false
         } else {
           return false
         }
       })
+    },
+    async openFindPassword () {
+      try {
+        const email = await this.$prompt('이메일', '비밀번호 찾기', {
+          confirmButtonText: '찾기',
+          cancelButtonText: '취소',
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '올바른 이메일을 입력해주세요.'
+        })
+        const bool = await this.$store.dispatch('passwordResetEmail', email)
+        if (bool) {
+          this.$message({
+            message: '이메일을 확인하여 주세요.',
+            type: 'success'
+          })
+        }
+      } catch (err) {
+        // todo
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .login-form {
-    padding: map-get($spacers, 5) map-get($spacers, 3);
-
-    .login-form-card {
-      max-width: 500px;
-      margin: 0 auto;
-    }
+  .signin-form {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: map-get($spacers, 5) 0;
 
     .el-form-item__label {
       padding-bottom: 0;
     }
 
     .el-form-item {
-      margin-bottom: map-get($spacers, 2);
+      margin-bottom: map-get($spacers, 3);
 
       &:last-child {
         margin-bottom: 0;
@@ -102,7 +112,20 @@ export default {
     .btn-submit {
       display: block;
       width: 100%;
-      margin-top: map-get($spacers, 3);
+      margin-top: map-get($spacers, 2);
+    }
+
+    .btn-box {
+      .el-button {
+        display: block;
+        margin: 0;
+      }
+    }
+  }
+
+  .signin-dialog {
+    .el-dialog__body {
+      padding-top: 0;
     }
   }
 </style>

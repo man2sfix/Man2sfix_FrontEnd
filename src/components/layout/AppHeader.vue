@@ -5,12 +5,15 @@
         <router-link :to="'/'">{{ title }}</router-link>
       </h1>
       <ul class="btn-list">
+        <li v-if="auth.logined">
+          <router-link :to="'/mypage'" class="welcome">{{ auth.name }}님 환영합니다.</router-link>
+          </li>
         <!-- not logined -->
-        <li v-if="!auth.logined"><router-link :to="'signin'">로그인</router-link></li>
-        <li v-if="!auth.logined"><router-link :to="'signup'">회원가입</router-link></li>
+        <li v-if="!auth.logined"><router-link :to="'/signin'">로그인</router-link></li>
+        <li v-if="!auth.logined"><router-link :to="'/signup'">회원가입</router-link></li>
         <!-- logined -->
-        <li v-if="auth.logined"><router-link :to="'signout'">로그아웃</router-link></li>
-        <li v-if="auth.logined"><router-link :to="'mypage'">마이페이지</router-link></li>
+        <li v-if="auth.logined"><router-link :to="'/signout'">로그아웃</router-link></li>
+        <li v-if="auth.logined"><router-link :to="'/mypage'">마이페이지</router-link></li>
         <li v-if="auth.logined && auth.type === 'instructor'"><router-link :to="'#'">강사페이지</router-link></li>
       </ul>
     </div>
@@ -41,7 +44,7 @@ export default {
   methods: {
     getAuth () {
       this.$store.commit('setState')
-      this.auth = this.$store.getters.getState
+      this.auth = this.$store.getters.getStateAuth
     }
   }
 }
@@ -98,9 +101,14 @@ export default {
         border: 1px solid gray('300');
         padding: 0 map-get($spacers, 2);
 
-        &:hover,
-        &:focus,
-        &.router-link-exact-active {
+        &.welcome {
+          border: 0;
+          padding: 0;
+        }
+
+        &:not(.welcome):hover,
+        &:not(.welcome):focus,
+        &:not(.welcome).router-link-active {
           color: theme-color('primary');
           border-color: theme-color('primary');
         }
