@@ -1,5 +1,5 @@
 <template>
-  <div class="signup-form" v-loading="loading">
+  <div class="form signup-form" v-loading="loading">
     <el-card shadow="never" class="signup-form-card">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이름" prop="name">
@@ -21,25 +21,23 @@
           </div>
           <el-checkbox v-model="form.phoneRecive">SMS 수신동의</el-checkbox>
         </el-form-item>
-        <el-form-item label="프로필사진" class="relative-container">
-          <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfileFile" :on-remove="removeProfileFile">
+        <el-form-item label="프로필사진" class="relative-box">
+          <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile">
             <el-button size="small" plain>업로드</el-button>
             <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="이용약관" prop="terms" class="relative-container">
+        <el-form-item label="이용약관" prop="terms" class="relative-box">
           <el-checkbox v-model="form.terms">동의하기</el-checkbox>
           <el-button plain size="mini" @click="termsVisible = true">전문보기</el-button>
         </el-form-item>
-        <el-form-item label="개인정보처리방침" prop="privacy" class="relative-container">
+        <el-form-item label="개인정보처리방침" prop="privacy" class="relative-box">
           <el-checkbox v-model="form.privacy">동의하기</el-checkbox>
           <el-button plain size="mini" @click="privacyVisible = true">전문보기</el-button>
         </el-form-item>
-        <div class="form-btn">
-          <el-form-item>
-            <el-button native-type="submit" plain class="btn-submit">회원가입</el-button>
-          </el-form-item>
-        </div>
+        <el-form-item>
+          <el-button native-type="submit" plain class="btn-block">회원가입</el-button>
+        </el-form-item>
       </el-form>
     </el-card>
     <el-dialog title="이용약관" :visible.sync="termsVisible" class="signup-dialog">
@@ -52,11 +50,18 @@
 </template>
 
 <script>
+import Validator from '@/mixins/validator/Validator'
+import UploadProfile from '@/mixins/upload/UploadProfile'
+
 import SignUpTerms from '@/components/auth/SignUpTerms'
 import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
 
 export default {
   name: 'SignUpStudent',
+  mixins: [
+    Validator,
+    UploadProfile
+  ],
   data () {
     return {
       loading: false,
@@ -108,64 +113,13 @@ export default {
     }
   },
   methods: {
-    validatePassword (rule, value, callback) {
-      if (value === '') {
-        callback(new Error('비밀번호를 입력해주세요.'))
-      } else {
-        if (this.form.passwordConfirm !== '') {
-          this.$refs.form.validateField('passwordConfirm')
-        }
-        callback()
-      }
-    },
-    validatePasswordConfirm (rule, value, callback) {
-      if (value === '') {
-        callback(new Error('비밀번호를 입력해주세요.'))
-      } else if (value !== this.form.password) {
-        callback(new Error('비밀번호가 서로 다릅니다.'))
-      } else {
-        callback()
-      }
-    },
-    validateCheck (rule, value, callback) {
-      if (!value) {
-        callback(new Error())
-      } else {
-        callback()
-      }
-    },
-    validatePhone (rule, value, callback) {
-      if (!/^\d{3}-\d{3,4}-\d{4}$/.test(value)) {
-        callback(new Error())
-      } else {
-        callback()
-      }
-    },
-    uploadProfileFile (file, fileList) {
-      const isSize = file.size <= 1 * 1024 * 1024
-      const isType = file.raw.type === 'image/jpg' || file.raw.type === 'image/png' || file.raw.type === 'image/jpeg' || file.raw.type === 'image/gif'
-
-      if (isSize && isType) {
-        this.form.profile = file.raw
-      } else {
-        fileList.pop()
-        this.$message({
-          showClose: true,
-          message: '파일 크기 혹은 형식을 확인해주세요.',
-          type: 'warning'
-        })
-      }
-    },
-    removeProfileFile (file, fileList) {
-      this.form.profile = ''
-    },
     onSubmit (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // 로딩 시작
           this.loading = true
           // 폼 데이터 set
-          const signUpData = {
+          const formData = {
             type: 'student',
             name: this.form.name,
             email: this.form.email,
@@ -178,10 +132,11 @@ export default {
             phoneRecive: this.form.phoneRecive,
             createdAt: new Date().getTime(),
             lastLoginedAt: new Date().getTime(),
+            lastUpdatedAt: new Date().getTime(),
             passwordChangedAt: new Date().getTime()
           }
           // 리턴 boolean
-          const bool = await this.$store.dispatch('signUp', signUpData)
+          const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기
           if (bool) {
             this.$message({

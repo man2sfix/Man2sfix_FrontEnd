@@ -18,9 +18,9 @@ import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
 import SignUpStudent from '@/components/auth/SignUpStudent'
 import SignUpInstructor from '@/components/auth/SignUpInstructor'
-
-// user
-import MyPage from '@/pages/user/MyPage'
+import MyPage from '@/pages/auth/MyPage'
+import ChangeInfo from '@/pages/auth/ChangeInfo'
+import ChangePassword from '@/pages/auth/ChangePassword'
 
 // shaerd
 import NotFound from '@/pages/shared/NotFound'
@@ -106,6 +106,18 @@ const router = new Router({
       path: '/mypage',
       name: 'mypage',
       component: MyPage,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/changeinfo',
+      name: 'changeinfo',
+      component: ChangeInfo,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/changepassword',
+      name: 'changepassword',
+      component: ChangePassword,
       meta: { requiresAuth: true }
     },
     {

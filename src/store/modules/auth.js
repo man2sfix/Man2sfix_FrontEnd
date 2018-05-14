@@ -22,7 +22,6 @@ const mutations = {
       name: payload.name,
       type: payload.type,
       email: payload.email,
-      createdAt: payload.createdAt,
       lastLoginedAt: payload.lastLoginedAt
     }
     // set state auth
@@ -84,9 +83,9 @@ const actions = {
       // auth data
       const key = payload.email.split('@').join('').split('.').join('')
       const authData = await firebase.database().ref(`members/${key}`).once('value')
-      await firebase.database().ref(`members/${key}`).update({ lastLoginedAt: new Date().getTime() })
+      await firebase.database().ref(`members/${key}`).update({ lastLoginedAt: payload.lastLoginedAt })
       context.commit('signIn', Object.assign({ key: authData.key }, authData.val()))
-      // reutrn
+      // return
       return true
     } catch (err) {
       context.commit('errorHandling', err)
@@ -106,18 +105,34 @@ const actions = {
       // if instructor
       if (payload.type === 'instructor') {
         // academic
-        payload.academicFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.academicFile })
+        payload.academicFile = await context.dispatch('authUploadFile', { key: key, file: payload.academicFile })
         // career
-        payload.careerFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.careerFile })
+        payload.careerFile = await context.dispatch('authUploadFile', { key: key, file: payload.careerFile })
         // completion
-        payload.completionFile = await context.dispatch('signUpUploadFile', { key: key, file: payload.completionFile })
+        payload.completionFile = await context.dispatch('authUploadFile', { key: key, file: payload.completionFile })
       }
       // if profile
       if (payload.profile) {
-        payload.profile = await context.dispatch('signUpUploadFile', { key: key, file: payload.profile })
+        payload.profile = await context.dispatch('authUploadFile', { key: key, file: payload.profile })
       }
       // save storage
       await firebase.database().ref(`members/${key}`).set(payload)
+      // return
+      return true
+    } catch (err) {
+      context.commit('errorHandling', err)
+    }
+  },
+  async changePassword (context, payload) {
+    try {
+      // firebase login
+      const res = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      // update password
+      await firebase.auth().currentUser.updatePassword(payload.newPassword)
+      // update password date
+      await firebase.database().ref(`members/${payload.key}`).update({ passwordChangedAt: payload.passwordChangedAt })
+      // delete localstorage
+      context.commit('deleteLocalStorage', res)
       // return
       return true
     } catch (err) {
@@ -132,7 +147,7 @@ const actions = {
       context.commit('errorHandling', err)
     }
   },
-  async signUpUploadFile (context, payload) {
+  async authUploadFile (context, payload) {
     try {
       const metadata = { contentType: payload.file.type }
       const response = await firebase.storage().ref(`members/${payload.key}/${payload.file.name}`).put(payload.file, metadata)
@@ -146,7 +161,7 @@ const actions = {
       context.commit('errorHandling', err)
     }
   },
-  async signUpDeleteFile (context, payload) {
+  async authDeleteFile (context, payload) {
     try {
       await firebase.storage().ref(payload.path).delete()
       return true

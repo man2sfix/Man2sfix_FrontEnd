@@ -1,5 +1,5 @@
 <template>
-  <div class="signin-form" v-loading="loading">
+  <div class="form form-signin" v-loading="loading">
     <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이메일" prop="email">
@@ -9,11 +9,11 @@
           <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button native-type="submit" plain class="btn-submit">로그인</el-button>
+          <el-button native-type="submit" plain class="btn-block">로그인</el-button>
         </el-form-item>
-        <div class="btn-box">
-          <el-button type="text" size="small" @click="openFindPassword">비밀번호를 잊으셨나요?</el-button>
-          <el-button type="text" size="small"><router-link :to="'/signup'">아직 회원이 아니신가요?</router-link></el-button>
+        <div class="link-box">
+          <router-link :to="'/'" class="link">비밀번호를 잊으셨나요?</router-link>
+          <router-link :to="'/signup'" class="link">아직 회원이 아니신가요?</router-link>
         </div>
       </el-form>
     </el-card>
@@ -49,15 +49,20 @@ export default {
           // 로딩 시작
           this.loading = true
           // 폼 데이터 셋
-          const signInData = {
+          const formData = {
             email: this.form.email,
             password: this.form.password,
             lastLoginedAt: new Date().getTime()
           }
           // 리턴 boolean
-          const bool = await this.$store.dispatch('signIn', signInData)
+          const bool = await this.$store.dispatch('signIn', formData)
           // 리턴값에 따른 분기
           if (bool) {
+            this.$message({
+              showClose: true,
+              message: '로그인에 성공하였습니다.',
+              type: 'success'
+            })
             this.$router.replace(this.$route.query.redirect || '/')
           }
           // 로딩 끝
@@ -90,42 +95,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .signin-form {
-    max-width: 550px;
-    margin: 0 auto;
-    padding: map-get($spacers, 5) 0;
+<style lang="scss" scoped>
 
-    .el-form-item__label {
-      padding-bottom: 0;
-    }
-
-    .el-form-item {
-      margin-bottom: map-get($spacers, 3);
-
-      &:last-child {
-        margin-bottom: 0;
-        text-align: center;
-      }
-    }
-
-    .btn-submit {
-      display: block;
-      width: 100%;
-      margin-top: map-get($spacers, 2);
-    }
-
-    .btn-box {
-      .el-button {
-        display: block;
-        margin: 0;
-      }
-    }
-  }
-
-  .signin-dialog {
-    .el-dialog__body {
-      padding-top: 0;
-    }
-  }
 </style>
