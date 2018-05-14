@@ -108,8 +108,8 @@ export default {
         privacy: false,
         emailAgree: true,
         phoneAgree: true,
-        verified: false,
-        active: true
+        instructorVerified: false,
+        instructorActive: true
       },
       rules: {
         name: [
@@ -215,9 +215,9 @@ export default {
             academicFile: this.form.academicFile,
             careerFile: this.form.careerFile,
             completionFile: this.form.completionFile,
+            instructorVerified: this.form.instructorVerified,
+            instructorActive: this.form.instructorActive,
             profile: this.form.profile,
-            verified: this.form.verified,
-            active: this.form.active,
             terms: this.form.terms,
             privacy: this.form.privacy,
             emailAgree: this.form.emailAgree,
