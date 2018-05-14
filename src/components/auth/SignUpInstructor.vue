@@ -7,7 +7,7 @@
         </el-form-item>
         <el-form-item label="이메일" prop="email">
           <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
-          <el-checkbox v-model="form.emailRecive">이메일 수신동의</el-checkbox>
+          <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
         </el-form-item>
         <el-form-item label="비밀번호" prop="password">
           <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
@@ -19,7 +19,7 @@
           <div class="item-phone">
             <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
           </div>
-          <el-checkbox v-model="form.phoneRecive">SMS 수신동의</el-checkbox>
+          <el-checkbox v-model="form.phoneAgree">SMS 수신동의</el-checkbox>
         </el-form-item>
         <!-- 강사용 정보 -->
         <el-form-item label="성별" prop="gender">
@@ -106,8 +106,8 @@ export default {
         profile: '',
         terms: false,
         privacy: false,
-        emailRecive: true,
-        phoneRecive: true,
+        emailAgree: true,
+        phoneAgree: true,
         verified: false,
         active: true
       },
@@ -216,12 +216,12 @@ export default {
             careerFile: this.form.careerFile,
             completionFile: this.form.completionFile,
             profile: this.form.profile,
-            terms: this.form.terms,
-            privacy: this.form.privacy,
-            emailRecive: this.form.emailRecive,
-            phoneRecive: this.form.phoneRecive,
             verified: this.form.verified,
             active: this.form.active,
+            terms: this.form.terms,
+            privacy: this.form.privacy,
+            emailAgree: this.form.emailAgree,
+            phoneAgree: this.form.phoneAgree,
             createdAt: new Date().getTime(),
             lastLoginedAt: new Date().getTime(),
             lastUpdatedAt: new Date().getTime(),
