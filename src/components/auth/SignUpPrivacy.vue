@@ -1,14 +1,14 @@
 <template>
-  <textarea class="privacy-container" readonly>
-    맨투스픽은 (이하 "회사"는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
-
-    회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
-
-    수집하는 개인정보 항목 및 수집방법
-    가. 수집하는 개인정보의 항목
-    회사는 회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
-    - 일반회원 : 이름, 이메일, 비밀번호, 핸드폰 번호
-    - 강사회원 : 이름, 이메일, 비밀번호, 핸드폰 번호, 성별, 생년월일
+  <div class="privacy-contents">
+    맨투스픽은 (이하 "회사"는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.<br>
+    <br>
+    회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br>
+    <br>
+    수집하는 개인정보 항목 및 수집방법<br>
+    가. 수집하는 개인정보의 항목<br>
+    회사는 회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.<br>
+    - 일반회원 : 이름, 이메일, 비밀번호, 핸드폰 번호<br>
+    - 강사회원 : 이름, 이메일, 비밀번호, 핸드폰 번호, 성별, 생년월일<br>
 
     서비스 이용 과정이나 사업 처리 과정에서 서비스이용기록, 접속로그, 쿠키, 접속 IP, 결제 기록, 불량이용 기록이 생성되어 수집될 수 있습니다.
 
@@ -102,7 +102,7 @@
     개인정보침해신고센터 (privacy.kisa.or.kr / 국번 없이 118)
     대검찰청 사이버범죄수사단 (www.spo.go.kr / 02-3480-2000)
     경찰청 사이버안전국 (www.ctrc.go.kr/ 국번 없이 182)
-  </textarea>
+  </div>
 </template>
 
 <script>
@@ -112,14 +112,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .privacy-container {
-   display: block;
-   resize: none;
-   border: 1px solid gray('300');
-   width: 100%;
+ .privacy-contents {
+   border-top: 1px solid gray('300');
+   border-bottom: 1px solid gray('300');
+   padding: map-get($spacers, 3) 0;
    height: 300px;
-   padding: map-get($spacers, 3);
-   white-space: pre-line;
    font-size: $font-size-sm;
+   line-height: 1.5;
+   overflow-y: scroll;
  }
 </style>

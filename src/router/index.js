@@ -32,6 +32,10 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
       name: 'Home',
       component: Home
     },
@@ -43,12 +47,24 @@ const router = new Router({
     {
       path: '/magazine',
       name: 'magazine',
-      component: Magazine
+      component: Magazine,
+      children: [
+        {
+          path: ':id',
+          component: Magazine
+        }
+      ]
     },
     {
       path: '/community',
       name: 'community',
-      component: Community
+      component: Community,
+      children: [
+        {
+          path: ':/id',
+          component: Community
+        }
+      ]
     },
     {
       path: '/howtouse',
@@ -147,7 +163,7 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.NotRequiresAuth)) {
-    // 로그인 있을 시 홈으로 리다이렉트
+    // 로그인 정보 있을 시 홈으로 리다이렉트
     const auth = JSON.parse(sessionStorage.getItem('_auth')) || { logined: false }
     if (auth.logined) {
       next({

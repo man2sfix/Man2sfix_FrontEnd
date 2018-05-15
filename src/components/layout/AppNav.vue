@@ -1,8 +1,8 @@
 <template>
   <nav class="app-nav">
-    <ul class="inner">
-      <li v-for="(item, index) in nav" :key="index">
-        <router-link :to="item.href">{{ item.name }}</router-link>
+    <ul class="app-nav-list">
+      <li v-for="(item, index) in nav" :key="index" class="nav-item">
+        <router-link :to="item.href" class="link">{{ item.name }}</router-link>
       </li>
     </ul>
   </nav>
@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       nav: [
-        { name: '맨투스픽', href: '/' },
+        { name: '맨투스픽', href: '/home' },
         { name: '강사진 소개', href: '/instructors' },
         { name: '매거진', href: '/magazine' },
         { name: '커뮤니티', href: '/community' },
@@ -27,34 +27,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .app-nav {
-    height: $font-size-base * 3;
+.app-nav {
+  height: $font-size-base * 3;
 
-    .inner {
-      max-width: 1200px;
-      display: flex;
-      margin: 0 auto;
-    }
+  &-list {
+    height: 100%;
+    max-width: 1100px;
+    display: flex;
+    margin: 0 auto;
+  }
 
-    .inner,
-    li,
-    a {
-      height: 100%;
-    }
+  &-inner,
+  .nav-item,
+  .link {
+    height: 100%;
+  }
 
-    li {
-      display: inline-block;
-      font-size: $font-size-base;
-      margin: 0 map-get($spacers, 3);
-    }
+  .nav-item {
+    display: inline-block;
+    font-size: $font-size-sm;
+    margin: 0 map-get($spacers, 3);
+  }
 
-    a {
-      display: flex;
-      align-items: center;
-    }
+  .link {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
 
-    .router-link-exact-active {
-      color: theme-color('primary');
+  .router-link-active {
+    color: theme-color('primary');
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: theme-color('primary');
     }
   }
+}
 </style>

@@ -39,9 +39,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .collapse-container {
-    padding-bottom: map-get($spacers, 5);
+.collapse-container {
+  padding-bottom: map-get($spacers, 5);
 
-    @include clearfix();
-  }
+  @include clearfix();
+}
 </style>

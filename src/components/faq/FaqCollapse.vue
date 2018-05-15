@@ -1,6 +1,6 @@
 <template>
   <div class="collapse-contents">
-    <h3 class="collapse-contents--title">{{ title }}</h3>
+    <h3 class="collapse-contents-title">{{ title }}</h3>
     <el-collapse accordion>
       <el-collapse-item v-for="(item, index) in items" :key="index" :name="index">
         <template slot="title">
@@ -40,7 +40,7 @@ export default {
       float: right;
     }
 
-    &--title {
+    &-title {
       position: relative;
       font-size: $font-size-lg;
       color: gray('800');

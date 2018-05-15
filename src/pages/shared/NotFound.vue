@@ -20,8 +20,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .notfound {
-    text-align: center;
-    padding: map-get($spacers, 5)
-  }
+.notfound {
+  text-align: center;
+  padding: map-get($spacers, 5)
+}
 </style>

@@ -34,16 +34,16 @@ export default {
       console.log(this.user)
     }
   },
-  components: {
-    AppLayout,
-    MyInfo,
-    MyPassword
-  },
   watch: {
     '$route': 'fetchData'
   },
   created () {
     this.fetchData()
+  },
+  components: {
+    AppLayout,
+    MyInfo,
+    MyPassword
   }
 }
 </script>

@@ -44,14 +44,14 @@ export default {
       }
     }
   },
-  components: {
-    AppLayout
-  },
   created () {
     this.onShow()
   },
   watch: {
     '$route': 'onShow'
+  },
+  components: {
+    AppLayout
   }
 }
 </script>

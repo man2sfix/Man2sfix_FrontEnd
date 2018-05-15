@@ -22,26 +22,26 @@ export default {
 </script>
 
 <style lang="scss">
-  .app-contents {
-    @include clearfix();
+.app-contents {
+  @include clearfix();
 
-    .inner-contents {
-      max-width: 1200px;
-      padding: 0 map-get($spacers, 3);
-      margin: 0 auto;
-    }
-
-    .contents-title {
-      font-size: $font-size-base * 2;
-      color: gray('900');
-      text-align: center;
-      padding: map-get($spacers, 5) 0 map-get($spacers, 3);
-    }
-
-    .contents-text {
-      font-size: $font-size-base;
-      color: gray('800');
-      text-align: center;
-    }
+  .inner-contents {
+    max-width: 1100px;
+    padding: map-get($spacers, 5) map-get($spacers, 3);
+    margin: 0 auto;
   }
+
+  .contents-title {
+    font-size: $font-size-base * 2;
+    color: gray('900');
+    text-align: center;
+    padding: 0 0 map-get($spacers, 3);
+  }
+
+  .contents-text {
+    font-size: $font-size-base;
+    color: gray('800');
+    text-align: center;
+  }
+}
 </style>

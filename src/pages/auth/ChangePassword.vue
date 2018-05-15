@@ -96,14 +96,14 @@ export default {
       })
     }
   },
-  components: {
-    AppLayout
-  },
   watch: {
     '$route': 'getAuth'
   },
   created () {
     this.getAuth()
+  },
+  components: {
+    AppLayout
   }
 }
 </script>
