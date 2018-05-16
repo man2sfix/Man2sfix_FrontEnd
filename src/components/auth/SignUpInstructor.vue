@@ -1,5 +1,5 @@
 <template>
-  <div class="form signup-form" v-loading="loading">
+  <div class="signup-form" v-loading="loading">
     <el-card shadow="never" class="signup-form-card">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이름" prop="name">
@@ -252,3 +252,56 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.signup-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: map-get($spacers, 5) 0;
+
+  .el-form-item__label {
+    padding-bottom: 0;
+  }
+
+  .el-form-item {
+    margin-bottom: map-get($spacers, 3);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .el-date-editor {
+    width: 100%;
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    margin-top: map-get($spacers, 2);
+  }
+
+  .relative-box {
+    position: relative;
+
+    .el-button {
+      position: absolute;
+      bottom: 5px;
+      right: 0;
+    }
+
+    .el-upload {
+      .el-button {
+        position: static;
+      }
+    }
+
+    .el-upload__tip {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+    }
+  }
+}
+</style>

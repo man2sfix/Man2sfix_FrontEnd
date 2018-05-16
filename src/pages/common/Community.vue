@@ -102,6 +102,19 @@ export default {
       ]
     }
   },
+  methods: {
+    getList () {
+      this.currentPage()
+      this.currentSort()
+      console.log('a')
+    }
+  },
+  watch: {
+    '$route': 'getList'
+  },
+  created () {
+    this.getList()
+  },
   components: {
     AppLayout,
     CommunityList

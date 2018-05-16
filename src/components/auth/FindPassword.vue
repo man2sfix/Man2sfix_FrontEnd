@@ -1,12 +1,12 @@
 <template>
-  <article class="visual">
-
-  </article>
+<div>
+  password
+</div>
 </template>
 
 <script>
 export default {
-  name: 'Visual',
+  name: 'FindPassword',
   data () {
     return {
 
@@ -14,3 +14,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

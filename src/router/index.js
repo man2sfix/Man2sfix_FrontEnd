@@ -15,6 +15,9 @@ import Training from '@/pages/student/Training'
 
 // auth
 import SignIn from '@/pages/auth/SignIn'
+import FindAccount from '@/pages/auth/FindAccount'
+import FindEmail from '@/components/auth/FindEmail'
+import FindPassword from '@/components/auth/FindPassword'
 import SignUp from '@/pages/auth/SignUp'
 import SignUpStudent from '@/components/auth/SignUpStudent'
 import SignUpInstructor from '@/components/auth/SignUpInstructor'
@@ -61,7 +64,7 @@ const router = new Router({
       component: Community,
       children: [
         {
-          path: ':/id',
+          path: ':id',
           component: Community
         }
       ]
@@ -117,6 +120,22 @@ const router = new Router({
         sessionStorage.removeItem('_auth')
         location.replace('/')
       }
+    },
+    {
+      path: '/findaccount',
+      name: 'findaccount',
+      component: FindAccount,
+      meta: { NotRequiresAuth: true },
+      children: [
+        {
+          path: 'email',
+          component: FindEmail
+        },
+        {
+          path: 'password',
+          component: FindPassword
+        }
+      ]
     },
     {
       path: '/mypage',

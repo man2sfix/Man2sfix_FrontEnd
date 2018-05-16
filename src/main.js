@@ -5,15 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
-import ElementUI from 'element-ui'
-import ElementLocale from 'element-ui/lib/locale/lang/ko'
-import 'element-ui/lib/theme-chalk/index.css'
-
 import VueMoment from 'vue-moment'
 import momentLocale from 'moment/locale/ko'
 
+import './elements/components'
+
 Vue.config.productionTip = false
-Vue.use(ElementUI, { ElementLocale })
 Vue.use(VueMoment, { momentLocale })
 
 /* eslint-disable no-new */

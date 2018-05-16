@@ -3,7 +3,6 @@
 //
 
 // Base
-
 @import './base/common';
 
 // Utils
@@ -12,9 +11,3 @@
 @import './utils/variables';
 @import './utils/mixins';
 @import './utils/breakpoints';
-
-// Components
-
-@import './components/text';
-@import './components/spacers';
-@import './components/form';

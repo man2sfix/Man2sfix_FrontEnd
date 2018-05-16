@@ -1,5 +1,5 @@
 <template>
-  <div class="form form-signin" v-loading="loading">
+  <div class="form-signin" v-loading="loading">
     <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이메일" prop="email">
@@ -12,7 +12,7 @@
           <el-button native-type="submit" plain class="btn-block">로그인</el-button>
         </el-form-item>
         <div class="link-box">
-          <router-link :to="'/'" class="link">비밀번호를 잊으셨나요?</router-link>
+          <router-link :to="'/findaccount'" class="link">이메일/비밀번호를 잊으셨나요?</router-link>
           <router-link :to="'/signup'" class="link">아직 회원이 아니신가요?</router-link>
         </div>
       </el-form>
@@ -96,5 +96,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form-signin {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: map-get($spacers, 5) 0;
 
+  .el-form-item__label {
+    padding-bottom: 0;
+  }
+
+  .el-form-item {
+    margin-bottom: map-get($spacers, 3);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    margin-top: map-get($spacers, 2);
+  }
+
+  .link-box {
+    .link {
+      display: block;
+      color: gray('700');
+      font-size: $font-size-base * 0.8;
+      padding: map-get($spacers, 2);
+
+      &:hover,
+      &:focus {
+        color: theme-color('primary');
+      }
+    }
+  }
+}
 </style>
