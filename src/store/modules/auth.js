@@ -1,3 +1,4 @@
+import axios from 'axios'
 import firebase from '@/providers/firebase'
 import { Message } from 'element-ui'
 
@@ -76,6 +77,13 @@ const mutations = {
 const actions = {
   async signIn (context, payload) {
     try {
+      axios.post('localhost:3000/member', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      /*
       // firebase auth
       const signInData = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       // delete localstorage
@@ -85,14 +93,19 @@ const actions = {
       const authData = await firebase.database().ref(`members/${key}`).once('value')
       await firebase.database().ref(`members/${key}`).update({ lastLoginedAt: payload.lastLoginedAt })
       context.commit('signIn', Object.assign({ key: authData.key }, authData.val()))
+      */
       // return
       return true
     } catch (err) {
+      console.log(err)
       context.commit('errorHandling', err)
     }
   },
   async signUp (context, payload) {
     try {
+      console.log(payload)
+      axios.post('http://localhost:3000/member/', payload)
+      /*
       // firebase auth
       const signUpData = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       // const refreshToken = signUp.refreshToken
@@ -117,8 +130,9 @@ const actions = {
       }
       // save storage
       await firebase.database().ref(`members/${key}`).set(payload)
+      */
       // return
-      return true
+      // return true
     } catch (err) {
       context.commit('errorHandling', err)
     }

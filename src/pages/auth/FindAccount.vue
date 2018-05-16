@@ -14,9 +14,9 @@
             <h3 class="title">비밀번호 찾기</h3>
           </router-link>
         </div>
-        <p class="notice">문의사항은 <router-link :to="'/contact'" class="link">제휴 및 문의</router-link>를 이용하여 주세요.</p>
       </div>
       <router-view/>
+      <p class="notice">문의사항은 <router-link :to="'/contact'" class="link">제휴 및 문의</router-link>를 이용하여 주세요.</p>
     </div>
   </app-layout>
 </template>

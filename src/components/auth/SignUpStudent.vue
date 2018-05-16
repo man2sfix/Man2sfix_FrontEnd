@@ -1,7 +1,7 @@
 <template>
   <div class="signup-form" v-loading="loading">
     <el-card shadow="never" class="signup-form-card">
-      <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+      <el-form ref="form" :model="form" :rules="rules" enctype="multipart/form-data" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이름" prop="name">
           <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
         </el-form-item>
@@ -129,12 +129,9 @@ export default {
             terms: this.form.terms,
             privacy: this.form.privacy,
             emailAgree: this.form.emailAgree,
-            phoneAgree: this.form.phoneAgree,
-            createdAt: new Date().getTime(),
-            lastLoginedAt: new Date().getTime(),
-            lastUpdatedAt: new Date().getTime(),
-            passwordChangedAt: new Date().getTime()
+            phoneAgree: this.form.phoneAgree
           }
+          console.log(this.$refs[formName])
           // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기

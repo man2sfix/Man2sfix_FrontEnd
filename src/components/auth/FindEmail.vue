@@ -3,36 +3,96 @@
     <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이름" prop="name">
-          <el-input v-model="form.email"></el-input>
+          <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
         </el-form-item>
-        <el-form-item label="비밀번호" prop="password">
-          <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+        <el-form-item label="핸드폰번호" prop="phone">
+          <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button native-type="submit" plain class="btn-block">로그인</el-button>
+          <el-button native-type="submit" plain class="btn-block">이메일 찾기</el-button>
         </el-form-item>
-        <div class="link-box">
-          <router-link :to="'/findaccount'" class="link">이메일/비밀번호를 잊으셨나요?</router-link>
-          <router-link :to="'/signup'" class="link">아직 회원이 아니신가요?</router-link>
-        </div>
       </el-form>
     </el-card>
   </div>
 </template>
 
 <script>
+import Validator from '@/mixins/validator/Validator'
+
 export default {
   name: 'FindEmail',
+  mixins: [
+    Validator
+  ],
   data () {
     return {
+      loading: false,
       form: {
-        
+        name: '',
+        phone: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '이름을 입력해주세요.', trigger: 'blur' },
+          { min: 2, max: 5, message: '이름은 2글자 이상 5글자 이하로 입력해주세요.', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '휴대폰 번호를 입력해주세요.', trigger: 'blur' },
+          { validator: this.validatePhone, message: '휴대폰 번호가 올바르지 않습니다.', trigger: 'blur' }
+        ]
       }
+    }
+  },
+  methods: {
+    onSubmit (formName) {
+      this.$refs[formName].validate(async (valid) => {
+        if (valid) {
+          // 로딩 시작
+          this.loading = true
+          // 폼 데이터 셋
+          const formData = {
+            name: this.form.name,
+            phone: this.form.phone
+          }
+          // 리턴 boolean
+          const bool = await this.$store.dispatch('findEmail', formData)
+          // 리턴값에 따른 분기
+          if (bool) {
+            // todo
+          }
+          // 로딩 끝
+          this.loading = false
+        } else {
+          return false
+        }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.form-find {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: map-get($spacers, 5) 0 map-get($spacers, 4);
 
+  .el-form-item__label {
+    padding-bottom: 0;
+  }
+
+  .el-form-item {
+    margin-bottom: map-get($spacers, 3);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    margin-top: map-get($spacers, 2);
+  }
+}
 </style>
