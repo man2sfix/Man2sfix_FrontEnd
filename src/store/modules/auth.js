@@ -1,5 +1,4 @@
 import axios from 'axios'
-import firebase from '@/providers/firebase'
 import { Message } from 'element-ui'
 
 // initial state
@@ -138,6 +137,7 @@ const actions = {
     }
   },
   async changePassword (context, payload) {
+    /*
     try {
       // firebase login
       const res = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
@@ -152,16 +152,20 @@ const actions = {
     } catch (err) {
       context.commit('errorHandling', err)
     }
+    */
   },
   async passwordResetEmail (context, payload) {
+    /*
     try {
       await firebase.auth().sendPasswordResetEmail(payload.value)
       return true
     } catch (err) {
       context.commit('errorHandling', err)
     }
+    */
   },
   async authUploadFile (context, payload) {
+    /*
     try {
       const metadata = { contentType: payload.file.type }
       const response = await firebase.storage().ref(`members/${payload.key}/${payload.file.name}`).put(payload.file, metadata)
@@ -174,18 +178,23 @@ const actions = {
     } catch (err) {
       context.commit('errorHandling', err)
     }
+    */
   },
   async authDeleteFile (context, payload) {
+    /*
     try {
       await firebase.storage().ref(payload.path).delete()
       return true
     } catch (err) {
       context.commit('errorHandling', err)
     }
+    */
   },
   async getUser (context, payload) {
+    /*
     const user = await firebase.database().ref(`members/${payload.key}`).once('value')
     return Object.assign({ key: user.key }, user.val())
+    */
   }
 }
 

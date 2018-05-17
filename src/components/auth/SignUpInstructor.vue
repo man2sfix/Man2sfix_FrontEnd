@@ -203,30 +203,25 @@ export default {
           // 로딩 시작
           this.loading = true
           // 폼 데이터 set
-          const formData = {
-            type: 'instructor',
-            name: this.form.name,
-            email: this.form.email,
-            password: this.form.password,
-            phone: this.form.phone,
-            gender: this.form.gender,
-            birthday: this.form.birthday.getTime(),
-            greeting: this.form.greeting,
-            academicFile: this.form.academicFile,
-            careerFile: this.form.careerFile,
-            completionFile: this.form.completionFile,
-            instructorVerified: this.form.instructorVerified,
-            instructorActive: this.form.instructorActive,
-            profile: this.form.profile,
-            terms: this.form.terms,
-            privacy: this.form.privacy,
-            emailAgree: this.form.emailAgree,
-            phoneAgree: this.form.phoneAgree,
-            createdAt: new Date().getTime(),
-            lastLoginedAt: new Date().getTime(),
-            lastUpdatedAt: new Date().getTime(),
-            passwordChangedAt: new Date().getTime()
-          }
+          const formData = new FormData()
+          formData.append('type', 'instructor')
+          formData.append('name', this.form.name)
+          formData.append('email', this.form.email)
+          formData.append('password', this.form.password)
+          formData.append('phone', this.form.phone)
+          formData.append('gender', this.form.gender)
+          formData.append('birthday', this.form.birthday)
+          formData.append('greeting', this.form.greeting)
+          formData.append('academicFile', this.form.academicFile)
+          formData.append('careerFile', this.form.careerFile)
+          formData.append('completionFile', this.form.completionFile)
+          formData.append('instructorVerified', this.form.instructorVerified)
+          formData.append('instructorActive', this.form.instructorActive)
+          formData.append('profile', this.form.profile)
+          formData.append('terms', this.form.terms)
+          formData.append('privacy', this.form.privacy)
+          formData.append('emailAgree', this.form.emailAgree)
+          formData.append('phoneAgree', this.form.phoneAgree)
           // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기

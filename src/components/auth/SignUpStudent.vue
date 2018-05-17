@@ -119,19 +119,17 @@ export default {
           // 로딩 시작
           this.loading = true
           // 폼 데이터 set
-          const formData = {
-            type: 'student',
-            name: this.form.name,
-            email: this.form.email,
-            password: this.form.password,
-            phone: this.form.phone,
-            profile: this.form.profile,
-            terms: this.form.terms,
-            privacy: this.form.privacy,
-            emailAgree: this.form.emailAgree,
-            phoneAgree: this.form.phoneAgree
-          }
-          console.log(this.$refs[formName])
+          const formData = new FormData()
+          formData.append('type', 'student')
+          formData.append('name', this.form.name)
+          formData.append('email', this.form.email)
+          formData.append('password', this.form.password)
+          formData.append('phone', this.form.phone)
+          formData.append('profile', this.form.profile)
+          formData.append('terms', this.form.terms)
+          formData.append('privacy', this.form.privacy)
+          formData.append('emailAgree', this.form.emailAgree)
+          formData.append('phoneAgree', this.form.phoneAgree)
           // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기
