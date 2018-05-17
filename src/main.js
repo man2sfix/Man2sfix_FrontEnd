@@ -8,6 +8,8 @@ import store from './store/index'
 import VueMoment from 'vue-moment'
 import momentLocale from 'moment/locale/ko'
 
+import 'normalize.css'
+import './assets/css/base.css'
 import './elements/components'
 
 Vue.config.productionTip = false

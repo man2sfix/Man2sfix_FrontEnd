@@ -1,6 +1,6 @@
 <template>
-  <div class="form-signin" v-loading="loading">
-    <el-card shadow="never">
+  <div class="form" v-loading="loading">
+    <el-card shadow="never" class="form-card">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이메일" prop="email">
           <el-input v-model="form.email"></el-input>
@@ -94,43 +94,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.form-signin {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: map-get($spacers, 5) 0;
-
-  .el-form-item__label {
-    padding-bottom: 0;
-  }
-
-  .el-form-item {
-    margin-bottom: map-get($spacers, 3);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .btn-block {
-    display: block;
-    width: 100%;
-    margin-top: map-get($spacers, 2);
-  }
-
-  .link-box {
-    .link {
-      display: block;
-      color: gray('700');
-      font-size: $font-size-base * 0.8;
-      padding: map-get($spacers, 2);
-
-      &:hover,
-      &:focus {
-        color: theme-color('primary');
-      }
-    }
-  }
-}
-</style>

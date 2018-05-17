@@ -1,5 +1,5 @@
 <template>
-  <div class="form-find" v-loading="loading">
+  <div class="form form-find" v-loading="loading">
     <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이메일" prop="email">

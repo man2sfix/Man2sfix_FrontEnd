@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .signup-text {
   padding-top: map-get($spacers, 2);
 
@@ -102,6 +102,75 @@ export default {
 .signup-dialog {
   .el-dialog__body {
     padding-top: 0;
+  }
+}
+
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: map-get($spacers, 5) 0;
+
+  &.form-find {
+    padding-bottom: map-get($spacers, 3);
+  }
+
+  .el-form-item__label {
+    padding-bottom: 0;
+  }
+
+  .el-form-item {
+    margin-bottom: map-get($spacers, 3);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .el-date-editor {
+    width: 100%;
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    margin-top: map-get($spacers, 2);
+  }
+
+  .relative-box {
+    position: relative;
+
+    .el-button {
+      position: absolute;
+      bottom: 5px;
+      right: 0;
+    }
+
+    .el-upload {
+      .el-button {
+        position: static;
+      }
+    }
+
+    .el-upload__tip {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+    }
+  }
+
+  .link-box {
+    .link {
+      display: block;
+      color: gray('700');
+      font-size: $font-size-base * 0.8;
+      padding: map-get($spacers, 2);
+
+      &:hover,
+      &:focus {
+        color: theme-color('primary');
+      }
+    }
   }
 }
 </style>

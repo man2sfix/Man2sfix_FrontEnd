@@ -58,20 +58,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .training-step {
-    padding: map-get($spacers, 5) 0 0;
-  }
+.training-step {
+  padding: map-get($spacers, 5) 0 0;
+}
 
-  .training-container {
-    max-width: 850px;
-    padding: map-get($spacers, 3);
-    margin: map-get($spacers, 5) auto 0;
-    border: 1px solid gray('300');
-    border-radius: $font-size-sm;
-  }
+.training-container {
+  max-width: 850px;
+  padding: map-get($spacers, 3);
+  margin: map-get($spacers, 5) auto 0;
+  border: 1px solid gray('300');
+  border-radius: $font-size-sm;
+}
 
-  .training-btn {
-    text-align: center;
-    padding: map-get($spacers, 5);
-  }
+.training-btn {
+  text-align: center;
+  padding: map-get($spacers, 5);
+}
 </style>

@@ -49,94 +49,94 @@ export default {
 </script>
 
 <style lang="scss">
-  .mypage-container {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 0;
-    padding: map-get($spacers, 5) 0;
-    min-height: 300px;
+.mypage-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0;
+  padding: map-get($spacers, 5) 0;
+  min-height: 300px;
 
-    @include clearfix();
+  @include clearfix();
 
-    .mypage-inner {
-      width: 50%;
+  .mypage-inner {
+    width: 50%;
 
-      &:nth-child(odd) {
-        padding-right: map-get($spacers, 2);
-      }
+    &:nth-child(odd) {
+      padding-right: map-get($spacers, 2);
+    }
 
-      &:nth-child(even) {
-        padding-left: map-get($spacers, 2);
-      }
+    &:nth-child(even) {
+      padding-left: map-get($spacers, 2);
+    }
 
-      .el-card {
+    .el-card {
+      height: 100%;
+    }
+  }
+
+  .mypage-card {
+    .el-card__body {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .thumb {
+      flex: none;
+      width: 150px;
+      height: 150px;
+      border: 1px solid gray('300');
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: gray('300');
+
+      img {
+        display: block;
+        width: 100%;
         height: 100%;
+      }
+
+      &-icon {
+        text-align: center;
+        background-color: transparent;
+      }
+
+      .icon {
+        padding-top: map-get($spacers, 5);
+        font-size: $font-size-base * 3.5;
       }
     }
 
-    .mypage-card {
-      .el-card__body {
-        display: flex;
-        align-items: center;
-        position: relative;
+    .info {
+      flex: auto;
+      padding: 0 map-get($spacers, 4);
+      line-height: 1.5;
+
+      .title {
+        color: gray('900');
+        font-size: $font-size-lg;
+        font-weight: 600;
       }
 
-      .thumb {
-        flex: none;
-        width: 150px;
-        height: 150px;
+      .email,
+      .phone {
+        font-size: $font-size-base * 0.9;
+      }
+
+      .date {
+        font-size: $font-size-sm;
+      }
+
+      .link {
+        position: absolute;
+        bottom: map-get($spacers, 2);
+        right: map-get($spacers, 4);;
+        font-size: $font-size-sm;
+        color: gray('700');
         border: 1px solid gray('300');
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: gray('300');
-
-        img {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-
-        &-icon {
-          text-align: center;
-          background-color: transparent;
-        }
-
-        .icon {
-          padding-top: map-get($spacers, 5);
-          font-size: $font-size-base * 3.5;
-        }
-      }
-
-      .info {
-        flex: auto;
-        padding: 0 map-get($spacers, 4);
-        line-height: 1.5;
-
-        .title {
-          color: gray('900');
-          font-size: $font-size-lg;
-          font-weight: 600;
-        }
-
-        .email,
-        .phone {
-          font-size: $font-size-base * 0.9;
-        }
-
-        .date {
-          font-size: $font-size-sm;
-        }
-
-        .link {
-          position: absolute;
-          bottom: map-get($spacers, 2);
-          right: map-get($spacers, 4);;
-          font-size: $font-size-sm;
-          color: gray('700');
-          border: 1px solid gray('300');
-          padding: map-get($spacers, 2);
-        }
+        padding: map-get($spacers, 2);
       }
     }
   }
+}
 </style>

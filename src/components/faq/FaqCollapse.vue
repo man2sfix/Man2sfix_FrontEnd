@@ -29,38 +29,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .collapse-contents {
-    width: calc(50% - 10px);
+.collapse-contents {
+  width: calc(50% - 10px);
 
-    &:nth-child(odd) {
-      float: left;
-    }
+  &:nth-child(odd) {
+    float: left;
+  }
 
-    &:nth-child(even) {
-      float: right;
-    }
+  &:nth-child(even) {
+    float: right;
+  }
 
-    &-title {
-      position: relative;
-      font-size: $font-size-lg;
-      color: gray('800');
-      text-align: center;
-      padding: map-get($spacers, 5) 0 map-get($spacers, 5);
+  &-title {
+    position: relative;
+    font-size: $font-size-lg;
+    color: gray('800');
+    text-align: center;
+    padding: map-get($spacers, 5) 0 map-get($spacers, 5);
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: map-get($spacers, 4);
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60px;
-        height: 2px;
-        background-color: theme-color('primary');
-      }
-    }
-
-    .el-collapse-item__header {
-      font-size: $font-size-base;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: map-get($spacers, 4);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 2px;
+      background-color: theme-color('primary');
     }
   }
+
+  .el-collapse-item__header {
+    font-size: $font-size-base;
+  }
+}
 </style>

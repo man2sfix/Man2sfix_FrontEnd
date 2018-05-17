@@ -1,5 +1,5 @@
 <template>
-  <div class="form-find" v-loading="loading">
+  <div class="form form-find" v-loading="loading">
     <el-card shadow="never">
       <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
         <el-form-item label="이름" prop="name">
@@ -70,29 +70,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.form-find {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: map-get($spacers, 5) 0 map-get($spacers, 4);
-
-  .el-form-item__label {
-    padding-bottom: 0;
-  }
-
-  .el-form-item {
-    margin-bottom: map-get($spacers, 3);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .btn-block {
-    display: block;
-    width: 100%;
-    margin-top: map-get($spacers, 2);
-  }
-}
-</style>
