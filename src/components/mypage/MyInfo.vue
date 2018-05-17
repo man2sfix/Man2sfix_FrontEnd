@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never" class="mypage-card">
+  <div class="mypage-card">
     <div class="thumb">
       <img :src="info.profile.downloadURL" alt="thumb">
     </div>
@@ -9,7 +9,7 @@
       <span class="phone">휴대폰: {{ info.phone }}</span><br>
       <router-link :to="'/changeinfo'" class="link">수정</router-link>
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script>

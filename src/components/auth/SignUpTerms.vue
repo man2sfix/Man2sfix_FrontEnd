@@ -1,5 +1,5 @@
 <template>
-  <div class="temrs-contents">
+  <div class="terms-contents">
     맨투스픽에 오신것을 진심으로 환영합니다!<br>
     아래의 약관은 회원님들께 원할한 서비스를 제공하기 위한 내용들이오니, 꼭 읽어 보시고 서비스 이용에 참고하시길 바랍니다.<br>
     <br>
@@ -220,13 +220,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .temrs-contents {
-   border-top: 1px solid gray('300');
-   border-bottom: 1px solid gray('300');
-   padding: map-get($spacers, 3) 0;
-   height: 300px;
+ .terms-contents {
    font-size: $font-size-sm;
    line-height: 1.5;
-   overflow-y: scroll;
  }
 </style>

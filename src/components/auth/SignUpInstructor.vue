@@ -1,82 +1,84 @@
 <template>
   <div class="form" v-loading="loading">
-    <el-card shadow="never" class="form-card">
-      <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
-        <el-form-item label="이름" prop="name">
-          <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
-        </el-form-item>
-        <el-form-item label="이메일" prop="email">
-          <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
-          <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
-        </el-form-item>
-        <el-form-item label="비밀번호" prop="password">
-          <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="비밀번호 확인" prop="passwordConfirm">
-          <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="휴대폰 번호" prop="phone">
-          <div class="item-phone">
-            <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
-          </div>
-          <el-checkbox v-model="form.phoneAgree">SMS 수신동의</el-checkbox>
-        </el-form-item>
-        <!-- 강사용 정보 -->
-        <el-form-item label="성별" prop="gender">
-          <el-radio-group v-model="form.gender">
-            <el-radio label="man">남성</el-radio>
-            <el-radio label="woman">여성</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="생년월일" prop="birthday">
-          <el-date-picker v-model="form.birthday" type="date" placeholder="예) 0000-00-00"></el-date-picker>
-        </el-form-item>
-        <el-form-item label="인사말" prop="greeting">
-          <el-input type="textarea" v-model="form.greeting" :autosize="{ minRows: 3, maxRows: 10}"></el-input>
-        </el-form-item>
-        <el-form-item label="학력인증 (학력증명서, 졸업증명서, 재학증명서)" prop="academicFile" class="relative-box">
-          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile">
-            <el-button size="small" plain>업로드</el-button>
-            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="경력인증 (경력증명서, 출강증명서)" prop="careerFile" class="relative-box">
-          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile">
-            <el-button size="small" plain>업로드</el-button>
-            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="수료인증 (수료증 및 이수증)" prop="completionFile" class="relative-box">
-          <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile">
-            <el-button size="small" plain>업로드</el-button>
-            <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
-          </el-upload>
-        </el-form-item>
-        <!-- // 강사용 정보 -->
-        <el-form-item label="프로필사진" class="relative-box">
-          <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile">
-            <el-button size="small" plain>업로드</el-button>
-            <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="이용약관" prop="terms" class="relative-box">
-          <el-checkbox v-model="form.terms">동의하기</el-checkbox>
-          <el-button plain size="mini" @click="termsVisible = true">전문보기</el-button>
-        </el-form-item>
-        <el-form-item label="개인정보처리방침" prop="privacy" class="relative-box">
-          <el-checkbox v-model="form.privacy">동의하기</el-checkbox>
-          <el-button plain size="mini" @click="privacyVisible = true">전문보기</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button native-type="submit" plain class="btn-block">회원가입</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+      <el-form-item label="이름" prop="name">
+        <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
+      </el-form-item>
+      <el-form-item label="이메일" prop="email">
+        <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
+        <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
+      </el-form-item>
+      <el-form-item label="비밀번호" prop="password">
+        <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="비밀번호 확인" prop="passwordConfirm">
+        <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="휴대폰 번호" prop="phone">
+        <div class="item-phone">
+          <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
+        </div>
+        <el-checkbox v-model="form.phoneAgree">SMS 수신동의</el-checkbox>
+      </el-form-item>
+      <!-- 강사용 정보 -->
+      <el-form-item label="성별" prop="gender">
+        <el-radio-group v-model="form.gender">
+          <el-radio label="man">남성</el-radio>
+          <el-radio label="woman">여성</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="생년월일" prop="birthday">
+        <el-date-picker v-model="form.birthday" type="date" placeholder="예) 0000-00-00"></el-date-picker>
+      </el-form-item>
+      <el-form-item label="인사말" prop="greeting">
+        <el-input type="textarea" v-model="form.greeting" :autosize="{ minRows: 3, maxRows: 10}"></el-input>
+      </el-form-item>
+      <el-form-item label="학력인증 (학력증명서, 졸업증명서, 재학증명서)" prop="academicFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="경력인증 (경력증명서, 출강증명서)" prop="careerFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="수료인증 (수료증 및 이수증)" prop="completionFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <!-- // 강사용 정보 -->
+      <el-form-item label="프로필사진" class="relative-box">
+        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="이용약관" prop="terms" class="relative-box">
+        <el-checkbox v-model="form.terms">동의하기</el-checkbox>
+        <el-button plain size="mini" @click="termsVisible = true">전문보기</el-button>
+      </el-form-item>
+      <el-form-item label="개인정보처리방침" prop="privacy" class="relative-box">
+        <el-checkbox v-model="form.privacy">동의하기</el-checkbox>
+        <el-button plain size="mini" @click="privacyVisible = true">전문보기</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button native-type="submit" plain class="btn-block">회원가입</el-button>
+      </el-form-item>
+    </el-form>
     <el-dialog title="이용약관" :visible.sync="termsVisible" class="signup-dialog">
-      <sign-up-terms></sign-up-terms>
+      <div class="signup-dialog-inner">
+        <sign-up-terms></sign-up-terms>
+      </div>
     </el-dialog>
     <el-dialog title="개인정보처리방침" :visible.sync="privacyVisible" class="signup-dialog">
-      <sign-up-privacy></sign-up-privacy>
+      <div class="signup-dialog-inner">
+        <sign-up-privacy></sign-up-privacy>
+      </div>
     </el-dialog>
   </div>
 </template>

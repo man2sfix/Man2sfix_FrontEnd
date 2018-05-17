@@ -1,6 +1,8 @@
 <template>
   <app-layout>
-    Instructors
+    <div class="inner-contents">
+      <h2 class="contents-title">강사진 소개</h2>
+    </div>
   </app-layout>
 </template>
 

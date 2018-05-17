@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="never" class="mypage-card">
+  <div class="mypage-card">
     <div class="thumb thumb-icon">
       <i class="fas fa-key icon"></i>
     </div>
@@ -8,7 +8,7 @@
       <span class="date">변경일자: {{ new Date(info.passwordChangedAt) | moment('YYYY-MM-DD HH:mm') }}</span>
       <router-link :to="'/changepassword'" class="link">수정</router-link>
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script>

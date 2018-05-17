@@ -1,15 +1,14 @@
 <template>
   <div class="magazine-item">
-    <el-card :body-style="{ padding: '0px' }" shadow="never">
+    <router-link :to="'/'" class="link">
       <div class="thumb">
         <img :src="item.thumb" class="image">
-        <el-button icon="el-icon-star-off" circle plain class="btn-like"></el-button>
       </div>
       <div class="info">
         <h3 class="title">{{ item.title }}</h3>
         <time class="date">{{ item.date | moment('YYYY-MM-DD HH:mm') }}</time>
       </div>
-    </el-card>
+    </router-link>
   </div>
 </template>
 
@@ -27,36 +26,38 @@ export default {
 
 <style lang="scss" scoped>
 .magazine-item {
+  position: relative;
   width: calc(25% - 9px);
-  margin: 0 0 12px 12px;
+  margin: 12px 0 0 12px;
   display: inline-block;
+  overflow: hidden;
+  border: 1px solid gray('300');
 
   &:nth-child(4n + 1) {
     margin-left: 0;
   }
 
+  &:hover {
+    .thumb {
+      img {
+        opacity: 0.6;
+        transform: scale(1.15);
+      }
+    }
+  }
+
+  .link {
+    display: block;
+  }
+
   .thumb {
-    position: relative;
+    overflow: hidden;
+    background: $black;
 
     img {
       display: block;
       width: 100%;
-    }
-
-    .btn-like {
-      position: absolute;
-      top: map-get($spacers, 2);
-      right: map-get($spacers, 2);
-      border: 0;
-      color: $white;
-      font-size: $font-size-lg;
-
-      &:focus,
-      &:hover {
-        background: transparent;
-        transform: scale(1.3);
-        transition: $transition-base;
-      }
+      transition: all 0.4s ease-in-out;
     }
   }
 

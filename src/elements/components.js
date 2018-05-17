@@ -5,7 +5,6 @@ import ElementLocale from 'element-ui/lib/locale'
 import {
   Button,
   Select,
-  Pagination,
   Card,
   Loading,
   Radio,
@@ -19,7 +18,8 @@ import {
   Message,
   Upload,
   Checkbox,
-  DatePicker
+  DatePicker,
+  Pagination
 } from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/icon.css'
@@ -39,12 +39,12 @@ import 'element-ui/lib/theme-chalk/message.css'
 import 'element-ui/lib/theme-chalk/upload.css'
 import 'element-ui/lib/theme-chalk/checkbox.css'
 import 'element-ui/lib/theme-chalk/date-picker.css'
+import 'element-ui/lib/theme-chalk/pagination.css'
 
 ElementLocale.use(ElementLang)
 
 Vue.use(Button)
 Vue.use(Select)
-Vue.use(Pagination)
 Vue.use(Card)
 Vue.use(Loading.directive)
 Vue.use(Radio)
@@ -58,5 +58,6 @@ Vue.use(CollapseItem)
 Vue.use(Upload)
 Vue.use(Checkbox)
 Vue.use(DatePicker)
+Vue.use(Pagination)
 
 Vue.prototype.$message = Message

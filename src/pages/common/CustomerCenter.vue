@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <div class="inner-contents">
-      <h2 class="contents-title">제휴 및 문의</h2>
+      <h2 class="contents-title">고객 센터</h2>
     </div>
   </app-layout>
 </template>
@@ -10,9 +10,13 @@
 import AppLayout from '@/components/layout/AppLayout'
 
 export default {
-  name: 'Contact',
+  name: 'CustomerCenter',
   components: {
     AppLayout
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

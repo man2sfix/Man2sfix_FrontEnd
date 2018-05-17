@@ -108,7 +108,6 @@ export default {
 .magazine-header {
   display: flex;
   align-items: center;
-  padding-bottom: map-get($spacers, 4);
 
   .title {
     flex: auto;

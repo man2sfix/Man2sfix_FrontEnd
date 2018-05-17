@@ -9,6 +9,11 @@ import Faq from '@/pages/common/Faq'
 import Contact from '@/pages/common/Contact'
 import Magazine from '@/pages/common/Magazine'
 import Community from '@/pages/common/Community'
+import Company from '@/pages/common/Company'
+import Service from '@/pages/common/Service'
+import CustomerCenter from '@/pages/common/CustomerCenter'
+import TermsOfUse from '@/pages/common/TermsOfUse'
+import PrivacyPolicy from '@/pages/common/PrivacyPolicy'
 
 // student
 import Training from '@/pages/student/Training'
@@ -33,6 +38,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: [
+    // Common Page Router
     {
       path: '/',
       redirect: '/home'
@@ -70,11 +76,6 @@ const router = new Router({
       ]
     },
     {
-      path: '/howtouse',
-      name: 'howtouse',
-      component: HowToUse
-    },
-    {
       path: '/faq',
       name: 'faq',
       component: Faq
@@ -85,10 +86,42 @@ const router = new Router({
       component: Contact
     },
     {
+      path: '/company',
+      name: 'company',
+      component: Company
+    },
+    {
+      path: '/service',
+      name: 'service',
+      component: Service
+    },
+    {
+      path: '/how-to-use',
+      name: 'howtouse',
+      component: HowToUse
+    },
+    {
+      path: '/customer-center',
+      name: 'customercenter',
+      component: CustomerCenter
+    },
+    {
+      path: '/terms-of-use',
+      name: 'termsofuse',
+      component: TermsOfUse
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacypolicy',
+      component: PrivacyPolicy
+    },
+    // Only Student Page Router
+    {
       path: '/training',
       name: 'training',
       component: Training
     },
+    // Auth Page Router
     {
       path: '/signin',
       name: 'signin',
@@ -122,7 +155,7 @@ const router = new Router({
       }
     },
     {
-      path: '/findaccount',
+      path: '/find-account',
       name: 'findaccount',
       component: FindAccount,
       meta: { NotRequiresAuth: true },
@@ -138,23 +171,24 @@ const router = new Router({
       ]
     },
     {
-      path: '/mypage',
-      name: 'mypage',
-      component: MyPage,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/changeinfo',
+      path: '/change-info',
       name: 'changeinfo',
       component: ChangeInfo,
       meta: { requiresAuth: true }
     },
     {
-      path: '/changepassword',
+      path: '/change-password',
       name: 'changepassword',
       component: ChangePassword,
       meta: { requiresAuth: true }
     },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: MyPage,
+      meta: { requiresAuth: true }
+    },
+    // NotFound Page Router
     {
       path: '*',
       name: 'notfound',

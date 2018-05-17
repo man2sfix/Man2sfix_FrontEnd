@@ -2,6 +2,7 @@
   <app-layout>
     <div class="inner-contents">
       <h2 class="contents-title">회원가입</h2>
+      <p class="contents-text" v-if="!show">(<span class="require-text">*</span>는 필수입력 사항입니다.)</p>
       <div v-if="show">
         <p class="contents-text">회원가입 유형을 선택하여 주세요.</p>
         <p class="contents-text signup-text">(이미 회원이시라면 <router-link :to="'/signin'" class="link">로그인</router-link>을 해주세요!)</p>
@@ -103,12 +104,21 @@ export default {
   .el-dialog__body {
     padding-top: 0;
   }
+
+  &-inner {
+    padding: map-get($spacers, 3) 0;
+    border-top: 1px solid gray('300');
+    border-bottom: 1px solid gray('300');
+    height: 300px;
+    overflow-y: scroll;
+  }
 }
 
 .form {
   max-width: 500px;
-  margin: 0 auto;
-  padding: map-get($spacers, 5) 0;
+  margin: map-get($spacers, 5) auto;
+  padding: map-get($spacers, 3) map-get($spacers, 4) map-get($spacers, 4);
+  border: 1px solid gray('300');
 
   &.form-find {
     padding-bottom: map-get($spacers, 3);

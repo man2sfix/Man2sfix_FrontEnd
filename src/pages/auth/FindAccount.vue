@@ -5,11 +5,11 @@
       <div v-if="show">
         <p class="contents-text">아래 유형을 선택하여 주세요.</p>
         <div class="find-select">
-          <router-link :to="'/findaccount/email'" class="link">
+          <router-link :to="'/find-account/email'" class="link">
             <i class="fas fa-envelope icon"></i>
             <h3 class="title">이메일 찾기</h3>
           </router-link>
-          <router-link :to="'/findaccount/password'" class="link">
+          <router-link :to="'/find-account/password'" class="link">
             <i class="fas fa-key icon"></i>
             <h3 class="title">비밀번호 찾기</h3>
           </router-link>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     onShow () {
-      if (this.$route.path !== '/findaccount') {
+      if (this.$route.path !== '/find-account') {
         this.show = false
       } else {
         this.show = true

@@ -1,6 +1,8 @@
 <template>
   <app-layout>
-    how to use
+    <div class="inner-contents">
+      <h2 class="contents-title">이용 방법</h2>
+    </div>
   </app-layout>
 </template>
 

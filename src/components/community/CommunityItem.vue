@@ -1,18 +1,24 @@
 <template>
   <div class="community-item">
-    <el-card :body-style="{ padding: '0px' }" shadow="never">
       <div class="community-item-inner">
         <div class="thumb">
-          <img :src="item.thumb" class="image">
+          <router-link :to="'/'" class="link">
+            <img :src="item.thumb" class="image">
+          </router-link>
         </div>
         <div class="info">
-          <h3 class="title">{{ item.title }}</h3>
-          <p class="description">{{ item.description }}</p>
-          <time class="date">{{ item.date | moment('YYYY-MM-DD HH:mm') }}</time>
+          <router-link :to="'/'" class="link">
+            <h3 class="title">{{ item.title }}</h3>
+            <p class="description">{{ item.description }}</p>
+            <time class="date">{{ item.date | moment('YYYY-MM-DD HH:mm') }}</time>
+          </router-link>
           <span class="member"><strong>{{ item.nowMember }}</strong>명 참여중</span>
+          <div class="btn-container">
+            <el-button plain circle class="btn"><i class="far fa-thumbs-up"></i></el-button>
+            <el-button plain circle class="btn"><i class="far fa-heart"></i></el-button>
+          </div>
         </div>
       </div>
-    </el-card>
   </div>
 </template>
 
@@ -33,7 +39,8 @@ export default {
   width: calc(50% - 10px);
   display: inline-block;
   margin-left: 20px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  border: 1px solid gray('300');
 
   &:nth-child(odd) {
     margin-left: 0;
@@ -52,6 +59,7 @@ export default {
     overflow: hidden;
 
     img {
+      display: block;
       height: 100%;
     }
   }
@@ -80,12 +88,23 @@ export default {
 
   .member {
     position: absolute;
-    top: map-get($spacers, 3);
-    right: map-get($spacers, 3);
+    top: map-get($spacers, 4);
+    right: map-get($spacers, 4);
     font-size: $font-size-sm;
 
     strong {
       color: theme-color('primary');
+    }
+  }
+
+  .btn-container {
+    font-size: 0;
+    position: absolute;
+    bottom: map-get($spacers, 4);
+    right: map-get($spacers, 4);
+
+    .btn {
+      font-size: $font-size-base * 0.8;
     }
   }
 }

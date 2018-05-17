@@ -113,12 +113,7 @@ export default {
 
 <style lang="scss" scoped>
  .privacy-contents {
-   border-top: 1px solid gray('300');
-   border-bottom: 1px solid gray('300');
-   padding: map-get($spacers, 3) 0;
-   height: 300px;
    font-size: $font-size-sm;
    line-height: 1.5;
-   overflow-y: scroll;
  }
 </style>
