@@ -23,6 +23,8 @@ export default {
 
 <style lang="scss">
 .app-contents {
+  padding-top: $font-size-base * 7;
+
   @include clearfix();
 
   .inner-contents {

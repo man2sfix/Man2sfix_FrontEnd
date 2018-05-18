@@ -17,7 +17,12 @@ export default {
 
 <style lang="scss" scoped>
 .app-title {
-  height: 100%;
+  display: flex;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  height: $font-size-base * 3.5;
+  padding: 0 map-get($spacers, 3);
   font-size: $font-size-base * 1.5;
 
   .link {

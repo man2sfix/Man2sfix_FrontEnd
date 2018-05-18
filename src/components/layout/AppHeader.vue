@@ -1,16 +1,12 @@
 <template>
   <header class="app-header">
-    <div class="app-header-inner">
-      <app-title></app-title>
-      <app-auth :auth="auth"></app-auth>
-    </div>
-    <app-nav></app-nav>
+    <app-title></app-title>
+    <app-nav :auth="auth"></app-nav>
   </header>
 </template>
 
 <script>
 import AppTitle from '@/components/layout/AppTitle'
-import AppAuth from '@/components/layout/AppAuth'
 import AppNav from '@/components/layout/AppNav'
 
 export default {
@@ -34,7 +30,6 @@ export default {
   },
   components: {
     AppTitle,
-    AppAuth,
     AppNav
   }
 }
@@ -42,15 +37,12 @@ export default {
 
 <style lang="scss" scoped>
 .app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $white;
   border-bottom: 1px solid gray('300');
-
-  &-inner {
-    max-width: 1100px;
-    height: $font-size-base * 4;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    padding: map-get($spacers, 3);
-  }
+  z-index: $zindex-layout;
 }
 </style>
