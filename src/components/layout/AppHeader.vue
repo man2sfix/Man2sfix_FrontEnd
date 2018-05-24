@@ -44,5 +44,9 @@ export default {
   background-color: $white;
   border-bottom: 1px solid gray('300');
   z-index: $zindex-layout;
+
+  @include media-breakpoint-up(md) {
+    position: static;
+  }
 }
 </style>

@@ -5,7 +5,6 @@ import ElementLocale from 'element-ui/lib/locale'
 import {
   Button,
   Select,
-  Card,
   Loading,
   Radio,
   RadioGroup,
@@ -25,7 +24,6 @@ import {
 import 'element-ui/lib/theme-chalk/icon.css'
 import 'element-ui/lib/theme-chalk/button.css'
 import 'element-ui/lib/theme-chalk/select.css'
-import 'element-ui/lib/theme-chalk/card.css'
 import 'element-ui/lib/theme-chalk/loading.css'
 import 'element-ui/lib/theme-chalk/radio.css'
 import 'element-ui/lib/theme-chalk/radio-group.css'
@@ -45,7 +43,6 @@ ElementLocale.use(ElementLang)
 
 Vue.use(Button)
 Vue.use(Select)
-Vue.use(Card)
 Vue.use(Loading.directive)
 Vue.use(Radio)
 Vue.use(RadioGroup)

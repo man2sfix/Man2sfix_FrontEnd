@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss">
 .app-contents {
-  padding-top: $font-size-base * 7;
+  padding-top: $font-size-base * 3.5;
 
   @include clearfix();
 
@@ -44,6 +44,10 @@ export default {
     font-size: $font-size-base;
     color: gray('800');
     text-align: center;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-top: 0;
   }
 }
 </style>

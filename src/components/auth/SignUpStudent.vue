@@ -4,7 +4,7 @@
       <el-form-item label="이름" prop="name">
         <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
       </el-form-item>
-      <el-form-item label="이메일" prop="email">
+      <el-form-item label="이메일" prop="email" class="relative-box">
         <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
         <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
       </el-form-item>
@@ -21,7 +21,7 @@
         <el-checkbox v-model="form.phoneAgree">SMS 수신동의</el-checkbox>
       </el-form-item>
       <el-form-item label="프로필사진" class="relative-box">
-        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile">
+        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile" :on-exceed="exceedProfile">
           <el-button size="small" plain>업로드</el-button>
           <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
         </el-upload>
@@ -54,7 +54,6 @@
 <script>
 import Validator from '@/mixins/validator/Validator'
 import UploadProfile from '@/mixins/upload/UploadProfile'
-
 import SignUpTerms from '@/components/auth/SignUpTerms'
 import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
 
@@ -121,7 +120,7 @@ export default {
           // 로딩 시작
           this.loading = true
           // 폼 데이터 set
-          const formData = new FormData()
+          let formData = new FormData()
           formData.append('type', 'student')
           formData.append('name', this.form.name)
           formData.append('email', this.form.email)
@@ -130,8 +129,8 @@ export default {
           formData.append('profile', this.form.profile)
           formData.append('terms', this.form.terms)
           formData.append('privacy', this.form.privacy)
-          formData.append('emailAgree', this.form.emailAgree)
-          formData.append('phoneAgree', this.form.phoneAgree)
+          formData.append('email_agree', this.form.emailAgree)
+          formData.append('phone_agree', this.form.phoneAgree)
           // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기

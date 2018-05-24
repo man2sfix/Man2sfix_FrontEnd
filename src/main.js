@@ -8,12 +8,15 @@ import store from './store/index'
 import VueMoment from 'vue-moment'
 import momentLocale from 'moment/locale/ko'
 
+import enviroment from '../enviroments/enviroment'
+
 import 'normalize.css'
 import './assets/css/base.css'
 import './elements/components'
 
 Vue.config.productionTip = false
 Vue.use(VueMoment, { momentLocale })
+Vue.prototype.$api = enviroment.api
 
 /* eslint-disable no-new */
 new Vue({

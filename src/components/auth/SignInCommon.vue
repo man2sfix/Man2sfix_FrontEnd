@@ -49,8 +49,7 @@ export default {
           // 폼 데이터 셋
           const formData = {
             email: this.form.email,
-            password: this.form.password,
-            lastLoginedAt: new Date().getTime()
+            password: this.form.password
           }
           // 리턴 boolean
           const bool = await this.$store.dispatch('signIn', formData)
@@ -69,25 +68,6 @@ export default {
           return false
         }
       })
-    },
-    async openFindPassword () {
-      try {
-        const email = await this.$prompt('이메일', '비밀번호 찾기', {
-          confirmButtonText: '찾기',
-          cancelButtonText: '취소',
-          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: '올바른 이메일을 입력해주세요.'
-        })
-        const bool = await this.$store.dispatch('passwordResetEmail', email)
-        if (bool) {
-          this.$message({
-            message: '이메일을 확인하여 주세요.',
-            type: 'success'
-          })
-        }
-      } catch (err) {
-        // todo
-      }
     }
   }
 }

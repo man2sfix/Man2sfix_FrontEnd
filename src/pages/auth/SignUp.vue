@@ -153,6 +153,10 @@ export default {
       position: absolute;
       bottom: 5px;
       right: 0;
+
+      &.btn-email-verify {
+        bottom: -15px;
+      }
     }
 
     .el-upload {
@@ -180,6 +184,18 @@ export default {
       &:focus {
         color: theme-color('primary');
       }
+    }
+  }
+
+  .found {
+    text-align: center;
+    font-size: $font-size-sm;
+    padding: map-get($spacers, 5) 0 map-get($spacers, 4);
+
+    .value {
+      display: block;
+      padding: map-get($spacers, 4) 0;
+      font-size: $font-size-base;
     }
   }
 }

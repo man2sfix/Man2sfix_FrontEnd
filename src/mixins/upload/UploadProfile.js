@@ -17,6 +17,17 @@ export default {
     },
     removeProfile (file, fileList) {
       this.form.profile = ''
+    },
+    removeUpdateProfile (file, fileList) {
+      this.form.profile = ''
+      this.form.profileRemove = true
+    },
+    exceedProfile (file, fileList) {
+      this.$message({
+        showClose: true,
+        message: '파일은 1개만 등록가능합니다.',
+        type: 'warning'
+      })
     }
   }
 }

@@ -34,26 +34,26 @@
         <el-input type="textarea" v-model="form.greeting" :autosize="{ minRows: 3, maxRows: 10}"></el-input>
       </el-form-item>
       <el-form-item label="학력인증 (학력증명서, 졸업증명서, 재학증명서)" prop="academicFile" class="relative-box">
-        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile" :on-exceed="exceedFile">
           <el-button size="small" plain>업로드</el-button>
           <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
         </el-upload>
       </el-form-item>
       <el-form-item label="경력인증 (경력증명서, 출강증명서)" prop="careerFile" class="relative-box">
-        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile" :on-exceed="exceedFile">
           <el-button size="small" plain>업로드</el-button>
           <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
         </el-upload>
       </el-form-item>
       <el-form-item label="수료인증 (수료증 및 이수증)" prop="completionFile" class="relative-box">
-        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile" :on-exceed="exceedFile">
           <el-button size="small" plain>업로드</el-button>
           <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
         </el-upload>
       </el-form-item>
       <!-- // 강사용 정보 -->
       <el-form-item label="프로필사진" class="relative-box">
-        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile">
+        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile" :on-exceed="exceedProfile">
           <el-button size="small" plain>업로드</el-button>
           <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
         </el-upload>
@@ -87,10 +87,14 @@
 import SignUpStudent from '@/components/auth/SignUpStudent'
 import SignUpTerms from '@/components/auth/SignUpTerms'
 import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
+import UploadInstructor from '@/mixins/upload/UploadInstructor'
 
 export default {
   name: 'SignUpInstructor',
   extends: SignUpStudent,
+  mixins: [
+    UploadInstructor
+  ],
   data () {
     return {
       form: {
@@ -181,24 +185,6 @@ export default {
         })
       }
     },
-    uploadAcademicFile (file, fileList) {
-      this.uploadFile(file, fileList, 'academicFile')
-    },
-    removeAcademicFile (file, fileList) {
-      this.form.academicFile = ''
-    },
-    uploadCareerFile (file, fileList) {
-      this.uploadFile(file, fileList, 'careerFile')
-    },
-    removeCareerFile (file, fileList) {
-      this.form.careerFile = ''
-    },
-    uploadCompletionFile (file, fileList) {
-      this.uploadFile(file, fileList, 'completionFile')
-    },
-    removeCompletionFile (file, fileList) {
-      this.form.completionFile = ''
-    },
     onSubmit (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
@@ -214,16 +200,16 @@ export default {
           formData.append('gender', this.form.gender)
           formData.append('birthday', this.form.birthday)
           formData.append('greeting', this.form.greeting)
-          formData.append('academicFile', this.form.academicFile)
-          formData.append('careerFile', this.form.careerFile)
-          formData.append('completionFile', this.form.completionFile)
-          formData.append('instructorVerified', this.form.instructorVerified)
-          formData.append('instructorActive', this.form.instructorActive)
+          formData.append('academic_file', this.form.academicFile)
+          formData.append('career_file', this.form.careerFile)
+          formData.append('completion_file', this.form.completionFile)
+          formData.append('instructor_verified', this.form.instructorVerified)
+          formData.append('instructor_active', this.form.instructorActive)
           formData.append('profile', this.form.profile)
           formData.append('terms', this.form.terms)
           formData.append('privacy', this.form.privacy)
-          formData.append('emailAgree', this.form.emailAgree)
-          formData.append('phoneAgree', this.form.phoneAgree)
+          formData.append('email_agree', this.form.emailAgree)
+          formData.append('phone_agree', this.form.phoneAgree)
           // 리턴 boolean
           const bool = await this.$store.dispatch('signUp', formData)
           // 리턴값에 따른 분기

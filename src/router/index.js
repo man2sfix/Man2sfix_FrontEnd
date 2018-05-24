@@ -17,6 +17,9 @@ import PrivacyPolicy from '@/pages/common/PrivacyPolicy'
 
 // student
 import Training from '@/pages/student/Training'
+import TrainingType from '@/components/training/TrainingType'
+import TrainingQuestion from '@/components/training/TrainingQuestion'
+import TrainingVideo from '@/components/training/TrainingVideo'
 
 // auth
 import SignIn from '@/pages/auth/SignIn'
@@ -119,7 +122,24 @@ const router = new Router({
     {
       path: '/training',
       name: 'training',
-      component: Training
+      component: Training,
+      children: [
+        {
+          path: 'type',
+          name: 'trainingType',
+          component: TrainingType
+        },
+        {
+          path: 'question',
+          name: 'trainingQuestion',
+          component: TrainingQuestion
+        },
+        {
+          path: 'video',
+          name: 'trainingVideo',
+          component: TrainingVideo
+        }
+      ]
     },
     // Auth Page Router
     {

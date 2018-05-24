@@ -1,8 +1,8 @@
 <template>
   <nav :class="visible ? 'app-nav active' : 'app-nav'">
-    <el-button plain circle class="btn-nav-show" @click="visible = !visible" v-if="!visible"><i class="fas fa-bars"></i></el-button>
+    <div class="background" v-if="visible" @click="visible = !visible"></div>
+    <el-button plain class="btn-nav-show" v-if="!visible" @click="visible = !visible"><i class="fas fa-bars"></i></el-button>
     <div class="app-nav-inner">
-      <el-button plain circle class="btn-nav-close" @click="visible = !visible" v-if="visible"><i class="fas fa-times"></i></el-button>
       <app-auth :auth="auth"></app-auth>
       <ul class="app-nav-list">
         <li v-for="(item, index) in nav" :key="index" class="nav-item">
@@ -28,6 +28,7 @@ export default {
     return {
       visible: false,
       nav: [
+        { name: '모의훈련', href: '/training' },
         { name: '맨투스픽', href: '/home' },
         { name: '강사진 소개', href: '/instructors' },
         { name: '매거진', href: '/magazine' },
@@ -53,24 +54,29 @@ export default {
   z-index: $zindex-nav;
   transition: $transition-base;
 
-  .btn-nav-show,
-  .btn-nav-close {
+  .btn-nav-show {
     position: fixed;
     top: map-get($spacers, 2);
-    right: map-get($spacers, 3);
+    right: 0;
+    border: 0;
+    font-size: $font-size-base;
+  }
+
+  .background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   &.active {
     right: 0;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+    .background {
+      display: block;
     }
   }
 
@@ -96,11 +102,6 @@ export default {
     position: relative;
     display: block;
     font-size: $font-size-sm;
-    border-top: 1px solid gray('300');
-
-    &:last-child {
-      border-bottom: 1px solid gray('300');
-    }
   }
 
   .link {
@@ -116,36 +117,70 @@ export default {
     &::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
+      top: 50%;
+      right: map-get($spacers, 4);
+      width: $font-size-base * 0.5;
+      height: $font-size-base * 0.5;
       background-color: theme-color('primary');
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     & {
       position: static;
 
       &-inner {
-        position: static;
+        position: relative;
         width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
         font-size: 0;
       }
 
       &-list {
-        max-width: 1100px;
+        width: 100%;
         margin: 0 auto;
-        padding: 0 map-get($spacers, 3);
+        padding: 0;
+      }
+
+      &.active {
+        .background {
+          display: none;
+        }
+      }
+
+      .btn-nav-show {
+        display: none;
       }
 
       .nav-item {
         display: inline-block;
         border: 0;
+        margin: 0 map-get($spacers, 3);
 
         &:last-child {
           border-bottom: 0;
+        }
+      }
+
+      .link {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .router-link-active {
+        &::after {
+          top: auto;
+          bottom: -1px;
+          left: 0;
+          right: auto;
+          width: 100%;
+          height: 2px;
+          background-color: theme-color('primary');
+          border-radius: 0;
+          transform: none;
         }
       }
     }

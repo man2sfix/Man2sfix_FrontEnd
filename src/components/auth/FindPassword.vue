@@ -56,7 +56,10 @@ export default {
           const bool = await this.$store.dispatch('findPassword', formData)
           // 리턴값에 따른 분기
           if (bool) {
-            // todo
+            this.$message({
+              message: '이메일을 확인하여 주세요.',
+              type: 'success'
+            })
           }
           // 로딩 끝
           this.loading = false

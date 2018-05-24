@@ -1,13 +1,13 @@
 <template>
   <div class="mypage-card">
     <div class="thumb">
-      <img :src="info.profile.downloadURL" alt="thumb">
+      <img :src="`${$api}/${ info.mem_profile }`" alt="thumb">
     </div>
     <div class="info">
-      <strong class="title">{{ info.name }}</strong><br>
-      <span class="email">이메일: {{ info.email }}</span><br>
-      <span class="phone">휴대폰: {{ info.phone }}</span><br>
-      <router-link :to="'/changeinfo'" class="link">수정</router-link>
+      <strong class="title">{{ info.mem_name }}</strong><br>
+      <span class="email">이메일: {{ info.mem_email }}</span><br>
+      <span class="phone">휴대폰: {{ info.mem_phone }}</span><br>
+      <router-link :to="'/change-info'" class="link">수정</router-link>
     </div>
   </div>
 </template>

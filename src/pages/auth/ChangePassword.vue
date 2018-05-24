@@ -3,22 +3,20 @@
     <div class="inner-contents">
       <h2 class="contents-title">패스워드 변경</h2>
       <div class="form" v-loading="loading">
-        <el-card shadow="never">
-          <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
-            <el-form-item label="현재 비밀번호" prop="prevPassword">
-              <el-input type="password" v-model="form.prevPassword" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="새로운 비밀번호" prop="password">
-              <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="새로운 비밀번호 확인" prop="passwordConfirm">
-              <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button native-type="submit" plain class="btn-block">비밀번호 변경</el-button>
-            </el-form-item>
-          </el-form>
-        </el-card>
+        <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+          <el-form-item label="현재 비밀번호" prop="prevPassword">
+            <el-input type="password" v-model="form.prevPassword" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="새로운 비밀번호" prop="password">
+            <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="새로운 비밀번호 확인" prop="passwordConfirm">
+            <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button native-type="submit" plain class="btn-block">변경하기</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </div>
   </app-layout>
@@ -71,11 +69,8 @@ export default {
           this.loading = true
           // 폼 데이터 셋
           const formData = {
-            key: this.auth.key,
-            email: this.auth.email,
             password: this.form.prevPassword,
-            newPassword: this.form.password,
-            passwordChangedAt: new Date().getTime()
+            newPassword: this.form.password
           }
           // 리턴 boolean
           const bool = await this.$store.dispatch('changePassword', formData)

@@ -28,10 +28,8 @@ export default {
   },
   methods: {
     async fetchData () {
-      const auth = JSON.parse(sessionStorage.getItem('_auth'))
-      this.user = await this.$store.dispatch('getUser', auth)
+      this.user = await this.$store.dispatch('getUser')
       this.loading = false
-      console.log(this.user)
     }
   },
   watch: {
@@ -53,7 +51,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   font-size: 0;
-  padding: map-get($spacers, 5) 0;
   min-height: 300px;
 
   @include clearfix();
@@ -75,6 +72,12 @@ export default {
   }
 
   .mypage-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: map-get($spacers, 4);
+    border: 1px solid gray('300');
+
     .el-card__body {
       display: flex;
       align-items: center;
@@ -129,7 +132,7 @@ export default {
 
       .link {
         position: absolute;
-        bottom: map-get($spacers, 2);
+        bottom: map-get($spacers, 4);
         right: map-get($spacers, 4);;
         font-size: $font-size-sm;
         color: gray('700');
