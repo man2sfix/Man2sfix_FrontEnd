@@ -11,7 +11,6 @@ import Magazine from '@/pages/common/Magazine'
 import Community from '@/pages/common/Community'
 import Company from '@/pages/common/Company'
 import Service from '@/pages/common/Service'
-import CustomerCenter from '@/pages/common/CustomerCenter'
 import TermsOfUse from '@/pages/common/TermsOfUse'
 import PrivacyPolicy from '@/pages/common/PrivacyPolicy'
 
@@ -102,11 +101,6 @@ const router = new Router({
       path: '/how-to-use',
       name: 'howtouse',
       component: HowToUse
-    },
-    {
-      path: '/customer-center',
-      name: 'customercenter',
-      component: CustomerCenter
     },
     {
       path: '/terms-of-use',

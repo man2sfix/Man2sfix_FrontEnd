@@ -1,8 +1,6 @@
 <template>
   <app-layout>
-    <div class="inner-contents">
-      <h2 class="contents-title">홈</h2>
-    </div>
+    <visual-carousel></visual-carousel>
   </app-layout>
 </template>
 

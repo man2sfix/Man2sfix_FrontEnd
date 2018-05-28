@@ -1,66 +1,47 @@
 <template>
-  <div class="collapse-contents">
-    <h3 class="collapse-contents-title">{{ title }}</h3>
-    <el-collapse accordion>
-      <el-collapse-item v-for="(item, index) in items" :key="index" :name="index">
-        <template slot="title">
-          {{ item.title }}
-        </template>
-        <div>{{ item.text }}</div>
-      </el-collapse-item>
-    </el-collapse>
+  <div class="inner-contents">
+    <div class="collapse-container">
+      <el-tabs type="card">
+        <el-tab-pane label="자주묻는질문">
+          <faq-collapse-item :items="studentItems"></faq-collapse-item>
+        </el-tab-pane>
+        <el-tab-pane label="강사관련">
+          <faq-collapse-item :items="instructorItems"></faq-collapse-item>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 
 <script>
+import FaqCollapseItem from '@/components/faq/FaqCollapseItem'
+
 export default {
   name: 'FaqCollapse',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    items: {
-      type: Array,
-      requirend: true
+  data () {
+    return {
+      activeName: 'first',
+      studentItems: [
+        { title: '질문입니다.', text: '답변입니다.' },
+        { title: '질문입니다.', text: '답변입니다.' }
+      ],
+      instructorItems: [
+        { title: '질문입니다.', text: '답변입니다.' },
+        { title: '질문입니다.', text: '답변입니다.' }
+      ]
     }
+  },
+  components: {
+    FaqCollapseItem
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.collapse-contents {
-  width: calc(50% - 10px);
+.collapse-container {
+  max-width: 800px;
+  margin: 0 auto;
 
-  &:nth-child(odd) {
-    float: left;
-  }
-
-  &:nth-child(even) {
-    float: right;
-  }
-
-  &-title {
-    position: relative;
-    font-size: $font-size-lg;
-    color: gray('800');
-    text-align: center;
-    padding: map-get($spacers, 5) 0 map-get($spacers, 5);
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: map-get($spacers, 4);
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 2px;
-      background-color: theme-color('primary');
-    }
-  }
-
-  .el-collapse-item__header {
-    font-size: $font-size-base;
-  }
+  @include clearfix();
 }
 </style>

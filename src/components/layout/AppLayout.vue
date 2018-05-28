@@ -40,6 +40,11 @@ export default {
     padding: 0 0 map-get($spacers, 3);
   }
 
+  .contents-title-sub {
+    font-size: $font-size-lg;
+    color: gray('800');
+  }
+
   .contents-text {
     font-size: $font-size-base;
     color: gray('800');

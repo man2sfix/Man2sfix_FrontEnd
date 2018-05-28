@@ -30,7 +30,6 @@ export default {
         { name: '이용방법', href: '/how-to-use' }
       ],
       help: [
-        { name: '고객센터', href: '/customer-center' },
         { name: '이용약관', href: '/terms-of-use' },
         { name: '개인정보 처리방침', href: '/privacy-policy' }
       ],
