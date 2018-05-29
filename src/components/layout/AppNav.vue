@@ -28,8 +28,9 @@ export default {
     return {
       visible: false,
       nav: [
+        { name: '홈', href: '/home' },
         { name: '모의훈련', href: '/training' },
-        { name: '맨투스픽', href: '/home' },
+        { name: '정규 클래스', href: '/class' },
         { name: '강사진 소개', href: '/instructors' },
         { name: '매거진', href: '/magazine' },
         { name: '커뮤니티', href: '/community' },

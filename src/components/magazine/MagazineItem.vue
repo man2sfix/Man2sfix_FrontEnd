@@ -27,8 +27,7 @@ export default {
 <style lang="scss" scoped>
 .magazine-item {
   position: relative;
-  width: calc(25% - 9px);
-  margin: 12px 0 0 12px;
+  width: 100%;
   display: inline-block;
   overflow: hidden;
   border: 1px solid gray('300');
@@ -40,7 +39,6 @@ export default {
   &:hover {
     .thumb {
       img {
-        opacity: 0.6;
         transform: scale(1.15);
       }
     }

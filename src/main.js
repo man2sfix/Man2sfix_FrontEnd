@@ -12,6 +12,7 @@ import enviroment from '../enviroments/enviroment'
 
 import 'normalize.css'
 import './assets/css/base.css'
+
 import './elements/components'
 
 Vue.config.productionTip = false

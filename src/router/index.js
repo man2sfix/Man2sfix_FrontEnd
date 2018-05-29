@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // common
 import Home from '@/pages/common/Home'
 import Instructors from '@/pages/common/Instructors'
+import Class from '@/pages/common/Class'
 import HowToUse from '@/pages/common/HowToUse'
 import Faq from '@/pages/common/Faq'
 import Contact from '@/pages/common/Contact'
@@ -54,6 +55,11 @@ const router = new Router({
       path: '/instructors',
       name: 'instructors',
       component: Instructors
+    },
+    {
+      path: '/class',
+      name: 'class',
+      component: Class
     },
     {
       path: '/magazine',

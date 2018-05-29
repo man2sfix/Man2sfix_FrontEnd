@@ -20,3 +20,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.magazine-list {
+  .magazine-item {
+    width: calc(25% - 9px);
+    margin: 12px 0 0 12px;
+  }
+}
+</style>

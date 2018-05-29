@@ -42,7 +42,7 @@ export default {
 
   .contents-title-sub {
     font-size: $font-size-lg;
-    color: gray('800');
+    color: gray('900');
   }
 
   .contents-text {
