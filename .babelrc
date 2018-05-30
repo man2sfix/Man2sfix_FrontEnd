@@ -14,14 +14,7 @@
       "presets": ["env", "stage-2"],
       "plugins": [
         "transform-vue-jsx",
-        "istanbul",
-        [
-          "component",
-          {
-            "libraryName": "element-ui",
-            "styleLibraryName": "theme-chalk"
-          }
-        ]
+        "istanbul"
       ]
     }
   }
