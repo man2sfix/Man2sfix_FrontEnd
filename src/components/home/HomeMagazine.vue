@@ -1,7 +1,7 @@
 <template>
   <article class="inner-contents contents-magazine">
-    <h2 class="contents-title-sub">나에게 맞는 클래스로 스피치를 시작하세요!</h2>
-    <router-link :to="'/class'" class="btn-more">더보기</router-link>
+    <h2 class="contents-title-sub">다양한 스피치 정보가 필요하신가요?</h2>
+    <router-link :to="'/magazine'" class="btn-more">더보기</router-link>
     <div class="list-magazine">
       <tiny-slider
         :mouse-drag="true"
@@ -15,7 +15,7 @@
           <magazine-item :item="item"></magazine-item>
         </div>
       </tiny-slider>
-      <div class="list-magazine-controls" id="list-magazine-controls">
+      <div class="list-magazine-controls" id="list-magazine-controls" v-if="list.length > 1">
         <el-button icon="el-icon-arrow-left" circle plain></el-button>
         <el-button icon="el-icon-arrow-right" circle plain></el-button>
       </div>
@@ -41,26 +41,6 @@ export default {
           thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
           title: '제목제목제목제목제목제목제목제목',
           date: new Date()
-        },
-        {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
-          title: '제목제목제목제목제목제목제목제목',
-          date: new Date()
-        },
-        {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
-          title: '제목제목제목제목제목제목제목제목',
-          date: new Date()
-        },
-        {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
-          title: '제목제목제목제목제목제목제목제목',
-          date: new Date()
-        },
-        {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
-          title: '제목제목제목제목제목제목제목제목',
-          date: new Date()
         }
       ]
     }
@@ -74,7 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 .contents-magazine {
-  padding-top: map-get($spacers, 3);
   position: relative;
   overflow: hidden;
 
@@ -84,7 +63,7 @@ export default {
 
   .btn-more {
     position: absolute;
-    top: map-get($spacers, 3);
+    top: map-get($spacers, 5);
     right: map-get($spacers, 3);
     padding: map-get($spacers, 2);
     border: 1px solid gray('300');

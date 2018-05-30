@@ -1,0 +1,153 @@
+<template>
+  <article class="inner-contents contents-community">
+    <h2 class="contents-title-sub">스피치 모임에 참여하시겠어요?</h2>
+    <router-link :to="'/class'" class="btn-more">더보기</router-link>
+    <div class="list-community">
+      <tiny-slider
+        :mouse-drag="true"
+        :loop="false"
+        items="2"
+        :controls="true"
+        gutter="20"
+        controlsContainer="#list-community-controls"
+        >
+        <div v-for="(item, index) in list" :key="index">
+          <community-item :item="item"></community-item>
+        </div>
+      </tiny-slider>
+      <div class="list-community-controls" id="list-community-controls" v-if="list.length > 1">
+        <el-button icon="el-icon-arrow-left" circle plain></el-button>
+        <el-button icon="el-icon-arrow-right" circle plain></el-button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<script>
+import VueTinySlider from 'vue-tiny-slider'
+import CommunityItem from '@/components/community/CommunityItem'
+
+export default {
+  name: 'HomeCommunity',
+  data () {
+    return {
+      list: [
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        },
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        },
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        },
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        },
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        },
+        {
+          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          title: '제목제목제목제목제목제목제목제목',
+          description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
+          nowMember: 3,
+          limitMember: 10,
+          date: new Date()
+        }
+      ]
+    }
+  },
+  components: {
+    'tiny-slider': VueTinySlider,
+    CommunityItem
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.contents-community {
+  position: relative;
+  overflow: hidden;
+
+  .contents-title-sub {
+    margin-bottom: map-get($spacers, 4);
+  }
+
+  .btn-more {
+    position: absolute;
+    top: map-get($spacers, 5);
+    right: map-get($spacers, 3);
+    padding: map-get($spacers, 2);
+    border: 1px solid gray('300');
+    font-size: $font-size-base * 0.8;
+    color: gray('700');
+    transform: translateY(-30%);
+
+    &:hover {
+      border-color: theme-color('primary');
+      color: theme-color('primary');
+    }
+  }
+
+  .list-community {
+    position: relative;
+
+    @include clearfix();
+
+    > div:not(.tns-outer) {
+      width: calc(50% - 20px);
+    }
+
+    .tns-item {
+      float: left;
+    }
+
+    &-controls {
+      .el-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: $zindex-carousel;
+
+        &:first-child {
+          left: -(map-get($spacers, 3));
+        }
+
+        &:last-child {
+          right: -(map-get($spacers, 3));
+        }
+
+        &[disabled] {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}
+</style>

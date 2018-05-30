@@ -3,7 +3,7 @@
       <div class="community-item-inner">
         <div class="thumb">
           <router-link :to="'/'" class="link">
-            <img :src="item.thumb" class="image">
+            <img :src="item.thumb">
           </router-link>
         </div>
         <div class="info">
@@ -36,24 +36,25 @@ export default {
 
 <style lang="scss" scoped>
 .community-item {
-  width: calc(50% - 10px);
-  display: inline-block;
-  margin-left: 20px;
-  margin-top: 20px;
-  border: 1px solid gray('300');
-
-  &:nth-child(odd) {
-    margin-left: 0;
-  }
+  overflow: hidden;
 
   &-inner {
-    display: flex;
-    align-items: center;
-    position: relative;
+    height: 230px;
+    border: 1px solid gray('300');
+
+    @include clearfix();
+  }
+
+  &:hover {
+    .thumb {
+      img {
+        transform: scale(1.10);
+      }
+    }
   }
 
   .thumb {
-    flex: none;
+    float: left;
     width: 40%;
     height: 100%;
     overflow: hidden;
@@ -61,13 +62,25 @@ export default {
     img {
       display: block;
       height: 100%;
+      transition: $transition-base;
     }
   }
 
   .info {
-    flex: auto;
-    padding: map-get($spacers, 3);
+    position: relative;
+    float: left;
+    width: 60%;
+    height: 100%;
     line-height: 1.5;
+
+    .link {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      padding: 0 map-get($spacers, 3);
+      transform: translateY(-50%);
+    }
   }
 
   .title,
@@ -75,6 +88,10 @@ export default {
     color: gray('900');
     font-size: $font-size-base;
     padding-bottom: map-get($spacers, 1);
+  }
+
+  .title {
+    @include text-truncate();
   }
 
   .description {

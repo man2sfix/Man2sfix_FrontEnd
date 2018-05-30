@@ -12,17 +12,10 @@
         controlsContainer="#list-class-controls"
         >
         <div v-for="(item, index) in list" :key="index">
-          <div class="thumb">
-            <img :src="item.thumb" :alt="item.title">
-          </div>
-          <div class="info">
-            <h3 class="title">{{ item.title }}</h3>
-            <p class="description">{{ item.description }}</p>
-            <router-link :to="item.link" class="btn-detail">상세보기</router-link>
-          </div>
+          <class-item :item="item"></class-item>
         </div>
       </tiny-slider>
-      <div class="list-class-controls" id="list-class-controls">
+      <div class="list-class-controls" id="list-class-controls" v-if="list.length > 1">
         <el-button icon="el-icon-arrow-left" circle plain></el-button>
         <el-button icon="el-icon-arrow-right" circle plain></el-button>
       </div>
@@ -32,6 +25,7 @@
 
 <script>
 import VueTinySlider from 'vue-tiny-slider'
+import ClassItem from '@/components/class/ClassItem'
 
 export default {
   name: 'HomeClass',
@@ -72,7 +66,8 @@ export default {
     }
   },
   components: {
-    'tiny-slider': VueTinySlider
+    'tiny-slider': VueTinySlider,
+    ClassItem
   }
 }
 </script>
@@ -81,6 +76,7 @@ export default {
 .contents-class {
   position: relative;
   overflow: hidden;
+  padding-bottom: 0;
 
   .contents-title-sub {
     margin-bottom: map-get($spacers, 4);
@@ -132,50 +128,6 @@ export default {
 
         &[disabled] {
           opacity: 0.6;
-        }
-      }
-    }
-
-    .thumb {
-      font-size: 0;
-      overflow: hidden;
-
-      img {
-        display: block;
-        width: 100%;
-      }
-    }
-
-    .info {
-      padding: map-get($spacers, 3);
-      border: 1px solid gray('300');
-
-      .title {
-        font-size: $font-size-base;
-        color: gray('900');
-
-        @include text-truncate();
-      }
-
-      .description {
-        font-size: $font-size-sm;
-        padding: map-get($spacers, 2) 0 map-get($spacers, 3);
-        line-height: 1.5;
-        color: gray('800');
-      }
-
-      .btn-detail {
-        display: block;
-        margin: 0 auto;
-        padding: map-get($spacers, 2) map-get($spacers, 3);
-        font-size: $font-size-sm;
-        color: theme-color('primary');
-        border: 1px solid theme-color('primary');
-        text-align: center;
-
-        &:hover {
-          background-color: theme-color('primary');
-          color: $white;
         }
       }
     }

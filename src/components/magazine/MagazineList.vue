@@ -23,9 +23,16 @@ export default {
 
 <style lang="scss" scoped>
 .magazine-list {
+  font-size: 0;
+
   .magazine-item {
+    display: inline-block;
     width: calc(25% - 9px);
     margin: 12px 0 0 12px;
+
+    &:nth-child(4n + 1) {
+      margin-left: 0;
+    }
   }
 }
 </style>

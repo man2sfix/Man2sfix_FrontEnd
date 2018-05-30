@@ -20,3 +20,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.community-list {
+  font-size: 0;
+
+  .community-item {
+    width: calc(50% - 10px);
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+
+    &:nth-child(odd) {
+      margin-left: 0;
+    }
+  }
+}
+</style>

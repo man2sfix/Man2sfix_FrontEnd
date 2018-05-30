@@ -27,19 +27,12 @@ export default {
 <style lang="scss" scoped>
 .magazine-item {
   position: relative;
-  width: 100%;
-  display: inline-block;
   overflow: hidden;
-  border: 1px solid gray('300');
-
-  &:nth-child(4n + 1) {
-    margin-left: 0;
-  }
 
   &:hover {
     .thumb {
       img {
-        transform: scale(1.15);
+        transform: scale(1.10);
       }
     }
   }
@@ -55,13 +48,14 @@ export default {
     img {
       display: block;
       width: 100%;
-      transition: all 0.4s ease-in-out;
+      transition: $transition-base;
     }
   }
 
   .info {
     padding: map-get($spacers, 3);
     line-height: 1.5;
+    border: 1px solid gray('300');
   }
 
   .title {
