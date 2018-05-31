@@ -6,7 +6,7 @@
         <el-radio v-model="radio" :label="item.value">{{ item.text }}</el-radio>
       </div>
     </div>
-    <div class="training-btn">
+    <div class="training-btn" v-if="radio">
       <router-link :to="{ name: 'trainingType' }" class="link">이전단계</router-link>
       <router-link :to="{ name: 'trainingVideo', query: { question: radio, type: type } }" class="link" v-if="radio">훈련하기</router-link>
     </div>

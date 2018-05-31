@@ -122,6 +122,7 @@ const router = new Router({
     {
       path: '/training',
       name: 'training',
+      redirect: '/training/type',
       component: Training,
       children: [
         {

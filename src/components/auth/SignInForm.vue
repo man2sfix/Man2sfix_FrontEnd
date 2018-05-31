@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'SignInCommon',
+  name: 'SignInForm',
   data () {
     return {
       loading: false,

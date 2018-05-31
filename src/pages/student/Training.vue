@@ -31,7 +31,7 @@ export default {
 
 .training-container {
   .training-form {
-    max-width: 850px;
+    max-width: 600px;
     padding: map-get($spacers, 4);
     margin: map-get($spacers, 5) auto 0;
     border: 1px solid gray('300');
