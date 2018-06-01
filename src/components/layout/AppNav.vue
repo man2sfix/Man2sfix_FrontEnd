@@ -1,7 +1,7 @@
 <template>
   <nav :class="visible ? 'app-nav active' : 'app-nav'">
     <div class="background" v-if="visible" @click="visible = !visible"></div>
-    <el-button plain class="btn-nav-show" v-if="!visible" @click="visible = !visible"><i class="fas fa-bars"></i></el-button>
+    <button type="button" class="btn btn-lg btn-link btn-nav-show" v-if="!visible" @click="visible = !visible"><i class="fas fa-bars"></i></button>
     <div class="app-nav-inner">
       <app-auth :auth="auth"></app-auth>
       <ul class="app-nav-list">
@@ -106,7 +106,7 @@ export default {
   }
 
   .link {
-    display: flex;
+    display: block;
     position: relative;
     align-items: center;
     padding: map-get($spacers, 3) map-get($spacers, 4);

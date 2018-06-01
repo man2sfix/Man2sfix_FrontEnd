@@ -2,9 +2,11 @@
 // Common Scss Style
 //
 
-// Utils
+// Base
+@import './common/index';
 
-@import './utils/functions';
-@import './utils/variables';
-@import './utils/mixins';
-@import './utils/breakpoints';
+// Utils
+@import './utils/index';
+
+// Components
+@import './components/index';

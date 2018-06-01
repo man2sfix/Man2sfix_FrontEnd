@@ -1,8 +1,8 @@
 <template>
   <ul class="app-auth">
     <!-- not logined -->
-    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signin'" class="link">로그인</router-link></li>
-    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signup'" class="link">회원가입</router-link></li>
+    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signin'" class="btn btn-sm link">로그인</router-link></li>
+    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signup'" class="btn btn-sm link">회원가입</router-link></li>
     <!-- logined -->
     <li v-if="auth.logined" class="auth-profile">
       <router-link :to="'/mypage'">
@@ -52,8 +52,6 @@ export default {
   }
 
   .link {
-    display: flex;
-    align-items: center;
     color: gray('700');
     border: 1px solid gray('300');
     padding: map-get($spacers, 2);

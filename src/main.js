@@ -11,7 +11,7 @@ import momentLocale from 'moment/locale/ko'
 import enviroment from '../enviroments/enviroment'
 
 import 'normalize.css'
-import './assets/css/base.css'
+import './assets/scss/style.scss'
 import './elements/components'
 
 Vue.config.productionTip = false
