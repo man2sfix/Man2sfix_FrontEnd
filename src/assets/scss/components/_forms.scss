@@ -226,6 +226,12 @@ select.form-control-lg {
 
 .form-group {
   margin-bottom: $form-group-margin-bottom;
+
+  label {
+    display: block;
+    margin-bottom: map-get($spacers, 2);
+    font-size: $font-size-sm;
+  }
 }
 
 .form-text {
@@ -233,6 +239,14 @@ select.form-control-lg {
   margin-top: $form-text-margin-top;
 }
 
+// Form Container
+
+.form-container {
+  max-width: 500px;
+  margin: map-get($spacers, 5) auto;
+  border: 1px solid gray('200');
+  padding: map-get($spacers, 4);
+}
 
 // Checkboxes and radios
 //
@@ -273,6 +287,9 @@ select.form-control-lg {
   }
 }
 
+.form-link {
+  margin-top: map-get($spacers, 3);
+}
 
 // Form validation
 //
@@ -283,3 +300,5 @@ select.form-control-lg {
 
 @include form-validation-state("valid", $form-feedback-valid-color);
 @include form-validation-state("invalid", $form-feedback-invalid-color);
+
+

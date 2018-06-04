@@ -93,6 +93,13 @@ $text-muted:                $gray-600 !default;
 $component-active-color:      $white !default;
 $component-active-bg:         theme-color("primary") !default;
 
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold:  150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark:             $gray-900 !default;
+$yiq-text-light:            $white !default;
+
 // Spacing
 
 $spacer: 1rem !default;
@@ -268,7 +275,7 @@ $input-height-lg:                       calc(#{$input-height-inner-lg} + #{$inpu
 
 $input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$form-text-margin-top:                  .25rem !default;
+$form-text-margin-top:                  .45rem !default;
 
 $form-check-input-gutter:               1.25rem !default;
 $form-check-input-margin-y:             .3rem !default;
