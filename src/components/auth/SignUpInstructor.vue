@@ -1,37 +1,114 @@
 <template>
-  <div class="form-container">
+  <div class="form">
     <form @submit.prevent="onSubmit">
-      <div class="form-group">
-        <label for="name"><span class="text-danger">*</span> 이름</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.name.$error }" id="name" placeholder="홍길동" v-model.trim="$v.form.name.$model">
-        <div class="invalid-feedback" v-if="!$v.form.name.required">이름을 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.name.minLength || !$v.form.name.maxLength">이름은 2글자 이상 5글자 이하로 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.name.$error }">
+        <label for="name" class="form-group-title"><span class="text-danger">*</span> 이름 (홍길동)</label>
+        <at-input v-model.trim="$v.form.name.$model" class="form-control" id="name" :status="$v.form.name.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.name.required">이름을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.name.minLength || !$v.form.name.maxLength">이름은 2글자 이상 5글자 이하로 입력해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.email.$error }">
+        <label for="email" class="form-group-title"><span class="text-danger">*</span> 이메일 (Man2sfix@man2sfix.com)</label>
+        <at-input type="email" v-model.trim="$v.form.email.$model" id="email" :status="$v.form.email.$error ? 'error' : ''" size="large"></at-input>
+        <div>
+          <at-checkbox v-model="form.emailAgree" label="emailAgree">이메일 수신 동의</at-checkbox>
+        </div>
+        <div class="form-group-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.password.$error }">
+        <label for="password" class="form-group-title"><span class="text-danger">*</span> 비밀번호</label>
+        <at-input type="password" v-model.trim="$v.form.password.$model" :status="$v.form.password.$error ? 'error' : ''" size="large" id="password"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.password.required">비밀번호를 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.password.minLength">비밀번호는 최소 6자리 이상으로 입력해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.passwordConfirm.$error }">
+        <label for="passwordConfirm" class="form-group-title"><span class="text-danger">*</span> 비밀번호 확인</label>
+        <at-input type="password" v-model.trim="$v.form.passwordConfirm.$model" :status="$v.form.passwordConfirm.$error ? 'error' : ''" size="large" id="passwordConfirm"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.passwordConfirm.required || !$v.form.passwordConfirm.sameAsPassword">비밀번호를 확인해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.phone.$error }">
+        <label for="phone" class="form-group-title"><span class="text-danger">*</span> 휴대폰 번호 (010-0000-0000)</label>
+        <at-input v-model.trim="$v.form.phone.$model" id="phone" :status="$v.form.phone.$error ? 'error' : ''" size="large"></at-input>
+        <div>
+          <at-checkbox v-model="form.phoneAgree" label="phoneAgree">SMS 수신 동의</at-checkbox>
+        </div>
+        <div class="form-group-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.gender.$error }">
+        <label class="form-group-title"><span class="text-danger">*</span> 성별</label>
+        <at-radio-group v-model.trim="$v.form.gender.$model">
+          <at-radio label="man">남성</at-radio>
+          <at-radio label="woman">여성</at-radio>
+        </at-radio-group>
+        <div class="form-group-feedback" v-if="!$v.form.gender.required">성별을 선택해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.birthday.$error }">
+        <label for="birthday" class="form-group-title"><span class="text-danger">*</span> 생년월일 (1900-01-01)</label>
+        <at-input type="text" v-model.trim="$v.form.birthday.$model" id="birthday" :status="$v.form.birthday.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.birthday.required">생년월일을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.birthday.helpers">생년월일은 '연-월-일'로 입력해주세요.</div>
+      </div>
+      <div class="form-group" :class="{ 'status': $v.form.greeting.$error }">
+        <label for="greeting" class="form-group-title"><span class="text-danger">*</span> 인사말</label>
+        <at-textarea v-model.trim="$v.form.greeting.$model" :status="$v.form.greeting.$error ? 'error' : ''" size="large" min-rows="5"></at-textarea>
+        <div class="form-group-feedback" v-if="!$v.form.greeting.required">인사말을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.greeting.minLength">인사말은 최소 50자 이상으로 입력해주세요.</div>
       </div>
       <div class="form-group">
-        <label for="email"><span class="text-danger">*</span> 이메일</label>
-        <input type="email" class="form-control" :class="{ 'is-invalid': $v.form.email.$error }" id="email" placeholder="man2sfix@man2sfix.com" v-model.trim="$v.form.email.$model">
-        <label class="form-control-checkbox"><input type="checkbox" v-model.trim="$v.form.emailAgree.$model" :checked="form.emailAgree"> 이메일 수신 동의</label>
-        <div class="invalid-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
+        <label for="academicFile" class="form-group-title"><span class="text-danger">*</span> 학력인증 (학력증명서, 졸업증명서, 재학증명서)</label>
+        <at-input type="file" v-model.trim="$v.form.academicFile.$model" id="academicFile" :status="$v.form.academicFile.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.greeting.required">학력인증 파일을 선택해주세요.</div>
       </div>
-      <div class="form-group">
-        <label for="password"><span class="text-danger">*</span> 비밀번호</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.passowrd.$error }" id="password" v-model.trim="$v.form.password.$model">
-        <div class="invalid-feedback" v-if="!$v.form.password.required">비밀번호를 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.password.minLength">비밀번호는 6글자 이상으로 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.terms.$error }">
+        <label class="form-group-title"><span class="text-danger">*</span> 이용약관</label>
+        <div>
+          <at-checkbox v-model="form.terms" label="terms">동의하기</at-checkbox>
+        </div>
+        <at-button type="primary" hollow class="btn-detail" @click="termsModal = true"> 전문보기</at-button>
+        <div class="form-group-feedback" v-if="!$v.form.terms.between">이용약관에 동의해주세요.</div>
       </div>
-      <div class="form-group">
-        <label for="passwordConfirm"><span class="text-danger">*</span> 비밀번호 확인</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.passwordConfirm.$error }" id="passwordConfirm" v-model.trim="$v.form.passwordConfirm.$model">
-        <div class="invalid-feedback" v-if="!$v.form.passwordConfirm.sameAsPassword">비밀번호를 확인하여 주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.privacy.$error }">
+        <label class="form-group-title"><span class="text-danger">*</span> 개인정보 취급방침</label>
+        <div>
+          <at-checkbox v-model="form.privacy" label="privacy">동의하기</at-checkbox>
+        </div>
+        <at-button type="primary" class="btn-detail" hollow @click="privacyModal = true">전문보기</at-button>
+        <div class="form-group-feedback" v-if="!$v.form.privacy.between">개인정보 취급방침에 동의해주세요.</div>
       </div>
+      <at-button hollow class="form-btn" nativeType="submit">회원가입</at-button>
     </form>
+    <!-- modal -->
+    <at-modal v-model="termsModal">
+      <div slot="header">
+        <span>이용약관</span>
+      </div>
+      <div style="max-height: 300px; overflow-y: scroll;">
+        <sign-up-terms></sign-up-terms>
+      </div>
+      <div slot="footer">
+        <at-button style="width:100%;" @click="termsModal = false">확인</at-button>
+      </div>
+    </at-modal>
+    <!-- modal -->
+    <at-modal v-model="privacyModal">
+      <div slot="header">
+        <span>개인정보 취급방침</span>
+      </div>
+      <div style="max-height: 300px; overflow-y: scroll;">
+        <sign-up-privacy></sign-up-privacy>
+      </div>
+      <div slot="footer">
+        <at-button style="width:100%;" @click="privacyModal = false">확인</at-button>
+      </div>
+    </at-modal>
   </div>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+import { required, email, minLength, maxLength, sameAs, helpers, between } from 'vuelidate/lib/validators'
 
 import SignUpTerms from '@/components/auth/SignUpTerms'
 import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
@@ -43,6 +120,9 @@ export default {
   ],
   data () {
     return {
+      loading: false,
+      termsModal: false,
+      privacyModal: false,
       form: {
         name: '',
         email: '',
@@ -56,8 +136,8 @@ export default {
         careerFile: '',
         completionFile: '',
         profile: '',
-        terms: false,
-        privacy: false,
+        terms: 0,
+        privacy: 0,
         emailAgree: true,
         phoneAgree: true,
         instructorVerified: false,
@@ -76,17 +156,44 @@ export default {
         required,
         email
       },
-      passowrd: {
+      password: {
         required,
         minLength: minLength(6)
       },
       passwordConfirm: {
         required,
         sameAsPassword: sameAs('password')
+      },
+      phone: {
+        required,
+        helpers: helpers.regex('phone', /^\d{3}-\d{3,4}-\d{4}$/)
+      },
+      gender: {
+        required
+      },
+      birthday: {
+        required,
+        helpers: helpers.regex('birthday', /^\d{4}-\d{2}-\d{2}$/)
+      },
+      greeting: {
+        required,
+        minLength: minLength(50)
+      },
+      academicFile: {
+        required
+      },
+      terms: {
+        between: between(1, 1)
+      },
+      privacy: {
+        between: between(1, 1)
       }
     }
   },
   methods: {
+    checkTrue (value, component) {
+      return value === true
+    },
     async onSubmit (formName) {
       this.$v.$touch()
       if (!this.$v.$invalid) {
@@ -100,7 +207,7 @@ export default {
         formData.append('password', this.form.password)
         formData.append('phone', this.form.phone)
         formData.append('gender', this.form.gender)
-        formData.append('birthday', this.form.birthday)
+        formData.append('birthday', new Date(this.form.birthday))
         formData.append('greeting', this.form.greeting)
         formData.append('academic_file', this.form.academicFile)
         formData.append('career_file', this.form.careerFile)
@@ -108,8 +215,8 @@ export default {
         formData.append('instructor_verified', this.form.instructorVerified)
         formData.append('instructor_active', this.form.instructorActive)
         formData.append('profile', this.form.profile)
-        formData.append('terms', this.form.terms)
-        formData.append('privacy', this.form.privacy)
+        formData.append('terms', !!this.form.terms)
+        formData.append('privacy', !!this.form.privacy)
         formData.append('email_agree', this.form.emailAgree)
         formData.append('phone_agree', this.form.phoneAgree)
         // 리턴 boolean
@@ -126,6 +233,7 @@ export default {
         // 로딩 끝
         this.loading = false
       } else {
+        console.log(this.form)
         return false
       }
     }

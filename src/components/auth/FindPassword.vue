@@ -1,19 +1,19 @@
 <template>
-  <div class="form-container">
+  <div class="form">
     <form @submit.prevent="onSubmit">
-      <div class="form-group">
-        <label for="email"><span class="text-danger">*</span> 이메일</label>
-        <input type="email" class="form-control" :class="{ 'is-invalid': $v.form.email.$error }" id="email" placeholder="man2sfix@man2sfix.com" v-model.trim="$v.form.email.$model">
-        <div class="invalid-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.email.$error }">
+        <label for="email" class="form-group-title"><span class="text-danger">*</span> 이메일 (Man2sfix@man2sfix.com)</label>
+        <at-input type="email" v-model.trim="$v.form.email.$model" :status="$v.form.email.$error ? 'error' : ''" size="large" id="email"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
       </div>
-      <div class="form-group">
-        <label for="phone"><span class="text-danger">*</span> 휴대폰 번호</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.phone.$error }" id="phone" placeholder="010-0000-0000" v-model.trim="$v.form.phone.$model">
-        <div class="invalid-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.phone.$error }">
+        <label for="phone" class="form-group-title"><span class="text-danger">*</span> 휴대폰 번호 (010-0000-0000)</label>
+        <at-input v-model.trim="$v.form.phone.$model" :status="$v.form.phone.$error ? 'error' : ''" size="large" id="phone"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
       </div>
-      <button type="submit" class="btn btn-outline-primary btn-block">비밀번호 찾기</button>
+      <at-button hollow class="form-btn" nativeType="submit">비밀번호 찾기</at-button>
     </form>
   </div>
 </template>

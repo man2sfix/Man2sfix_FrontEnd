@@ -1,19 +1,19 @@
 <template>
-  <div class="form-container">
+  <div class="form">
     <form @submit.prevent="onSubmit" v-if="!found">
-      <div class="form-group">
-        <label for="name"><span class="text-danger">*</span> 이름</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.name.$error }" id="name" placeholder="홍길동" v-model.trim="$v.form.name.$model">
-        <div class="invalid-feedback" v-if="!$v.form.name.required">이름을 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.name.minLength || !$v.form.name.maxLength">이름은 2글자 이상 5글자 이하로 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.name.$error }">
+        <label for="name" class="form-group-title"><span class="text-danger">*</span> 이름 (홍길동)</label>
+        <at-input v-model.trim="$v.form.name.$model" id="name" :status="$v.form.name.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.name.required">이름을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.name.minLength || !$v.form.name.maxLength">이름은 2글자 이상 5글자 이하로 입력해주세요.</div>
       </div>
-      <div class="form-group">
-        <label for="phone"><span class="text-danger">*</span> 휴대폰 번호</label>
-        <input type="text" class="form-control" :class="{ 'is-invalid': $v.form.phone.$error }" id="phone" placeholder="010-0000-0000" v-model.trim="$v.form.phone.$model">
-        <div class="invalid-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.phone.$error }">
+        <label for="phone" class="form-group-title"><span class="text-danger">*</span> 휴대폰 번호 (010-0000-0000)</label>
+        <at-input v-model.trim="$v.form.phone.$model" id="phone" :status="$v.form.phone.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
       </div>
-      <button type="submit" class="btn btn-outline-primary btn-block">이메일 찾기</button>
+      <at-button hollow class="form-btn" nativeType="submit">이메일 찾기</at-button>
     </form>
     <div class="found" v-if="found">
       회원님의 이메일 주소를 확인해주세요.

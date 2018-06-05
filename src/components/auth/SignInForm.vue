@@ -1,21 +1,21 @@
 <template>
-  <div class="form-container">
+  <div class="form">
     <form @submit.prevent="onSubmit">
-      <div class="form-group">
-        <label for="email"><span class="text-danger">*</span> 이메일</label>
-        <input type="email" class="form-control" :class="{ 'is-invalid': $v.form.email.$error }" id="email" placeholder="man2sfix@man2sfix.com" v-model.trim="$v.form.email.$model">
-        <div class="invalid-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
-        <div class="invalid-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.email.$error }">
+        <label for="email" class="form-group-title"><span class="text-danger">*</span> 이메일 (Man2sfix@man2sfix.com)</label>
+        <at-input type="email" v-model.trim="$v.form.email.$model" id="email" :status="$v.form.email.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
+        <div class="form-group-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
       </div>
-      <div class="form-group">
-        <label for="password"><span class="text-danger">*</span> 비밀번호</label>
-        <input type="password" class="form-control" :class="{ 'is-invalid': $v.form.password.$error }" id="password" v-model.trim="$v.form.password.$model">
-        <div class="invalid-feedback" v-if="!$v.form.password.required">비밀번호를 입력해주세요.</div>
+      <div class="form-group" :class="{ 'status': $v.form.password.$error }">
+        <label for="password" class="form-group-title"><span class="text-danger">*</span> 비밀번호</label>
+        <at-input type="password" v-model.trim="$v.form.password.$model" id="password" :status="$v.form.password.$error ? 'error' : ''" size="large"></at-input>
+        <div class="form-group-feedback" v-if="!$v.form.password.required">비밀번호를 입력해주세요.</div>
       </div>
-      <button type="submit" class="btn btn-outline-primary btn-block">로그인</button>
+      <at-button hollow class="form-btn" nativeType="submit">로그인</at-button>
       <div class="form-link">
-        <router-link :to="'/find-account'" class="btn btn-link btn-sm btn-block text-left">이메일/비밀번호를 잊으셨나요?</router-link>
-        <router-link :to="'/signup'" class="btn btn-link btn-sm btn-block text-left">아직 회원이 아니신가요?</router-link>
+        <router-link :to="'/find-account'" class="btn-link">이메일/비밀번호를 잊으셨나요?</router-link>
+        <router-link :to="'/signup'" class="btn-link">아직 회원이 아니신가요?</router-link>
       </div>
     </form>
   </div>
