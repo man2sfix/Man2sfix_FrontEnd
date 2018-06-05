@@ -5,16 +5,16 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
+import enviroment from '../enviroments/enviroment'
+
 import VueMoment from 'vue-moment'
 import momentLocale from 'moment/locale/ko'
 
-import AtComponents from 'at-ui'
-import 'at-ui-style'
-
-import enviroment from '../enviroments/enviroment'
-
 import 'normalize.css'
+import 'at-ui-style'
 import './assets/scss/style.scss'
+
+import AtComponents from 'at-ui'
 
 Vue.config.productionTip = false
 Vue.use(AtComponents)

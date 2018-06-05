@@ -1,14 +1,14 @@
 <template>
   <div class="inner-contents">
     <div class="collapse-container">
-      <el-tabs type="card">
-        <el-tab-pane label="자주묻는질문">
+      <at-tabs>
+        <at-tab-pane label="자주묻는질문">
           <faq-collapse-item :items="studentItems"></faq-collapse-item>
-        </el-tab-pane>
-        <el-tab-pane label="강사관련">
+        </at-tab-pane>
+        <at-tab-pane label="강사관련">
           <faq-collapse-item :items="instructorItems"></faq-collapse-item>
-        </el-tab-pane>
-      </el-tabs>
+        </at-tab-pane>
+      </at-tabs>
     </div>
   </div>
 </template>

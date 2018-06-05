@@ -1,6 +1,5 @@
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
-import { Message } from 'element-ui'
 import enviroment from '../../../enviroments/enviroment'
 
 // initial state
@@ -77,11 +76,7 @@ const mutations = {
         break
     }
 
-    Message({
-      showClose: true,
-      message: message,
-      type: type
-    })
+    console.log(message, type)
   }
 }
 
