@@ -1,13 +1,13 @@
 <template>
   <div class="collapse-contents">
-    <at-collapse simple accordion>
-      <at-collapse-item v-for="(item, index) in items" :key="index">
-        <div slot="title">{{ item.title }}</div>
-        <div>
-          {{ item.text }}
-        </div>
-      </at-collapse-item>
-    </at-collapse>
+    <el-collapse accordion>
+      <el-collapse-item v-for="(item, index) in items" :key="index" :name="index">
+        <template slot="title">
+          {{ item.title }}
+        </template>
+        <div>{{ item.text }}</div>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 
@@ -25,6 +25,13 @@ export default {
 
 <style lang="scss" scoped>
 .collapse-contents {
-  font-size: $font-size-sm;
+
+  .el-collapse {
+    border-top: 0;
+  }
+
+  .el-collapse-item__header {
+    font-size: $font-size-base;
+  }
 }
 </style>

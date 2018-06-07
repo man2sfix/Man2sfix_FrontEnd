@@ -3,23 +3,15 @@
     <div class="inner-contents">
       <h2 class="contents-title">계정 찾기</h2>
       <div v-if="show">
-        <p class="contents-text">찾으시는 계정 유형을 선택해주세요.</p>
-        <div class="find-select">
-          <router-link :to="'/find-account/email'" class="link">
-            <at-card>
-              <div>
-                <div class="icon-container"><i class="icon icon-mail"></i></div>
-                <h3>이메일 찾기</h3>
-              </div>
-            </at-card>
+        <p class="contents-text">아래 유형을 선택하여 주세요.</p>
+        <div class="select-container">
+          <router-link :to="'/find-account/email'" class="select-link">
+            <i class="fas fa-envelope icon"></i>
+            <h3 class="title">이메일 찾기</h3>
           </router-link>
-          <router-link :to="'/find-account/password'" class="link">
-            <at-card>
-              <div>
-                <div class="icon-container"><i class="icon icon-unlock"></i></div>
-                <h3>비밀번호 찾기</h3>
-              </div>
-            </at-card>
+          <router-link :to="'/find-account/password'" class="select-link">
+            <i class="fas fa-key icon"></i>
+            <h3 class="title">비밀번호 찾기</h3>
           </router-link>
         </div>
       </div>
@@ -61,29 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.find-select {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: map-get($spacers, 5) 0 map-get($spacers, 4);
-  text-align: center;
-
-  .link {
-    display: block;
-
-    &:last-child {
-      margin-top: map-get($spacers, 3);
-    }
-  }
-
-  .icon-container {
-    margin-bottom: map-get($spacers, 2);
-  }
-
-  .icon {
-    font-size: $font-size-base * 2;
-  }
-}
-
 .notice {
   text-align: center;
   color: gray('700');

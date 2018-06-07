@@ -1,128 +1,102 @@
 <template>
-  <div class="form">
-    <form @submit.prevent="onSubmit">
-      <div class="form-group" :class="{ 'status': $v.form.name.$error }">
-        <label for="name" class="form-group-title"><span class="text-danger">*</span> 이름 (홍길동)</label>
-        <at-input v-model.trim="$v.form.name.$model" class="form-control" id="name" :status="$v.form.name.$error ? 'error' : ''" size="large"></at-input>
-        <div class="form-group-feedback" v-if="!$v.form.name.required">이름을 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.name.minLength || !$v.form.name.maxLength">이름은 2글자 이상 5글자 이하로 입력해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.email.$error }">
-        <label for="email" class="form-group-title"><span class="text-danger">*</span> 이메일 (Man2sfix@man2sfix.com)</label>
-        <at-input type="email" v-model.trim="$v.form.email.$model" id="email" :status="$v.form.email.$error ? 'error' : ''" size="large"></at-input>
-        <div>
-          <at-checkbox v-model="form.emailAgree" label="emailAgree">이메일 수신 동의</at-checkbox>
+  <div class="form" v-loading="loading">
+    <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')">
+      <el-form-item label="이름" prop="name">
+        <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
+      </el-form-item>
+      <el-form-item label="이메일" prop="email">
+        <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
+        <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
+      </el-form-item>
+      <el-form-item label="비밀번호" prop="password">
+        <el-input type="password" v-model="form.password" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="비밀번호 확인" prop="passwordConfirm">
+        <el-input type="password" v-model="form.passwordConfirm" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="휴대폰 번호" prop="phone">
+        <div class="item-phone">
+          <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>
         </div>
-        <div class="form-group-feedback" v-if="!$v.form.email.required">이메일을 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.email.email">올바른 이메일을 입력해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.password.$error }">
-        <label for="password" class="form-group-title"><span class="text-danger">*</span> 비밀번호</label>
-        <at-input type="password" v-model.trim="$v.form.password.$model" :status="$v.form.password.$error ? 'error' : ''" size="large" id="password"></at-input>
-        <div class="form-group-feedback" v-if="!$v.form.password.required">비밀번호를 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.password.minLength">비밀번호는 최소 6자리 이상으로 입력해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.passwordConfirm.$error }">
-        <label for="passwordConfirm" class="form-group-title"><span class="text-danger">*</span> 비밀번호 확인</label>
-        <at-input type="password" v-model.trim="$v.form.passwordConfirm.$model" :status="$v.form.passwordConfirm.$error ? 'error' : ''" size="large" id="passwordConfirm"></at-input>
-        <div class="form-group-feedback" v-if="!$v.form.passwordConfirm.required || !$v.form.passwordConfirm.sameAsPassword">비밀번호를 확인해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.phone.$error }">
-        <label for="phone" class="form-group-title"><span class="text-danger">*</span> 휴대폰 번호 (010-0000-0000)</label>
-        <at-input v-model.trim="$v.form.phone.$model" id="phone" :status="$v.form.phone.$error ? 'error' : ''" size="large"></at-input>
-        <div>
-          <at-checkbox v-model="form.phoneAgree" label="phoneAgree">SMS 수신 동의</at-checkbox>
-        </div>
-        <div class="form-group-feedback" v-if="!$v.form.phone.required">휴대폰 번호를 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.phone.helpers">올바른 휴대폰 번호를 입력해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.gender.$error }">
-        <label class="form-group-title"><span class="text-danger">*</span> 성별</label>
-        <at-radio-group v-model.trim="$v.form.gender.$model">
-          <at-radio label="man">남성</at-radio>
-          <at-radio label="woman">여성</at-radio>
-        </at-radio-group>
-        <div class="form-group-feedback" v-if="!$v.form.gender.required">성별을 선택해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.birthday.$error }">
-        <label for="birthday" class="form-group-title"><span class="text-danger">*</span> 생년월일 (1900-01-01)</label>
-        <at-input type="text" v-model.trim="$v.form.birthday.$model" id="birthday" :status="$v.form.birthday.$error ? 'error' : ''" size="large"></at-input>
-        <div class="form-group-feedback" v-if="!$v.form.birthday.required">생년월일을 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.birthday.helpers">생년월일은 '연-월-일'로 입력해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.greeting.$error }">
-        <label for="greeting" class="form-group-title"><span class="text-danger">*</span> 인사말</label>
-        <at-textarea v-model.trim="$v.form.greeting.$model" :status="$v.form.greeting.$error ? 'error' : ''" size="large" min-rows="5"></at-textarea>
-        <div class="form-group-feedback" v-if="!$v.form.greeting.required">인사말을 입력해주세요.</div>
-        <div class="form-group-feedback" v-if="!$v.form.greeting.minLength">인사말은 최소 50자 이상으로 입력해주세요.</div>
-      </div>
-      <div class="form-group">
-        <label for="academicFile" class="form-group-title"><span class="text-danger">*</span> 학력인증 (학력증명서, 졸업증명서, 재학증명서)</label>
-        <at-input type="file" v-model.trim="$v.form.academicFile.$model" id="academicFile" :status="$v.form.academicFile.$error ? 'error' : ''" size="large"></at-input>
-        <div class="form-group-feedback" v-if="!$v.form.greeting.required">학력인증 파일을 선택해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.terms.$error }">
-        <label class="form-group-title"><span class="text-danger">*</span> 이용약관</label>
-        <div>
-          <at-checkbox v-model="form.terms" label="terms">동의하기</at-checkbox>
-        </div>
-        <at-button type="primary" hollow class="btn-detail" @click="termsModal = true"> 전문보기</at-button>
-        <div class="form-group-feedback" v-if="!$v.form.terms.between">이용약관에 동의해주세요.</div>
-      </div>
-      <div class="form-group" :class="{ 'status': $v.form.privacy.$error }">
-        <label class="form-group-title"><span class="text-danger">*</span> 개인정보 취급방침</label>
-        <div>
-          <at-checkbox v-model="form.privacy" label="privacy">동의하기</at-checkbox>
-        </div>
-        <at-button type="primary" class="btn-detail" hollow @click="privacyModal = true">전문보기</at-button>
-        <div class="form-group-feedback" v-if="!$v.form.privacy.between">개인정보 취급방침에 동의해주세요.</div>
-      </div>
-      <at-button hollow class="form-btn" nativeType="submit">회원가입</at-button>
-    </form>
-    <!-- modal -->
-    <at-modal v-model="termsModal">
-      <div slot="header">
-        <span>이용약관</span>
-      </div>
-      <div style="max-height: 300px; overflow-y: scroll;">
+        <el-checkbox v-model="form.phoneAgree">SMS 수신동의</el-checkbox>
+      </el-form-item>
+      <!-- 강사용 정보 -->
+      <el-form-item label="성별" prop="gender">
+        <el-radio-group v-model="form.gender">
+          <el-radio label="man">남성</el-radio>
+          <el-radio label="woman">여성</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="생년월일" prop="birthday">
+        <el-date-picker v-model="form.birthday" type="date" placeholder="예) 0000-00-00"></el-date-picker>
+      </el-form-item>
+      <el-form-item label="인사말" prop="greeting">
+        <el-input type="textarea" v-model="form.greeting" :autosize="{ minRows: 3, maxRows: 10}"></el-input>
+      </el-form-item>
+      <el-form-item label="학력인증 (학력증명서, 졸업증명서, 재학증명서)" prop="academicFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadAcademicFile" :on-remove="removeAcademicFile" :on-exceed="exceedFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="경력인증 (경력증명서, 출강증명서)" prop="careerFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCareerFile" :on-remove="removeCareerFile" :on-exceed="exceedFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="수료인증 (수료증 및 이수증)" prop="completionFile" class="relative-box">
+        <el-upload action="#" :auto-upload="false" :limit="1" :on-change="uploadCompletionFile" :on-remove="removeCompletionFile" :on-exceed="exceedFile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">2MB 이하의 gif/jpg/png/pdf 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <!-- // 강사용 정보 -->
+      <el-form-item label="프로필사진" class="relative-box">
+        <el-upload list-type="picture" action="#" :auto-upload="false" :limit="1" :on-change="uploadProfile" :on-remove="removeProfile" :on-exceed="exceedProfile">
+          <el-button size="small" plain>업로드</el-button>
+          <div slot="tip" class="el-upload__tip">1MB 이하의 gif/jpg/png 파일만 가능합니다.</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="이용약관" prop="terms" class="relative-box">
+        <el-checkbox v-model="form.terms">동의하기</el-checkbox>
+        <el-button plain size="mini" @click="termsVisible = true">전문보기</el-button>
+      </el-form-item>
+      <el-form-item label="개인정보처리방침" prop="privacy" class="relative-box">
+        <el-checkbox v-model="form.privacy">동의하기</el-checkbox>
+        <el-button plain size="mini" @click="privacyVisible = true">전문보기</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button native-type="submit" plain class="btn-block">회원가입</el-button>
+      </el-form-item>
+    </el-form>
+    <el-dialog title="이용약관" :visible.sync="termsVisible" class="signup-dialog">
+      <div class="signup-dialog-inner">
         <sign-up-terms></sign-up-terms>
       </div>
-      <div slot="footer">
-        <at-button style="width:100%;" @click="termsModal = false">확인</at-button>
-      </div>
-    </at-modal>
-    <!-- modal -->
-    <at-modal v-model="privacyModal">
-      <div slot="header">
-        <span>개인정보 취급방침</span>
-      </div>
-      <div style="max-height: 300px; overflow-y: scroll;">
+    </el-dialog>
+    <el-dialog title="개인정보처리방침" :visible.sync="privacyVisible" class="signup-dialog">
+      <div class="signup-dialog-inner">
         <sign-up-privacy></sign-up-privacy>
       </div>
-      <div slot="footer">
-        <at-button style="width:100%;" @click="privacyModal = false">확인</at-button>
-      </div>
-    </at-modal>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, email, minLength, maxLength, sameAs, helpers, between } from 'vuelidate/lib/validators'
-
+import SignUpStudent from '@/components/auth/SignUpStudent'
 import SignUpTerms from '@/components/auth/SignUpTerms'
 import SignUpPrivacy from '@/components/auth/SignUpPrivacy'
+import UploadInstructor from '@/mixins/upload/UploadInstructor'
 
 export default {
   name: 'SignUpInstructor',
+  extends: SignUpStudent,
   mixins: [
-    validationMixin
+    UploadInstructor
   ],
   data () {
     return {
-      loading: false,
-      termsModal: false,
-      privacyModal: false,
       form: {
         name: '',
         email: '',
@@ -136,106 +110,122 @@ export default {
         careerFile: '',
         completionFile: '',
         profile: '',
-        terms: 0,
-        privacy: 0,
+        terms: false,
+        privacy: false,
         emailAgree: true,
         phoneAgree: true,
         instructorVerified: false,
         instructorActive: true
-      }
-    }
-  },
-  validations: {
-    form: {
-      name: {
-        required,
-        minLength: minLength(2),
-        maxLength: maxLength(5)
       },
-      email: {
-        required,
-        email
-      },
-      password: {
-        required,
-        minLength: minLength(6)
-      },
-      passwordConfirm: {
-        required,
-        sameAsPassword: sameAs('password')
-      },
-      phone: {
-        required,
-        helpers: helpers.regex('phone', /^\d{3}-\d{3,4}-\d{4}$/)
-      },
-      gender: {
-        required
-      },
-      birthday: {
-        required,
-        helpers: helpers.regex('birthday', /^\d{4}-\d{2}-\d{2}$/)
-      },
-      greeting: {
-        required,
-        minLength: minLength(50)
-      },
-      academicFile: {
-        required
-      },
-      terms: {
-        between: between(1, 1)
-      },
-      privacy: {
-        between: between(1, 1)
+      rules: {
+        name: [
+          { required: true, message: '이름을 입력해주세요.', trigger: 'blur' },
+          { min: 2, max: 5, message: '이름은 2글자 이상 5글자 이하로 입력해주세요.', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '이메일을 입력해주세요.', trigger: 'blur' },
+          { type: 'email', message: '올바른 이메일을 입력해주세요.', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '비밀번호를 입력해주세요.', trigger: 'blur' },
+          { min: 6, message: '비밀번호는 6글자 이상으로 입력해주세요.', trigger: 'blur' },
+          { validator: this.validatePassword, trigger: 'blur' }
+        ],
+        passwordConfirm: [
+          { required: true, message: '비밀번호를 확인해주세요.', trigger: 'blur' },
+          { validator: this.validatePasswordConfirm, trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '휴대폰 번호를 입력해주세요.', trigger: 'blur' },
+          { validator: this.validatePhone, message: '휴대폰 번호가 올바르지 않습니다.', trigger: 'blur' }
+        ],
+        gender: [
+          { required: true, message: '성별을 선택해주세요.', trigger: 'change' }
+        ],
+        birthday: [
+          { required: true, message: '생년월일을 입력해주세요.', trigger: 'blur' }
+        ],
+        greeting: [
+          { required: true, message: '인사말을 입력해주세요.', trigger: 'blur' },
+          { min: 100, message: '인사말은 최소 100자 이상으로 입력해주세요.', trigger: 'blur' }
+        ],
+        academicFile: [
+          { required: true, message: '학력인증 파일을 등록해주세요', trigger: 'blur' }
+        ],
+        careerFile: [
+          { required: true, message: '경력인증 파일을 등록해주세요.', trigger: 'blur' }
+        ],
+        completionFile: [
+          { required: true, message: '수료인증 파일을 등록해주세요.', trigger: 'blur' }
+        ],
+        terms: [
+          { required: true, message: '이용약관에 동의해주세요.', trigger: 'change' },
+          { validator: this.validateCheck, message: '이용약관에 동의해주세요.', trigger: 'change' }
+        ],
+        privacy: [
+          { required: true, message: '개인정보처리방침에 동의해주세요.', trigger: 'change' },
+          { validator: this.validateCheck, message: '개인정보처리방침에 동의해주세요.', trigger: 'change' }
+        ]
       }
     }
   },
   methods: {
-    checkTrue (value, component) {
-      return value === true
-    },
-    async onSubmit (formName) {
-      this.$v.$touch()
-      if (!this.$v.$invalid) {
-        // 로딩 시작
-        this.loading = true
-        // 폼 데이터 set
-        const formData = new FormData()
-        formData.append('type', 'instructor')
-        formData.append('name', this.form.name)
-        formData.append('email', this.form.email)
-        formData.append('password', this.form.password)
-        formData.append('phone', this.form.phone)
-        formData.append('gender', this.form.gender)
-        formData.append('birthday', new Date(this.form.birthday))
-        formData.append('greeting', this.form.greeting)
-        formData.append('academic_file', this.form.academicFile)
-        formData.append('career_file', this.form.careerFile)
-        formData.append('completion_file', this.form.completionFile)
-        formData.append('instructor_verified', this.form.instructorVerified)
-        formData.append('instructor_active', this.form.instructorActive)
-        formData.append('profile', this.form.profile)
-        formData.append('terms', !!this.form.terms)
-        formData.append('privacy', !!this.form.privacy)
-        formData.append('email_agree', this.form.emailAgree)
-        formData.append('phone_agree', this.form.phoneAgree)
-        // 리턴 boolean
-        const bool = await this.$store.dispatch('signUp', formData)
-        // 리턴값에 따른 분기
-        if (bool) {
-          this.$message({
-            showClose: true,
-            message: '회원가입에 성공하였습니다.',
-            type: 'success'
-          })
-          this.$router.replace('/signin')
-        }
-        // 로딩 끝
-        this.loading = false
+    uploadFile (file, fileList, key) {
+      const isSize = file.size <= 2 * 1024 * 1024
+      const isType = file.raw.type === 'image/jpg' || file.raw.type === 'image/png' || file.raw.type === 'image/jpeg' || file.raw.type === 'image/gif' || file.raw.type === 'application/pdf'
+      if (isSize && isType) {
+        this.form[key] = file.raw
       } else {
-        console.log(this.form)
-        return false
+        fileList.pop()
+        this.$message({
+          showClose: true,
+          message: '파일 크기 혹은 형식을 확인해주세요.',
+          type: 'warning'
+        })
       }
+    },
+    onSubmit (formName) {
+      this.$refs[formName].validate(async (valid) => {
+        if (valid) {
+          // 로딩 시작
+          this.loading = true
+          // 폼 데이터 set
+          const formData = new FormData()
+          formData.append('type', 'instructor')
+          formData.append('name', this.form.name)
+          formData.append('email', this.form.email)
+          formData.append('password', this.form.password)
+          formData.append('phone', this.form.phone)
+          formData.append('gender', this.form.gender)
+          formData.append('birthday', this.form.birthday)
+          formData.append('greeting', this.form.greeting)
+          formData.append('academic_file', this.form.academicFile)
+          formData.append('career_file', this.form.careerFile)
+          formData.append('completion_file', this.form.completionFile)
+          formData.append('instructor_verified', this.form.instructorVerified)
+          formData.append('instructor_active', this.form.instructorActive)
+          formData.append('profile', this.form.profile)
+          formData.append('terms', this.form.terms)
+          formData.append('privacy', this.form.privacy)
+          formData.append('email_agree', this.form.emailAgree)
+          formData.append('phone_agree', this.form.phoneAgree)
+          // 리턴 boolean
+          const bool = await this.$store.dispatch('signUp', formData)
+          // 리턴값에 따른 분기
+          if (bool) {
+            this.$message({
+              showClose: true,
+              message: '회원가입에 성공하였습니다.',
+              type: 'success'
+            })
+            this.$router.replace('/signin')
+          }
+          // 로딩 끝
+          this.loading = false
+        } else {
+          return false
+        }
+      })
     }
   },
   components: {

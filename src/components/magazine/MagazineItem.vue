@@ -6,15 +6,20 @@
       </div>
       <div class="info">
         <h3 class="title">{{ item.title }}</h3>
-        <time class="date">{{ item.date | moment('YYYY-MM-DD HH:mm') }}</time>
+        <time class="date">{{ moment(item.date, 'YYYY-MM-DD HH:mm a') }}</time>
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
+import Moment from '@/mixins/moment/Moment'
+
 export default {
   name: 'MagazineItem',
+  mixins: [
+    Moment
+  ],
   props: {
     item: {
       type: Object,

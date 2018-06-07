@@ -10,7 +10,7 @@
           <router-link :to="'/'" class="link">
             <h3 class="title">{{ item.title }}</h3>
             <p class="description">{{ item.description }}</p>
-            <time class="date">{{ item.date | moment('YYYY-MM-DD HH:mm') }}</time>
+            <time class="date">{{ moment(item.date, 'YYYY-MM-DD HH:mm a') }}</time>
           </router-link>
           <span class="member"><strong>{{ item.nowMember }}</strong>명 참여중</span>
           <div class="btn-container">
@@ -23,8 +23,13 @@
 </template>
 
 <script>
+import Moment from '@/mixins/moment/Moment'
+
 export default {
   name: 'CommunityItem',
+  mixins: [
+    Moment
+  ],
   props: {
     item: {
       type: Object,

@@ -7,18 +7,11 @@ import store from './store/index'
 
 import enviroment from '../enviroments/enviroment'
 
-import VueMoment from 'vue-moment'
-import momentLocale from 'moment/locale/ko'
-
 import 'normalize.css'
-import 'at-ui-style'
+import './elements/components'
 import './assets/scss/style.scss'
 
-import AtComponents from 'at-ui'
-
 Vue.config.productionTip = false
-Vue.use(AtComponents)
-Vue.use(VueMoment, { momentLocale })
 Vue.prototype.$api = enviroment.api
 
 /* eslint-disable no-new */

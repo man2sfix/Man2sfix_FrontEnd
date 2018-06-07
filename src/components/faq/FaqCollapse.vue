@@ -1,21 +1,20 @@
 <template>
   <div class="inner-contents">
     <div class="collapse-container">
-      <at-tabs>
-        <at-tab-pane label="자주묻는질문">
+      <el-tabs type="card">
+        <el-tab-pane label="자주묻는질문">
           <faq-collapse-item :items="studentItems"></faq-collapse-item>
-        </at-tab-pane>
-        <at-tab-pane label="강사관련">
+        </el-tab-pane>
+        <el-tab-pane label="강사관련">
           <faq-collapse-item :items="instructorItems"></faq-collapse-item>
-        </at-tab-pane>
-      </at-tabs>
+        </el-tab-pane>
+      </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
 import FaqCollapseItem from '@/components/faq/FaqCollapseItem'
-
 export default {
   name: 'FaqCollapse',
   data () {

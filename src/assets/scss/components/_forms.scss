@@ -5,51 +5,100 @@
 .form {
   max-width: 500px;
   margin: map-get($spacers, 5) auto;
+  padding: map-get($spacers, 3) map-get($spacers, 4) map-get($spacers, 4);
   border: 1px solid gray('300');
-  padding: map-get($spacers, 4);
 
-  .form-group {
-    position: relative;
+  &.form-find {
+    padding-bottom: map-get($spacers, 3);
+  }
+
+  .el-form-item__label {
+    padding-bottom: 0;
+  }
+
+  .el-form-item {
     margin-bottom: map-get($spacers, 3);
-    
-    &-title {
-      display: block;
-      margin-bottom: map-get($spacers, 2);
+    &:last-child {
+      margin-bottom: 0;
     }
+  }
 
-    &-feedback {
-      display: none;
-      font-size: $font-size-base * 0.7;
-      color: theme-color('danger');
-      margin-top: map-get($spacers, 1);
-    }
+  .el-date-editor {
+    width: 100%;
+  }
 
-    &.status {
-      .form-group-feedback {
-        display: block;
+  .btn-block {
+    display: block;
+    width: 100%;
+    margin-top: map-get($spacers, 2);
+  }
+  
+  .el-select {
+    width: 100%;
+  }
+
+  .relative-box {
+    position: relative;
+
+    .el-button {
+      position: absolute;
+      bottom: 5px;
+      right: 0;
+      &.btn-email-verify {
+        bottom: -15px;
       }
     }
 
-    .btn-detail {
+    .el-upload {
+      .el-button {
+        position: static;
+      }
+    }
+
+    .el-upload__tip {
       position: absolute;
-      bottom: 0;
+      top: 0;
       right: 0;
+      margin: 0;
     }
   }
 
-  &-btn {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-
-  &-link {
-    margin-top: map-get($spacers, 2);
-
-    .btn-link {
+  .link-container {
+    .link {
       display: block;
-      font-size: $font-size-sm;
-      padding: map-get($spacers, 1) 0;
+      color: gray('700');
+      font-size: $font-size-base * 0.8;
+      padding: map-get($spacers, 2);
+      &:hover,
+      &:focus {
+        color: theme-color('primary');
+      }
     }
+  }
+
+  .found {
+    text-align: center;
+    font-size: $font-size-sm;
+    padding: map-get($spacers, 5) 0 map-get($spacers, 4);
+
+    .value {
+      display: block;
+      padding: map-get($spacers, 4) 0;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.signup-dialog {
+  .el-dialog__body {
+    padding-top: 0;
+  }
+
+  &-inner {
+    padding: map-get($spacers, 3) 0;
+    border-top: 1px solid gray('300');
+    border-bottom: 1px solid gray('300');
+    height: 300px;
+    overflow-y: scroll;
   }
 }
