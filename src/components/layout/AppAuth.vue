@@ -1,8 +1,8 @@
 <template>
   <ul class="app-auth">
     <!-- not logined -->
-    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signin'" class="btn btn-sm link">로그인</router-link></li>
-    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signup'" class="btn btn-sm link">회원가입</router-link></li>
+    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signin'" class="btn-link">로그인</router-link></li>
+    <li v-if="!auth.logined" class="auth-item"><router-link :to="'/signup'" class="btn-link">회원가입</router-link></li>
     <!-- logined -->
     <li v-if="auth.logined" class="auth-profile">
       <router-link :to="'/mypage'">
@@ -51,7 +51,8 @@ export default {
     font-size: $font-size-base * 0.8;
   }
 
-  .link {
+  .btn-link {
+    display: block;
     color: gray('700');
     border: 1px solid gray('300');
     padding: map-get($spacers, 2);

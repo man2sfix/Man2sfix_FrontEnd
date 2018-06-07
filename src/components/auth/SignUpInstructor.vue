@@ -5,7 +5,7 @@
         <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
       </el-form-item>
       <el-form-item label="이메일" prop="email">
-        <el-input v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
+        <el-input type="email" v-model="form.email" placeholder="예) man2sfix@man2sfix.com"></el-input>
         <el-checkbox v-model="form.emailAgree">이메일 수신동의</el-checkbox>
       </el-form-item>
       <el-form-item label="비밀번호" prop="password">

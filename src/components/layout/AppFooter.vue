@@ -27,9 +27,11 @@ export default {
       about: [
         { name: '회사 소개', href: '/company' },
         { name: '서비스 소개', href: '/service' },
-        { name: '이용방법', href: '/how-to-use' }
+        { name: '이용방법', href: '/how-to-use' },
+        { name: '자주묻는질문', href: '/faq' }
       ],
       help: [
+        { name: '문의하기', href: '/contact' },
         { name: '이용약관', href: '/terms-of-use' },
         { name: '개인정보 처리방침', href: '/privacy-policy' }
       ],

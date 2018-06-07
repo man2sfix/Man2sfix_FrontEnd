@@ -12,8 +12,8 @@
             <el-option label="기타" value="etc"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="이메일" prop="email">
-          <el-input v-model="form.email"></el-input>
+        <el-form-item label="답변받을 이메일" prop="email">
+          <el-input type="email" v-model="form.email"></el-input>
         </el-form-item>
         <el-form-item label="문의 제목" prop="title">
           <el-input v-model="form.title"></el-input>

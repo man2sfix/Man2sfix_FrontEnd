@@ -1,15 +1,12 @@
 <template>
   <app-layout>
-    <div class="inner-contents">
-      <h2 class="contents-title">모의훈련</h2>
-      <p class="contents-text">모의훈련을 통해 스피치를 연습해보세요.</p>
-      <router-view/>
-    </div>
+    <training-visual></training-visual>
   </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/components/layout/AppLayout'
+import TrainingVisual from '@/components/training/trainingVisual'
 
 export default {
   name: 'Training',
@@ -19,7 +16,8 @@ export default {
     }
   },
   components: {
-    AppLayout
+    AppLayout,
+    TrainingVisual
   }
 }
 </script>

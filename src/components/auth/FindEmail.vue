@@ -2,7 +2,7 @@
   <div class="form form-find" v-loading="loading">
     <el-form ref="form" :model="form" :rules="rules" label-position="top" size="medium" @submit.prevent.native="onSubmit('form')" v-if="!found">
       <el-form-item label="이름" prop="name">
-        <el-input v-model="form.name" placeholder="예) 홍길동"></el-input>
+        <el-input type="email" v-model="form.name" placeholder="예) 홍길동"></el-input>
       </el-form-item>
       <el-form-item label="핸드폰번호" prop="phone">
         <el-input type="text" v-model="form.phone" placeholder="예) 010-0000-0000"></el-input>

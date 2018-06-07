@@ -33,7 +33,7 @@ export default {
     return {
       list: [
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -41,7 +41,7 @@ export default {
           date: new Date()
         },
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -49,7 +49,7 @@ export default {
           date: new Date()
         },
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -57,7 +57,7 @@ export default {
           date: new Date()
         },
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -65,7 +65,7 @@ export default {
           date: new Date()
         },
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -73,7 +73,7 @@ export default {
           date: new Date()
         },
         {
-          thumb: 'http://element.eleme.io/static/hamburger.50e4091.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '제목제목제목제목제목제목제목제목',
           description: '상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세상세',
           nowMember: 3,
@@ -144,7 +144,7 @@ export default {
         }
 
         &[disabled] {
-          opacity: 0.6;
+          display: none;
         }
       }
     }

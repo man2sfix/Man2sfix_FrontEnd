@@ -1,7 +1,7 @@
 <template>
   <nav :class="visible ? 'app-nav active' : 'app-nav'">
     <div class="background" v-if="visible" @click="visible = !visible"></div>
-    <button type="button" class="btn btn-lg btn-link btn-nav-show" v-if="!visible" @click="visible = !visible"><i class="fas fa-bars"></i></button>
+    <button type="button" class="btn-nav--show" v-if="!visible" @click="visible = !visible"><i class="fas fa-bars"></i></button>
     <div class="app-nav-inner">
       <app-auth :auth="auth"></app-auth>
       <ul class="app-nav-list">
@@ -33,9 +33,7 @@ export default {
         { name: '정규 클래스', href: '/class' },
         { name: '강사진 소개', href: '/instructors' },
         { name: '매거진', href: '/magazine' },
-        { name: '커뮤니티', href: '/community' },
-        { name: '자주 묻는 질문', href: '/faq' },
-        { name: '제휴 및 문의', href: '/contact' }
+        { name: '커뮤니티', href: '/community' }
       ]
     }
   },
@@ -55,12 +53,13 @@ export default {
   z-index: $zindex-nav;
   transition: $transition-base;
 
-  .btn-nav-show {
+  .btn-nav--show {
     position: fixed;
-    top: map-get($spacers, 2);
+    top: map-get($spacers, 1);
     right: 0;
     border: 0;
     font-size: $font-size-base;
+    padding: map-get($spacers, 3);
   }
 
   .background {
@@ -152,7 +151,7 @@ export default {
         }
       }
 
-      .btn-nav-show {
+      .btn-nav--show {
         display: none;
       }
 

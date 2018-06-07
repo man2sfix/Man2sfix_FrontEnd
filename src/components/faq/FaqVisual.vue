@@ -14,29 +14,3 @@ export default {
   name: 'FaqVisual'
 }
 </script>
-
-<style lang="scss" scoped>
-.visual {
-  position: relative;
-  background-color: gray('200');
-  height: 400px;
-  text-align: center;
-
-  &-inner {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
-    line-height: 1.5;
-  }
-
-  &-title {
-    font-size: $font-size-base * 2;
-    padding-bottom: map-get($spacers, 3);
-  }
-
-  &-description {
-    font-size: $font-size-base;
-  }
-}
-</style>

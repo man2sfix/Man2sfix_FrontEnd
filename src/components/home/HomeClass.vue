@@ -34,31 +34,31 @@ export default {
       list: [
         {
           link: '/',
-          thumb: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '초보 스피치 강좌',
           description: '스피치라면 몸서리치는 분을 위한 스피치 강좌'
         },
         {
           link: '/',
-          thumb: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '초보 스피치 강좌',
           description: '스피치라면 몸서리치는 분을 위한 스피치 강좌'
         },
         {
           link: '/',
-          thumb: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '초보 스피치 강좌',
           description: '스피치라면 몸서리치는 분을 위한 스피치 강좌'
         },
         {
           link: '/',
-          thumb: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '초보 스피치 강좌',
           description: '스피치라면 몸서리치는 분을 위한 스피치 강좌'
         },
         {
           link: '/',
-          thumb: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png',
+          thumb: 'https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&h=350',
           title: '초보 스피치 강좌',
           description: '스피치라면 몸서리치는 분을 위한 스피치 강좌'
         }
@@ -127,7 +127,7 @@ export default {
         }
 
         &[disabled] {
-          opacity: 0.6;
+          display: none;
         }
       }
     }

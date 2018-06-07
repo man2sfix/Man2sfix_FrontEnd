@@ -26,13 +26,13 @@ export default {
     return {
       list: [
         {
-          background: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/3.png'
+          background: 'https://i.ytimg.com/vi/5-LyRjHlRgQ/maxresdefault.jpg'
         },
         {
-          background: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/2.png'
+          background: 'http://aslania.com/wp-content/uploads/2018/03/background-wallpaper-4.jpg'
         },
         {
-          background: 'http://ganlanyuan.github.io/tiny-slider/tests/images/1000x900/5.png'
+          background: 'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/4Ku9x8aIg/glamorous-sparkly-background-texture-from-real-glitter_bdfxfpnfdx_thumbnail-full01.png'
         }
       ]
     }

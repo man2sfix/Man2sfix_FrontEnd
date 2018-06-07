@@ -24,7 +24,8 @@ export default {
 
 <style lang="scss" scoped>
 .terms-container {
-  margin: map-get($spacers, 3) 0 0;
+  max-width: 800px;
+  margin: map-get($spacers, 3) auto 0;
   padding: map-get($spacers, 5);
   border: 1px solid gray('300');
 }
