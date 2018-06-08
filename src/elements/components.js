@@ -18,6 +18,7 @@ import {
   Message,
   Upload,
   Checkbox,
+  CheckboxGroup,
   DatePicker,
   Pagination,
   Tabs,
@@ -40,6 +41,7 @@ import 'element-ui/lib/theme-chalk/collapse-item.css'
 import 'element-ui/lib/theme-chalk/message.css'
 import 'element-ui/lib/theme-chalk/upload.css'
 import 'element-ui/lib/theme-chalk/checkbox.css'
+import 'element-ui/lib/theme-chalk/checkbox-group.css'
 import 'element-ui/lib/theme-chalk/date-picker.css'
 import 'element-ui/lib/theme-chalk/pagination.css'
 import 'element-ui/lib/theme-chalk/tabs.css'
@@ -61,6 +63,7 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Upload)
 Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
 Vue.use(DatePicker)
 Vue.use(Pagination)
 Vue.use(Tabs)

@@ -61,7 +61,6 @@ export default {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: transparent;
 
       &:first-child {
         left: map-get($spacers, 4);

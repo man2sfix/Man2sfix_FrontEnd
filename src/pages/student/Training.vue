@@ -1,12 +1,14 @@
 <template>
   <app-layout>
     <training-visual></training-visual>
+    <training-type></training-type>
   </app-layout>
 </template>
 
 <script>
 import AppLayout from '@/components/layout/AppLayout'
 import TrainingVisual from '@/components/training/trainingVisual'
+import TrainingType from '@/components/training/trainingType'
 
 export default {
   name: 'Training',
@@ -17,7 +19,8 @@ export default {
   },
   components: {
     AppLayout,
-    TrainingVisual
+    TrainingVisual,
+    TrainingType
   }
 }
 </script>
